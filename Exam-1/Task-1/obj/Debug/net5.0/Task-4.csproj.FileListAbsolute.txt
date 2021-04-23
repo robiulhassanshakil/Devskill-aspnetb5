@@ -1,0 +1,16 @@
+C:\Users\Shakil\source\repos\Exam-1\Task-1\bin\Debug\net5.0\Task-4.exe
+C:\Users\Shakil\source\repos\Exam-1\Task-1\bin\Debug\net5.0\Task-4.deps.json
+C:\Users\Shakil\source\repos\Exam-1\Task-1\bin\Debug\net5.0\Task-4.runtimeconfig.json
+C:\Users\Shakil\source\repos\Exam-1\Task-1\bin\Debug\net5.0\Task-4.runtimeconfig.dev.json
+C:\Users\Shakil\source\repos\Exam-1\Task-1\bin\Debug\net5.0\Task-4.dll
+C:\Users\Shakil\source\repos\Exam-1\Task-1\bin\Debug\net5.0\ref\Task-4.dll
+C:\Users\Shakil\source\repos\Exam-1\Task-1\bin\Debug\net5.0\Task-4.pdb
+C:\Users\Shakil\source\repos\Exam-1\Task-1\obj\Debug\net5.0\Task-4.csprojAssemblyReference.cache
+C:\Users\Shakil\source\repos\Exam-1\Task-1\obj\Debug\net5.0\Task-4.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Shakil\source\repos\Exam-1\Task-1\obj\Debug\net5.0\Task-4.AssemblyInfoInputs.cache
+C:\Users\Shakil\source\repos\Exam-1\Task-1\obj\Debug\net5.0\Task-4.AssemblyInfo.cs
+C:\Users\Shakil\source\repos\Exam-1\Task-1\obj\Debug\net5.0\Task-4.csproj.CoreCompileInputs.cache
+C:\Users\Shakil\source\repos\Exam-1\Task-1\obj\Debug\net5.0\Task-4.dll
+C:\Users\Shakil\source\repos\Exam-1\Task-1\obj\Debug\net5.0\ref\Task-4.dll
+C:\Users\Shakil\source\repos\Exam-1\Task-1\obj\Debug\net5.0\Task-4.pdb
+C:\Users\Shakil\source\repos\Exam-1\Task-1\obj\Debug\net5.0\Task-4.genruntimeconfig.cache
