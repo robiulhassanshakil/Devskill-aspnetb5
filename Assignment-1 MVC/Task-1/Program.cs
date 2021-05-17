@@ -25,6 +25,26 @@ namespace Task_1
             //Database
             Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configBuilder)
                 .CreateLogger();
+            //Email
+            Log.Logger=new LoggerConfiguration().WriteTo.Email(new EmailConnectionInfo
+                    {
+                        FromEmail = "shakilvictor9102@gmail.com",
+                        ToEmail = "robiul35-1663@diu.edu.bd",
+                        MailServer = "smtp.gmail.com",
+                        NetworkCredentials = new NetworkCredential
+                        {
+                            UserName = "shakilvictor9102@gmail.com",
+                            Password = "itsshakil123"
+                        },
+                        EnableSsl = true,
+                        Port = 465,
+                        EmailSubject = "ERROR!"
+                    },
+                    outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] {Message}{NewLine}{Exception}",
+                    batchPostingLimit: 10
+                    , restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information
+                )
+                .CreateLogger();
 
 
             try
