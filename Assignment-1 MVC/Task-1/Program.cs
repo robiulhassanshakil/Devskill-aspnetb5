@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.Email;
+using Serilog.Sinks.MSSqlServer;
 using Task_1.Models;
 
 namespace Task_1
@@ -22,29 +23,30 @@ namespace Task_1
                 .AddEnvironmentVariables()
                 .Build();
           
-            //Database
-            Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configBuilder)
-                .CreateLogger();
-            //Email
-            Log.Logger=new LoggerConfiguration().WriteTo.Email(new EmailConnectionInfo
+
+            Log.Logger = new LoggerConfiguration().WriteTo.MSSqlServer(
+                    connectionString: @"Server=DESKTOP-FPJ2F9H; Database=Task-1; Integrated Security=True;",
+                    sinkOptions: new MSSqlServerSinkOptions{TableName ="Logs"})
+                .WriteTo.Email(new EmailConnectionInfo
+                {
+                    FromEmail = "shakilvictor9102@gmail.com",
+                    ToEmail = "robiul35-1663@diu.edu.bd",
+                    MailServer = "smtp.gmail.com",
+                    NetworkCredentials = new NetworkCredential
                     {
-                        FromEmail = "shakilvictor9102@gmail.com",
-                        ToEmail = "robiul35-1663@diu.edu.bd",
-                        MailServer = "smtp.gmail.com",
-                        NetworkCredentials = new NetworkCredential
-                        {
-                            UserName = "shakilvictor9102@gmail.com",
-                            Password = "itsshakil123"
-                        },
-                        EnableSsl = true,
-                        Port = 465,
-                        EmailSubject = "ERROR!"
+                        UserName = "shakilvictor9102@gmail.com",
+                        Password = "itsshakil123"
                     },
+                    EnableSsl = true,
+                    Port = 465,
+                    EmailSubject = "ERROR!"
+                },
                     outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] {Message}{NewLine}{Exception}",
                     batchPostingLimit: 10
                     , restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information
                 )
                 .CreateLogger();
+            
 
 
             try
