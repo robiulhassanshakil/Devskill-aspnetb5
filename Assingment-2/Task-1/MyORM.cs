@@ -53,14 +53,51 @@ namespace Task_1
                 command.Parameters.AddWithValue(property.Name, property.GetValue(item));
             }
 
-            if(_sqlConnection.State == System.Data.ConnectionState.Closed)
-            _sqlConnection.Open();
+            if(_sqlConnection.State == System.Data.ConnectionState.Closed)  
+                _sqlConnection.Open();
+
             command.ExecuteNonQuery();
+            _sqlConnection.Close();
+
+            Console.WriteLine("Insert Successful");
 
         }
 
         public void Update(T item)
         {
+            var sql = new StringBuilder("Update ");
+            var type = item.GetType();
+            var properties = type.GetProperties();
+            sql.Append(type.Name);
+            sql.Append(' ');
+            sql.Append("set ");
+            for (int i = 1; i < properties.Length; i++)
+            {
+                sql.Append(properties[i].Name).Append('=').Append('@').Append(properties[i].Name).Append(',');
+            }
+
+            sql.Remove(sql.Length - 1, 1);
+            sql.Append(" where ");
+            sql.Append(properties[0].Name);
+            sql.Append('=');
+            sql.Append('@');
+            sql.Append(properties[0].Name);
+
+            var query = sql.ToString();
+            var command = new SqlCommand(query,_sqlConnection);
+            foreach (var property in properties)
+            {
+                command.Parameters.AddWithValue(property.Name, property.GetValue(item));
+            }
+
+            if (_sqlConnection.State==System.Data.ConnectionState.Closed)
+                _sqlConnection.Open();
+
+            command.ExecuteNonQuery();
+            _sqlConnection.Close();
+
+            Console.WriteLine("update successful");
+
 
         }
 
