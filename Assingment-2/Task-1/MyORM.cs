@@ -82,6 +82,7 @@ namespace Task_1
             sql.Append('=');
             sql.Append('@');
             sql.Append(properties[0].Name);
+            sql.Append(";");
 
             var query = sql.ToString();
             var command = new SqlCommand(query,_sqlConnection);
@@ -103,11 +104,33 @@ namespace Task_1
 
         public void Delete(T item)
         {
+            var type = item.GetType();
+            var properties = type.GetProperties();
+
+            foreach (var property in properties)
+            {
+                command.Parameters.AddWithValue(property.Name, property.GetValue(item));
+            }
+
+
+
 
         }
 
         public void Delete(int id)
         {
+            var sql = new StringBuilder("Delete From ");
+            var type = id.GetType();
+            sql.Append(type.Name);
+            sql.Append(" where ");
+            sql.Append("ID = @");
+            sql.Append(id);
+            sql.Append(";");
+            var query = sql.ToString();
+
+            var command = new SqlCommand(query, _sqlConnection);
+            command.Parameters.Add(id);
+
 
         }
 
