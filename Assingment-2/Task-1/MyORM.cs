@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection.Metadata;
@@ -46,7 +47,7 @@ namespace Task_1
             sql.Remove(sql.Length - 1, 1);
             sql.Append(");");
             var query = sql.ToString();
-            var command = new SqlCommand(query, _sqlConnection);
+            using SqlCommand command = new SqlCommand(query, _sqlConnection);
 
             foreach (var property in properties)
             {
@@ -85,7 +86,7 @@ namespace Task_1
             sql.Append(";");
 
             var query = sql.ToString();
-            var command = new SqlCommand(query,_sqlConnection);
+            using SqlCommand command = new SqlCommand(query,_sqlConnection);
             foreach (var property in properties)
             {
                 command.Parameters.AddWithValue(property.Name, property.GetValue(item));
@@ -95,7 +96,7 @@ namespace Task_1
                 _sqlConnection.Open();
 
             command.ExecuteNonQuery();
-            _sqlConnection.Close();
+            ;
 
             Console.WriteLine("update successful");
 
@@ -104,33 +105,37 @@ namespace Task_1
 
         public void Delete(T item)
         {
-            var type = item.GetType();
-            var properties = type.GetProperties();
 
-            foreach (var property in properties)
+            if (item.Id!=null)
             {
-                command.Parameters.AddWithValue(property.Name, property.GetValue(item));
+               Delete(item.Id);    
             }
-
-
-
-
+            
         }
 
         public void Delete(int id)
         {
             var sql = new StringBuilder("Delete From ");
-            var type = id.GetType();
-            sql.Append(type.Name);
+            var obj = Activator.CreateInstance(typeof(T));
+
+            var tableobj = obj.GetType();
+            sql.Append(tableobj.Name);
             sql.Append(" where ");
-            sql.Append("ID = @");
+            sql.Append("ID = ");
             sql.Append(id);
             sql.Append(";");
             var query = sql.ToString();
 
-            var command = new SqlCommand(query, _sqlConnection);
-            command.Parameters.Add(id);
+            using SqlCommand command = new SqlCommand(query, _sqlConnection);
 
+            if (_sqlConnection.State == System.Data.ConnectionState.Closed)
+                _sqlConnection.Open();
+
+            command.ExecuteNonQuery();
+
+            
+
+            Console.WriteLine("Delete Successful.");
 
         }
 
@@ -141,9 +146,48 @@ namespace Task_1
 
         public void GetAll()
         {
+            var sql = new StringBuilder("Select *From ");
+            var obj = Activator.CreateInstance(typeof(T));
+            var tableobj = obj.GetType();
+            sql.Append(tableobj.Name);
+            sql.Append(';');
+            var query = sql.ToString();
+            ReadOparation(query,_sqlConnection);
+
+
 
         }
 
+        static IList<T> ReadOparation(string sql, SqlConnection connection)
+        {
+            if (connection.State==System.Data.ConnectionState.Closed)
+                connection.Open();
+
+            using SqlCommand command = new SqlCommand(sql, connection);
+
+            var reader = command.ExecuteReader();
+            var objlist = new List<T>();
+            while (reader.Read())
+            {
+                var obj= Activator.CreateInstance(typeof(T));
+
+                var type = obj.GetType();
+                var properties = type.GetProperties();
+                foreach (var property in properties)
+                {
+                    obj.
+                }
+
+
+
+            }
+
+            return objlist;
+
+
+
+
+        }
 
     }
 }
