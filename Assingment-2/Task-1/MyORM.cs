@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -149,10 +150,21 @@ namespace Task_1
             var sql = new StringBuilder("Select *From ");
             var obj = Activator.CreateInstance(typeof(T));
             var tableobj = obj.GetType();
+            var properties = tableobj.GetProperties();
+            var count = properties.Length;
             sql.Append(tableobj.Name);
             sql.Append(';');
             var query = sql.ToString();
-            ReadOparation(query,_sqlConnection);
+            var coloumList=ReadOparation(query,_sqlConnection);
+
+            foreach (var entity in coloumList)
+            {
+
+
+                Console.WriteLine(entity.GetType());
+               
+
+            }
 
 
 
@@ -167,18 +179,17 @@ namespace Task_1
 
             var reader = command.ExecuteReader();
             var objlist = new List<T>();
+            var baseobject = typeof(T);
             while (reader.Read())
             {
-                var obj= Activator.CreateInstance(typeof(T));
-
-                var type = obj.GetType();
-                var properties = type.GetProperties();
+                var obj =(T)Activator.CreateInstance(baseobject);
+                var properties = baseobject.GetProperties();
                 foreach (var property in properties)
                 {
-                    obj.
+                    property.SetValue(obj,reader[property.Name]);
                 }
 
-
+                objlist.Add(obj);
 
             }
 
