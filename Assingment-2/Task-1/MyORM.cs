@@ -45,7 +45,6 @@ namespace Task_1
                 sql.Append('@').Append(properties[i].Name).Append(',');
             }
             
-
             sql.Remove(sql.Length - 1, 1);
             sql.Append(");");
             var query = sql.ToString();
@@ -98,21 +97,17 @@ namespace Task_1
                 _sqlConnection.Open();
 
             command.ExecuteNonQuery();
-            ;
-
+            
             Console.WriteLine("update successful");
-
 
         }
 
         public void Delete(T item)
         {
-
             if (item.Id!=null)
             {
                Delete(item.Id);    
             }
-            
         }
 
         public void Delete(int id)
@@ -135,15 +130,40 @@ namespace Task_1
 
             command.ExecuteNonQuery();
 
-            
-
             Console.WriteLine("Delete Successful.");
 
         }
 
         public void GetById(int id)
         {
-            var sql = new StringBuilder("");
+            var sql = new StringBuilder("Select ");
+            var obj = Activator.CreateInstance(typeof(T));
+            var type = obj.GetType();
+            var properties = type.GetProperties();
+            for (int i = 0; i < properties.Length; i++)
+            {
+                sql.Append(properties[i].Name).Append(',');
+            }
+
+            sql.Remove(sql.Length - 1, 1);
+            sql.Append(" From ").Append(type.Name).Append(" Where id=").Append(id);
+
+            var query = sql.ToString();
+
+            using SqlCommand command = new SqlCommand(query,_sqlConnection);
+            if (_sqlConnection.State == System.Data.ConnectionState.Closed)
+                _sqlConnection.Open();
+            var reader = command.ExecuteReader();
+            
+            while (reader.Read())
+            {
+                foreach (var property in properties)
+                {
+                    property.SetValue(obj,reader[property.Name]);
+                    Console.Write($" {property.Name}:");
+                    Console.Write($" {property.GetValue(obj)} ");
+                }
+            }
         }
 
         public void GetAll()
@@ -156,8 +176,8 @@ namespace Task_1
             sql.Append(tableobj.Name);
             sql.Append(';');
             var query = sql.ToString();
-            var coloumList =ReadOparation(query, _sqlConnection);
 
+            var coloumList =ReadOparation(query, _sqlConnection);
 
             foreach (var item in coloumList)
             {
@@ -168,8 +188,6 @@ namespace Task_1
                     Console.WriteLine(propertyInfo.GetValue(item));
                 }
             }
-
-
         }
 
         private  IList<T> ReadOparation(string sql, SqlConnection connection)
@@ -192,13 +210,9 @@ namespace Task_1
                 }
 
                 objlist.Add(obj);
-
             }
 
             return objlist;
-
-
-
 
         }
 

@@ -13,7 +13,7 @@ namespace Task_1
 
             var MyORM = new MyORM<Students>(connection);
 
-            MyORM.GetAll();
+            MyORM.GetById(1);
         }
     }
 }
