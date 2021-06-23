@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -142,7 +143,7 @@ namespace Task_1
 
         public void GetById(int id)
         {
-
+            var sql = new StringBuilder("");
         }
 
         public void GetAll()
@@ -155,22 +156,23 @@ namespace Task_1
             sql.Append(tableobj.Name);
             sql.Append(';');
             var query = sql.ToString();
-            var coloumList=ReadOparation(query,_sqlConnection);
+            var coloumList =ReadOparation(query, _sqlConnection);
 
-            foreach (var entity in coloumList)
+
+            foreach (var item in coloumList)
             {
-
-
-                Console.WriteLine(entity.GetType());
-               
-
+                var objOfItem = item.GetType();
+                var propertyOfItem = objOfItem.GetProperties();
+                foreach (var propertyInfo in propertyOfItem)
+                {
+                    Console.WriteLine(propertyInfo.GetValue(item));
+                }
             }
-
 
 
         }
 
-        static IList<T> ReadOparation(string sql, SqlConnection connection)
+        private  IList<T> ReadOparation(string sql, SqlConnection connection)
         {
             if (connection.State==System.Data.ConnectionState.Closed)
                 connection.Open();
