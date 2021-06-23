@@ -185,7 +185,9 @@ namespace Task_1
                 var propertyOfItem = objOfItem.GetProperties();
                 foreach (var propertyInfo in propertyOfItem)
                 {
-                    Console.WriteLine(propertyInfo.GetValue(item));
+                    Console.Write($" {propertyInfo.Name}: ");
+                    Console.Write(propertyInfo.GetValue(item));
+                    Console.WriteLine();
                 }
             }
         }
