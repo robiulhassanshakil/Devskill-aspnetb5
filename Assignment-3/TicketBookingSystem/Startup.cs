@@ -35,19 +35,34 @@ namespace TicketBookingSystem
         
         public void ConfigureContainer(ContainerBuilder builder)
         {
+            var connectionInfo = GetConnectionStringAndAssemblyName();
 
+            builder.RegisterModule(new DataModule(connectionInfo.connectionString,connectionInfo.migrationAssemblyName));
             builder.RegisterModule(new WebModule());
 
         }
 
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        private (string connectionString, string migrationAssemblyName) GetConnectionStringAndAssemblyName()
+        {
+            var connectionStringName = "DefaultConnection";
+            var connectionString = Configuration.GetConnectionString(connectionStringName);
+            var migrationAssemblyName = typeof(Startup).Assembly.FullName;
+            return (connectionString, migrationAssemblyName);
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDatabaseDeveloperPageExceptionFilter();
+
+            var connectionInfo = GetConnectionStringAndAssemblyName();
+
+            services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(connectionInfo.connectionString));
+
+            services.AddDbContext<BookingDbContext>(option =>
+                option.UseSqlServer(connectionInfo.connectionString, b => b.MigrationsAssembly(connectionInfo.migrationAssemblyName)));
+
+
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
