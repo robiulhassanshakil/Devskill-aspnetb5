@@ -1,0 +1,15 @@
+﻿@using System.Security.Cryptography
+@model TicketListModel;
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Tickets</h1>
+@{
+    foreach (var ticket in Model.Tickets)
+    {
+        <h1>@ticket.Destination</h1><br/>
+        <h2>@ticket.TicketFee</h2>
+    }
+}
+

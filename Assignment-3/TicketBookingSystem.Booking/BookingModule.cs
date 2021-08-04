@@ -6,15 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 using Microsoft.EntityFrameworkCore;
+using TicketBookingSystem.Booking.Contexts;
+using TicketBookingSystem.Booking.Services;
 
-namespace TicketBookingSystem.Data
+namespace TicketBookingSystem.Booking
 {
-    public class DataModule:Module
+    public class BookingModule:Module
     {
         private readonly string _connectionString;
         private readonly string _migrationAssemblyName;
 
-        public DataModule(string connectionString, string migrationAssemblyName)
+        public BookingModule(string connectionString, string migrationAssemblyName)
         {
             _connectionString = connectionString;
             _migrationAssemblyName = migrationAssemblyName;
@@ -27,6 +29,8 @@ namespace TicketBookingSystem.Data
                 .WithParameter("migrationAssemblyName", _migrationAssemblyName)
                 .InstancePerLifetimeScope();
 
+            builder.RegisterType<TicketService>().As<ITicketService>()
+                .InstancePerLifetimeScope();
 
             base.Load(builder);
 

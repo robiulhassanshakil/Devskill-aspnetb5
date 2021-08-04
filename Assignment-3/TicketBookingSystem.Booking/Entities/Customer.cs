@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TicketBookingSystem.Data
+namespace TicketBookingSystem.Booking.Entities
 {
     public class Customer
     {

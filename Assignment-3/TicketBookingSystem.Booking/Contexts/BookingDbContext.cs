@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using TicketBookingSystem.Booking.Entities;
 
-namespace TicketBookingSystem.Data
+namespace TicketBookingSystem.Booking.Contexts
 {
     public class BookingDbContext:DbContext
     {

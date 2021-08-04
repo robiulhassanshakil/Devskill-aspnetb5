@@ -13,7 +13,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using TicketBookingSystem.Booking;
+using TicketBookingSystem.Booking.Contexts;
 using TicketBookingSystem.Data;
+
 
 namespace TicketBookingSystem
 {
@@ -37,7 +40,7 @@ namespace TicketBookingSystem
         {
             var connectionInfo = GetConnectionStringAndAssemblyName();
 
-            builder.RegisterModule(new DataModule(connectionInfo.connectionString,connectionInfo.migrationAssemblyName));
+            builder.RegisterModule(new BookingModule(connectionInfo.connectionString,connectionInfo.migrationAssemblyName));
             builder.RegisterModule(new WebModule());
 
         }
