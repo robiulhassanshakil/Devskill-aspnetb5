@@ -30,7 +30,7 @@ namespace TicketBookingSystem.Areas.Admin.Controllers
 
             return View(model);
         }
-        [HttpPost,ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Create(CreateTicketModel model)
         {
             if (ModelState.IsValid)
@@ -41,11 +41,11 @@ namespace TicketBookingSystem.Areas.Admin.Controllers
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError("","Failed To Create Ticket");
+                    ModelState.AddModelError("", "Failed To Create Ticket");
                     _logger.LogError(ex, "Create Ticket Failed");
-                }    
+                }
             }
-            
+
 
             return View(model);
         }

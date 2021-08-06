@@ -17,34 +17,32 @@ using TicketBookingSystem.Booking;
 using TicketBookingSystem.Booking.Contexts;
 using TicketBookingSystem.Data;
 
-
 namespace TicketBookingSystem
 {
     public class Startup
     {
         public Startup(IWebHostEnvironment env)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
+            var builder = new ConfigurationBuilder().SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             WebHostEnvironment = env;
             Configuration = builder.Build();
         }
+
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment WebHostEnvironment { get; set; }
         public static ILifetimeScope AutofacContainer { get; set; }
-        
+
         public void ConfigureContainer(ContainerBuilder builder)
         {
             var connectionInfo = GetConnectionStringAndAssemblyName();
 
-            builder.RegisterModule(new BookingModule(connectionInfo.connectionString,connectionInfo.migrationAssemblyName));
+            builder.RegisterModule(new BookingModule(connectionInfo.connectionString,
+                connectionInfo.migrationAssemblyName));
             builder.RegisterModule(new WebModule());
-
         }
-
 
         // This method gets called by the runtime. Use this method to add services to the container.
         private (string connectionString, string migrationAssemblyName) GetConnectionStringAndAssemblyName()
@@ -57,15 +55,12 @@ namespace TicketBookingSystem
 
         public void ConfigureServices(IServiceCollection services)
         {
-
             var connectionInfo = GetConnectionStringAndAssemblyName();
 
             services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(connectionInfo.connectionString));
 
-            services.AddDbContext<BookingDbContext>(option =>
-                option.UseSqlServer(connectionInfo.connectionString, b => b.MigrationsAssembly(connectionInfo.migrationAssemblyName)));
-
-
+            services.AddDbContext<BookingDbContext>(option => option.UseSqlServer(connectionInfo.connectionString,
+                b => b.MigrationsAssembly(connectionInfo.migrationAssemblyName)));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -89,7 +84,6 @@ namespace TicketBookingSystem
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
             services.AddRazorPages();
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -108,6 +102,7 @@ namespace TicketBookingSystem
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession();
@@ -119,15 +114,10 @@ namespace TicketBookingSystem
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "areas",
-                    pattern:
-                    "{area:exists}/{controller=Dashboard}/{action=Index}/{Id?}"
-                );
+                endpoints.MapControllerRoute(name: "areas",
+                    pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{Id?}");
 
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

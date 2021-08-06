@@ -14,7 +14,7 @@ namespace TicketBookingSystem.Booking.Repositories
         ICustomerRepository
     {
         public CustomerRepository(IBookingDbContext context)
-            : base((DbContext) context)
+            : base((DbContext)context)
         {
 
         }

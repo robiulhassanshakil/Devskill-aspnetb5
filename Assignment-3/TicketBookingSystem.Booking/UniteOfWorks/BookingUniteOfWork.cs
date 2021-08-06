@@ -10,17 +10,17 @@ using TicketBookingSystem.Data;
 
 namespace TicketBookingSystem.Booking.UniteOfWorks
 {
-    public class BookingUniteOfWork : UnitOfWork ,IBookingUniteOfWork
+    public class BookingUniteOfWork : UnitOfWork, IBookingUniteOfWork
     {
-         public ICustomerRepository Customers { get; private set; }
-         public ITicketRepository Tickets { get; private set; }
+        public ICustomerRepository Customers { get; private set; }
+        public ITicketRepository Tickets { get; private set; }
 
-         public BookingUniteOfWork(IBookingDbContext context,
-             ICustomerRepository customers,
-             ITicketRepository tickets) : base((DbContext) context)
-         {
-             Customers = customers;
-             Tickets = tickets;
-         }
+        public BookingUniteOfWork(IBookingDbContext context,
+            ICustomerRepository customers,
+            ITicketRepository tickets) : base((DbContext)context)
+        {
+            Customers = customers;
+            Tickets = tickets;
+        }
     }
 }

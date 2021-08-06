@@ -8,7 +8,7 @@ using TicketBookingSystem.Data;
 
 namespace TicketBookingSystem.Booking.Repositories
 {
-    public interface ICustomerRepository:IRepository<Customer, int>
+    public interface ICustomerRepository : IRepository<Customer, int>
     {
     }
 }

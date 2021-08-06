@@ -8,12 +8,12 @@ using TicketBookingSystem.Booking.Services;
 
 namespace TicketBookingSystem.Areas.Admin.Models
 {
-    
     public class TicketListModel
     {
         private readonly ITicketService _ticketService;
 
         public IList<Ticket> Tickets { get; set; }
+
         public TicketListModel()
         {
             _ticketService = Startup.AutofacContainer.Resolve<ITicketService>();

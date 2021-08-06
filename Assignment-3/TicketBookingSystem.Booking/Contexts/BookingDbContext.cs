@@ -8,7 +8,7 @@ using TicketBookingSystem.Booking.Entities;
 
 namespace TicketBookingSystem.Booking.Contexts
 {
-    public class BookingDbContext:DbContext, IBookingDbContext
+    public class BookingDbContext : DbContext, IBookingDbContext
     {
 
 

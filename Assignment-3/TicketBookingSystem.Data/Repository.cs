@@ -20,7 +20,7 @@ namespace TicketBookingSystem.Data
             _dbContext = context;
             _dbSet = _dbContext.Set<TEntity>();
         }
-        
+
         public virtual void Add(TEntity entity)
         {
             _dbSet.Add(entity);

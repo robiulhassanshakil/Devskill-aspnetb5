@@ -15,6 +15,7 @@ namespace TicketBookingSystem.Areas.Admin.Models
         public int CustomerId { get; set; }
 
         private readonly ITicketService _ticketService;
+
         public CreateTicketModel()
         {
             _ticketService = Startup.AutofacContainer.Resolve<ITicketService>();
@@ -27,12 +28,7 @@ namespace TicketBookingSystem.Areas.Admin.Models
 
         public void CreateTicket()
         {
-            var ticket = new Ticket()
-            {
-                Destination = Destination,
-                TicketFee = TicketFee,
-                CustomerId = CustomerId
-            };
+            var ticket = new Ticket() { Destination = Destination, TicketFee = TicketFee, CustomerId = CustomerId };
 
             _ticketService.CreateTicket(ticket);
         }

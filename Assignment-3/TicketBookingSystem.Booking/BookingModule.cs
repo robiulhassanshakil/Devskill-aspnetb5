@@ -13,7 +13,7 @@ using TicketBookingSystem.Booking.UniteOfWorks;
 
 namespace TicketBookingSystem.Booking
 {
-    public class BookingModule:Module
+    public class BookingModule : Module
     {
         private readonly string _connectionString;
         private readonly string _migrationAssemblyName;

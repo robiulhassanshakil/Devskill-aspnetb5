@@ -14,7 +14,7 @@ namespace TicketBookingSystem.Booking.Services
     {
         private readonly IBookingUniteOfWork _bookingUniteOfWork;
 
-        
+
         public TicketService(IBookingUniteOfWork bookingUniteOfWork)
         {
             _bookingUniteOfWork = bookingUniteOfWork;
@@ -48,6 +48,6 @@ namespace TicketBookingSystem.Booking.Services
             }
             return tickets;
         }
-       
+
     }
 }
