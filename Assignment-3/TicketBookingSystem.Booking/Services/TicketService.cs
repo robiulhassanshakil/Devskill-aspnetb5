@@ -6,32 +6,48 @@ using System.Text;
 using System.Threading.Tasks;
 using TicketBookingSystem.Booking.BusinessObjects;
 using TicketBookingSystem.Booking.Contexts;
+using TicketBookingSystem.Booking.UniteOfWorks;
 
 namespace TicketBookingSystem.Booking.Services
 {
     public class TicketService : ITicketService
     {
+        private readonly IBookingUniteOfWork _bookingUniteOfWork;
 
-        private readonly BookingDbContext _bookingDbContext;
-        public TicketService(BookingDbContext bookingDbContext)
+        
+        public TicketService(IBookingUniteOfWork bookingUniteOfWork)
         {
-            _bookingDbContext = bookingDbContext;
+            _bookingUniteOfWork = bookingUniteOfWork;
         }
+
+        public void CreateTicket(Ticket ticket)
+        {
+            _bookingUniteOfWork.Tickets.Add(new Entities.Ticket
+            {
+                Destination = ticket.Destination,
+                TicketFee = ticket.TicketFee,
+                CustomerId = ticket.CustomerId
+            });
+            _bookingUniteOfWork.Save();
+        }
+
         public IList<Ticket> GetAllTicket()
         {
-            var ticketsEntities = _bookingDbContext.Tickets.ToList();
+            var ticketsEntities = _bookingUniteOfWork.Tickets.GetAll();
             var tickets = new List<Ticket>();
             foreach (var entity in ticketsEntities)
             {
                 var ticket = new Ticket()
                 {
                     Destination = entity.Destination,
-                    TicketFee = entity.TicketFee
+                    TicketFee = entity.TicketFee,
+                    CustomerId = entity.CustomerId
                 };
 
                 tickets.Add(ticket);
             }
             return tickets;
         }
+       
     }
 }

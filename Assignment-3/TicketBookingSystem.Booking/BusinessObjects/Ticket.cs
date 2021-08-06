@@ -10,5 +10,6 @@ namespace TicketBookingSystem.Booking.BusinessObjects
     {
         public string Destination { get; set; }
         public double TicketFee { get; set; }
+        public int CustomerId { get; set; }
     }
 }

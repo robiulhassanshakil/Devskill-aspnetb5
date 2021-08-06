@@ -10,5 +10,6 @@ namespace TicketBookingSystem.Booking.Services
     public interface ITicketService
     {
         IList<Ticket> GetAllTicket();
+        void CreateTicket(Ticket ticket);
     }
 }
