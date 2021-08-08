@@ -11,13 +11,16 @@ namespace TicketBookingSystem.Areas.Admin.Models
 {
     public class EditTicketModel
     {
-        [Required, Range(100, 50000)]
+        [Required, Range(1, 50000)]
         public int? Id { get; set; }
+
         [Required, MaxLength(200, ErrorMessage = "Destination should be less than 200 charecters")]
         public string Destination { get; set; }
+
         [Required, Range(100, 50000)]
         public double? TicketFee { get; set; }
-        [Required, Range(100, 50000)]
+
+        [Required, Range(1, 50000)]
         public int? CustomerId { get; set; }
 
         private readonly ITicketService _ticketService;
