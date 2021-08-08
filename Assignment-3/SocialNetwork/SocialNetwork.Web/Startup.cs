@@ -12,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 
 namespace SocialNetwork.Web
 {
@@ -30,6 +32,12 @@ namespace SocialNetwork.Web
         }
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment WebHostEnvironment { get; set; }
+        public static ILifetimeScope AutofacContainer { get; set; }
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+
+            builder.RegisterModule(new WebModule());
+        }
 
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -69,6 +77,8 @@ namespace SocialNetwork.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            AutofacContainer = app.ApplicationServices.GetAutofacRoot();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
