@@ -14,6 +14,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using SocialNetwork.Profiling;
+using SocialNetwork.Profiling.Contexts;
 
 namespace SocialNetwork.Web
 {
@@ -35,17 +37,24 @@ namespace SocialNetwork.Web
         public static ILifetimeScope AutofacContainer { get; set; }
         public void ConfigureContainer(ContainerBuilder builder)
         {
+            var connectionInfo = GetConnectionStringAndAssemblyName();
 
             builder.RegisterModule(new WebModule());
+
+            builder.RegisterModule(new ProfilingModule(connectionInfo.connectionString,connectionInfo.migrationAssemblyName));
         }
 
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            var connectionInfo = GetConnectionStringAndAssemblyName();
+
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionInfo.connectionString));
+
+            services.AddDbContext<ProfilingDbContext>(option => option.UseSqlServer(connectionInfo.connectionString,
+                b => b.MigrationsAssembly(connectionInfo.migrationAssemblyName)));
+
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -103,7 +112,7 @@ namespace SocialNetwork.Web
             {
                 endpoints.MapControllerRoute(
                     name: "areas",
-                    pattern:"{area:exists}/{controller=Home}/{action=Index}/{Id?}");
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{Id?}");
 
                 endpoints.MapControllerRoute(
                     name: "default",
@@ -111,6 +120,13 @@ namespace SocialNetwork.Web
 
                 endpoints.MapRazorPages();
             });
+        }
+        private (string connectionString, string migrationAssemblyName) GetConnectionStringAndAssemblyName()
+        {
+            var connectionStringName = "DefaultConnection";
+            var connectionString = Configuration.GetConnectionString(connectionStringName);
+            var migrationAssemblyName = typeof(Startup).Assembly.FullName;
+            return (connectionString, migrationAssemblyName);
         }
     }
 }

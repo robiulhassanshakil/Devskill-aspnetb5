@@ -27,4 +27,8 @@
     <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SocialNetwork.Profiling\SocialNetwork.Profiling.csproj" />
+  </ItemGroup>
+
 </Project>
