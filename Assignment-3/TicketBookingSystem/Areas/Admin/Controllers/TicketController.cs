@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FirstDemo.Models;
 using Microsoft.Extensions.Logging;
 using TicketBookingSystem.Areas.Admin.Models;
 
@@ -20,8 +21,15 @@ namespace TicketBookingSystem.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var model = new TicketListModel();
-            model.LoadModelData();
             return View(model);
+        }
+
+        public JsonResult GetTicketData()
+        {
+            var DataTableModel = new DataTablesAjaxRequestModel(Request);
+            var model = new TicketListModel();
+            var data = model.GetTicketData(DataTableModel);
+            return Json(data);
         }
 
         public IActionResult Create()
@@ -50,5 +58,35 @@ namespace TicketBookingSystem.Areas.Admin.Controllers
             return View(model);
         }
 
+        public IActionResult Edit(int id)
+        {
+            var model = new EditTicketModel();
+            model.LoadModelData(id);
+
+            return View(model);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Edit(EditTicketModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.Update();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            var model = new TicketListModel();
+            
+            model.Delete(id);
+            return RedirectToAction(nameof(Index));
+        }
+
     }
+
 }

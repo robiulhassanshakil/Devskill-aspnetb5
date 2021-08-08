@@ -9,7 +9,11 @@ namespace TicketBookingSystem.Booking.Services
 {
     public interface ITicketService
     {
-        IList<Ticket> GetAllTicket();
+    
         void CreateTicket(Ticket ticket);
+        (IList<Ticket>records,int total,int totalDisplay )GetTickets(int pageIndex, int pageSize, string searchText, string sortText);
+        Ticket GetTicket(int id);
+        void UpdateTicket(Ticket ticket);
+        void DeleteTicket(int id);
     }
 }
