@@ -45,13 +45,7 @@ namespace TicketBookingSystem
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        private (string connectionString, string migrationAssemblyName) GetConnectionStringAndAssemblyName()
-        {
-            var connectionStringName = "DefaultConnection";
-            var connectionString = Configuration.GetConnectionString(connectionStringName);
-            var migrationAssemblyName = typeof(Startup).Assembly.FullName;
-            return (connectionString, migrationAssemblyName);
-        }
+       
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -120,6 +114,14 @@ namespace TicketBookingSystem
                 endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+        }
+        private (string connectionString, string migrationAssemblyName) GetConnectionStringAndAssemblyName()
+        {
+            var connectionStringName = "DefaultConnection";
+            var connectionString = Configuration.GetConnectionString(connectionStringName);
+            var migrationAssemblyName = typeof(Startup).Assembly.FullName;
+            return (connectionString, migrationAssemblyName);
         }
     }
 }
