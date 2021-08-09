@@ -29,6 +29,14 @@ namespace SocialNetwork.Profiling.Contexts
 
             base.OnConfiguring(dbContextOptionsBuilder);
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Member>()
+                .HasMany(t=>t.Photos)
+                .WithOne(t => t.Member);
+
+        }
         public DbSet<Member> Members { get; set; }
         public DbSet<Photo> Photos { get; set; }
     }

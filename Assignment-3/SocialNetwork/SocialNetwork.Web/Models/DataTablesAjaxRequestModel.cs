@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Http;
 
-namespace TicketBookingSystem.Models
+namespace SocialNetwork.Web.Models
 {
     public class DataTablesAjaxRequestModel
     {

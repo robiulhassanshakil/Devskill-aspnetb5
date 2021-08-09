@@ -3,9 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FirstDemo.Models;
+
 using Microsoft.Extensions.Logging;
 using TicketBookingSystem.Areas.Admin.Models;
+using TicketBookingSystem.Models;
 
 namespace TicketBookingSystem.Areas.Admin.Controllers
 {

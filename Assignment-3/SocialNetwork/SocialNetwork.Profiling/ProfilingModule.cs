@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 using SocialNetwork.Profiling.Contexts;
+using SocialNetwork.Profiling.Repositories;
+using SocialNetwork.Profiling.Services;
+using SocialNetwork.Profiling.UniteOfWorks;
 
 namespace SocialNetwork.Profiling
 {
@@ -29,6 +32,19 @@ namespace SocialNetwork.Profiling
                 .WithParameter("connectionString", _connectionString)
                 .WithParameter("migrationAssemblyName", _migrationAssemblyName)
                 .InstancePerLifetimeScope();
+            builder.RegisterType<ProfilingUniteOfWork>().As<IProfilingUniteOfWork>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<MemberRepository>().As<IMemberRepository>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<PhotoRepository>().As<IPhotoRepository>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<MemberService>().As<IMemberService>()
+                .InstancePerLifetimeScope();
+
+         
 
             base.Load(builder);
 

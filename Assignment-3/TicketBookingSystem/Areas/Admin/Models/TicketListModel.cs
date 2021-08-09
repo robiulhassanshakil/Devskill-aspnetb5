@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
-using FirstDemo.Models;
 using TicketBookingSystem.Booking.BusinessObjects;
 using TicketBookingSystem.Booking.Services;
+using TicketBookingSystem.Models;
 
 namespace TicketBookingSystem.Areas.Admin.Models
 {

@@ -24,10 +24,10 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SocialNetwork.Data\SocialNetwork.Data.csproj" />
     <ProjectReference Include="..\SocialNetwork.Profiling\SocialNetwork.Profiling.csproj" />
   </ItemGroup>
 

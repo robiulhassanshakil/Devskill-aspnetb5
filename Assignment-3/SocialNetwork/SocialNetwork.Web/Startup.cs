@@ -112,7 +112,7 @@ namespace SocialNetwork.Web
             {
                 endpoints.MapControllerRoute(
                     name: "areas",
-                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{Id?}");
+                    pattern: "{area:exists}/{controller=Member}/{action=Index}/{Id?}");
 
                 endpoints.MapControllerRoute(
                     name: "default",
