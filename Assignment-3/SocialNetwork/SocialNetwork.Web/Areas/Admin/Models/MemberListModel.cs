@@ -40,7 +40,7 @@ namespace SocialNetwork.Web.Areas.Admin.Models
                         select new string[]
                         {
                             record.Name,
-                            record.DateOfBirth.ToString(),
+                            record.DateOfBirth.ToLongDateString(),
                             record.Address.ToString(),
                             record.Id.ToString()
                         }
