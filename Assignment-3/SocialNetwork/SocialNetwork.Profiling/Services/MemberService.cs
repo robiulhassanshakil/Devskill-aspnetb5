@@ -45,5 +45,47 @@ namespace SocialNetwork.Profiling.Services
 
             return (resultData, memberData.total, memberData.totalDisplay);
         }
+
+        public Member GetMember(int id)
+        {
+            var member = _profilingUniteOfWork.Members.GetById(id);
+
+            if (member == null) return null;
+
+            return new Member()
+            {
+                Id = member.Id,
+                Name = member.Name,
+                DateOfBirth = member.DateOfBirth,
+                Address = member.Address
+            };
+        }
+        public void UpdateMember(Member member)
+        {
+            if (member == null)
+                throw new InvalidOperationException("Member is missing");
+
+            var memberEntity = _profilingUniteOfWork.Members.GetById(member.Id);
+
+            if (memberEntity != null)
+            {
+                memberEntity.Name = member.Name;
+                memberEntity.DateOfBirth = member.DateOfBirth;
+                memberEntity.Address = member.Address;
+                
+                _profilingUniteOfWork.Save();
+            }
+            else
+            {
+                throw new InvalidOperationException("Couldn't find Member");
+            }
+
+        }
+
+        public void DeleteMember(int id)
+        {
+            _profilingUniteOfWork.Members.Remove(id);
+            _profilingUniteOfWork.Save();
+        }
     }
 }

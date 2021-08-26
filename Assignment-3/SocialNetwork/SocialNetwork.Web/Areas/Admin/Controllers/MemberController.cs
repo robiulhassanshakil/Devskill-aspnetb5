@@ -51,5 +51,34 @@ namespace SocialNetwork.Web.Areas.Admin.Controllers
 
             return View(model);
         }
+        public IActionResult Edit(int id)
+        {
+            var model = new EditMemberModel();
+            model.LoadModelData(id);
+
+            return View(model);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Edit(EditMemberModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.Update();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            var model = new MemberListModel();
+
+            model.Delete(id);
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

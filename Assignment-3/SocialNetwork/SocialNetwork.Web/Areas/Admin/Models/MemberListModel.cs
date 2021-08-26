@@ -47,5 +47,10 @@ namespace SocialNetwork.Web.Areas.Admin.Models
                     ).ToArray()
             };
         }
+
+        internal void Delete(int id)
+        {
+            _memberService.DeleteMember(id);
+        }
     }
 }
