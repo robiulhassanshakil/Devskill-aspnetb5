@@ -23,6 +23,13 @@ namespace LibraryManagementSystem.Web.Areas.Admin.Controllers
         {
             return View();
         }
+        public JsonResult GetBookData()
+        {
+            var dataTableModel = new DataTablesAjaxRequestModel(Request);
+            var model = new BookListModel();
+            var data = model.GetBooks(dataTableModel);
+            return Json(data);
+        }
 
         public IActionResult Create()
         {
@@ -47,6 +54,29 @@ namespace LibraryManagementSystem.Web.Areas.Admin.Controllers
 
             return View(model);
         }
-       
+        public IActionResult Edit(int id)
+        {
+            var model = new EditBookModel();
+            model.LoadModelData(id);
+            return View(model);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Edit(EditBookModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.Update();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            var model = new BookListModel();
+            model.Delete(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

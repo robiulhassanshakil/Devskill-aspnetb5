@@ -9,7 +9,12 @@ namespace LibraryManagementSystem.Publishing.Services
 {
     public interface IBookService
     {
-        void CreateBook(Book book);
         
+        void CreateBook(Book book);
+        (IList<Book> records, int total, int totalDisplay) GetBooks(int pageIndex, int pageSize,
+            string searchText, string sortText);
+        Book GetBook(int id);
+        void UpdateBook(Book book);
+        void DeleteBook(int id);
     }
 }

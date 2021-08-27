@@ -25,15 +25,51 @@ namespace LibraryManagementSystem.Publishing.Services
         public void CreateBook(Book book)
         {
 
-            _booKUniteOfWork.Books.Add(new Entities.Book()
-            {
-                Title = book.Title,
-                Barcode = book.Barcode,
-                Price = book.Price
-            });
+            _booKUniteOfWork.Books.Add(_mapper.Map<Entities.Book>(book));
 
             _booKUniteOfWork.Save();
         }
 
+        public void DeleteBook(int id)
+        {
+            _booKUniteOfWork.Books.Remove(id);
+            _booKUniteOfWork.Save();
+        }
+
+       
+
+        public Book GetBook(int id)
+        {
+            var book = _booKUniteOfWork.Books.GetById(id);
+
+            if (book == null) return null;
+
+            return _mapper.Map<Book>(book);
+        }
+
+        public (IList<Book> records, int total, int totalDisplay) GetBooks(int pageIndex, int pageSize, string searchText, string sortText)
+        {
+            var bookData = _booKUniteOfWork.Books.GetDynamic(
+                string.IsNullOrWhiteSpace(searchText) ? null : x => x.Title.Contains(searchText),
+                sortText, string.Empty, pageIndex, pageSize);
+
+            var resultData = (from book in bookData.data
+                select _mapper.Map<Book>(book)).ToList();
+
+            return (resultData, bookData.total, bookData.totalDisplay);
+        }
+
+        public void UpdateBook(Book book)
+        {
+            var bookEntity = _booKUniteOfWork.Books.GetById(book.Id);
+
+            if (bookEntity != null)
+            {
+                _mapper.Map(book, bookEntity);
+                _booKUniteOfWork.Save();
+            }
+            else
+                throw new InvalidOperationException("Couldn't find Book");
+        }
     }
 }
