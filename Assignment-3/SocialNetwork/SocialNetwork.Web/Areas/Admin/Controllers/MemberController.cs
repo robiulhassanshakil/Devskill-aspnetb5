@@ -21,8 +21,8 @@ namespace SocialNetwork.Web.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            var model = new MemberListModel();
-            return View(model);
+            
+            return View();
         }
         public JsonResult GetMemberData()
         {
