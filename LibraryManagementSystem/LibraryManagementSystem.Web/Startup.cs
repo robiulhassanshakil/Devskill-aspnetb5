@@ -14,6 +14,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using LibraryManagementSystem.Publishing;
+using LibraryManagementSystem.Publishing.Contexts;
 
 namespace LibraryManagementSystem.Web
 {
@@ -37,8 +39,9 @@ namespace LibraryManagementSystem.Web
         public void ConfigureContainer(ContainerBuilder builder)
         {
             var connectionInfo = GetConnectionStringAndMigrationAssemblyName();
-           
-                builder.RegisterModule(new WebModule());
+            
+            builder.RegisterModule(new WebModule());
+            builder.RegisterModule(new PublishingModule(connectionInfo.connectionString,connectionInfo.migrationAssemblyName));
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -46,6 +49,9 @@ namespace LibraryManagementSystem.Web
         {
             var connectionInfo = GetConnectionStringAndMigrationAssemblyName();
 
+            services.AddDbContext<PublishingDbContext>(options => 
+                options.UseSqlServer(connectionInfo.connectionString, 
+                    m => m.MigrationsAssembly(connectionInfo.migrationAssemblyName)));
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionInfo.connectionString));
             

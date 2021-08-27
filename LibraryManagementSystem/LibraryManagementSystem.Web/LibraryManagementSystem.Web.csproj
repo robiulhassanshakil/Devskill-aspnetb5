@@ -24,4 +24,8 @@
     <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LibraryManagementSystem.Publishing\LibraryManagementSystem.Publishing.csproj" />
+  </ItemGroup>
+
 </Project>
