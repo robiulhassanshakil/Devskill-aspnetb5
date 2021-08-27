@@ -10,7 +10,7 @@ namespace LibraryManagementSystem.Publishing.UniteOfWorks
 {
     public interface IBooKUniteOfWork:IUnitOfWork
     {
-         IBookRepository Books { get;  }
-         IAuthorRepository Authors { get; }
+        public IBookRepository Books { get;  }
+        public IAuthorRepository Authors { get; }
     }
 }

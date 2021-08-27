@@ -25,7 +25,12 @@ namespace LibraryManagementSystem.Publishing.Services
         public void CreateBook(Book book)
         {
 
-            _booKUniteOfWork.Books.Add(_mapper.Map<Entities.Book>(book));
+            _booKUniteOfWork.Books.Add(new Entities.Book()
+            {
+                Title = book.Title,
+                Barcode = book.Barcode,
+                Price = book.Price
+            });
 
             _booKUniteOfWork.Save();
         }
