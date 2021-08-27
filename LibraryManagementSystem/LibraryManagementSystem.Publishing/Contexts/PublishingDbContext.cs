@@ -31,6 +31,20 @@ namespace LibraryManagementSystem.Publishing.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
+
+            modelBuilder.Entity<BookAuthors>()
+                .HasKey(cs => new { cs.BookId, cs.AuthorId });
+
+            modelBuilder.Entity<BookAuthors>()
+                .HasOne(cs => cs.Book)
+                .WithMany(c => c.Authors)
+                .HasForeignKey(cs => cs.BookId);
+
+            modelBuilder.Entity<BookAuthors>()
+                .HasOne(cs => cs.Author)
+                .WithMany(s => s.WrittenBooks)
+                .HasForeignKey(cs => cs.AuthorId);
             base.OnModelCreating(modelBuilder);
         }
 
