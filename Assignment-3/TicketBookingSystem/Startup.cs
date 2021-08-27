@@ -75,6 +75,7 @@ namespace TicketBookingSystem
                 options.Cookie.IsEssential = true;
             });
 
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
             services.AddRazorPages();
@@ -109,9 +110,10 @@ namespace TicketBookingSystem
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(name: "areas",
-                    pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{Id?}");
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{Id?}");
 
-                endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(name: "default", 
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
 

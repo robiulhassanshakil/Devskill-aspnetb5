@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
+using AutoMapper;
 using TicketBookingSystem.Booking.BusinessObjects;
 using TicketBookingSystem.Booking.Services;
 
@@ -24,33 +25,30 @@ namespace TicketBookingSystem.Areas.Admin.Models
         public int? CustomerId { get; set; }
 
         private readonly ITicketService _ticketService;
+        private readonly IMapper _mapper;
 
         public EditTicketModel()
         {
             _ticketService = Startup.AutofacContainer.Resolve<ITicketService>();
+            _mapper = Startup.AutofacContainer.Resolve<IMapper>();
+        }
+        public EditTicketModel(ITicketService ticketService, IMapper mapper)
+        {
+            _ticketService = ticketService;
+            _mapper = mapper;
         }
 
         public void LoadModelData(int id)
         {
             var ticket = _ticketService.GetTicket(id);
 
-            Id = ticket?.Id;
-            Destination = ticket.Destination;
-            TicketFee = ticket?.TicketFee;
-            CustomerId = ticket?.CustomerId;
+            _mapper.Map(ticket,this);
 
         }
 
         internal void Update()
         {
-            var ticket = new Ticket()
-            {
-                Id = Id.Value,
-                Destination = Destination,
-                TicketFee = TicketFee.HasValue ? TicketFee.Value : 0,
-                CustomerId = CustomerId.HasValue ? CustomerId.Value : 0
-
-            };
+            var ticket = _mapper.Map<Ticket>(this);
 
             _ticketService.UpdateTicket(ticket);
         }
