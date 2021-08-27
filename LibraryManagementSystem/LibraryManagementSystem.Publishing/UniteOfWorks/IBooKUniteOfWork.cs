@@ -8,9 +8,9 @@ using LibraryManagementSystem.Publishing.Repositories;
 
 namespace LibraryManagementSystem.Publishing.UniteOfWorks
 {
-    public interface IPublishingUniteOfWork : IUnitOfWork
+    public interface IBooKUniteOfWork:IUnitOfWork
     {
-        IBookRepository Books { get; }
-        IAuthorRepository Authors { get; }
+         IBookRepository Books { get;  }
+         IAuthorRepository Authors { get; }
     }
 }

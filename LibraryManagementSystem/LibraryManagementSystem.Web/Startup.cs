@@ -68,6 +68,7 @@ namespace LibraryManagementSystem.Web
                 options.AccessDeniedPath = "/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromSeconds(100);

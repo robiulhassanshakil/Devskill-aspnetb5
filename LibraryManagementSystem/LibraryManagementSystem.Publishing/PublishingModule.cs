@@ -40,11 +40,14 @@ namespace LibraryManagementSystem.Publishing
 
             builder.RegisterType<BookRepository>().As<IBookRepository>()
                 .InstancePerLifetimeScope();
+
             builder.RegisterType<AuthorService>().As<IAuthorService>()
                 .InstancePerLifetimeScope();
+
             builder.RegisterType<BookService>().As<IBookService>()
                 .InstancePerLifetimeScope();
-            builder.RegisterType<PublishingUniteOfWork>().As<IPublishingUniteOfWork>()
+
+            builder.RegisterType<BooKUniteOfWork>().As<IBooKUniteOfWork>()
                 .InstancePerLifetimeScope();
 
 
