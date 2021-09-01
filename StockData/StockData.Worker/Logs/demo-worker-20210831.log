@@ -1,0 +1,17 @@
+2021-08-31 00:13:39.846 +06:00 [INF] Application Starting up
+2021-08-31 00:18:08.986 +06:00 [INF] Application Starting up
+2021-08-31 00:34:40.114 +06:00 [INF] Application Starting up
+2021-08-31 00:34:40.665 +06:00 [INF] Worker running at: "2021-08-31T00:34:40.6563397+06:00"
+2021-08-31 16:16:04.127 +06:00 [INF] Application Starting up
+2021-08-31 16:16:04.689 +06:00 [FTL] Application start-up failed
+System.InvalidOperationException: Process has exited, so the requested information is not available.
+   at System.Diagnostics.Process.EnsureState(State state)
+   at System.Diagnostics.Process.get_SessionId()
+   at Microsoft.Extensions.Hosting.WindowsServices.WindowsServiceHelpers.IsWindowsService()
+   at Microsoft.Extensions.Hosting.WindowsServiceLifetimeHostBuilderExtensions.UseWindowsService(IHostBuilder hostBuilder, Action`1 configure)
+   at Microsoft.Extensions.Hosting.WindowsServiceLifetimeHostBuilderExtensions.UseWindowsService(IHostBuilder hostBuilder)
+   at StockData.Worker.Program.CreateHostBuilder(String[] args) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\StockData\StockData.Worker\Program.cs:line 64
+   at StockData.Worker.Program.Main(String[] args) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\StockData\StockData.Worker\Program.cs:line 48
+2021-08-31 16:19:55.881 +06:00 [INF] Application Starting up
+2021-08-31 16:37:53.280 +06:00 [INF] Application Starting up
+2021-08-31 16:50:02.125 +06:00 [INF] Application Starting up
