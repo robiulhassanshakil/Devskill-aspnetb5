@@ -20,6 +20,5 @@ namespace StockData.Stock.Entities
         public double Trade { get; set; }
         public double Value { get; set; }
         public double Volume { get; set; }
-        public Company Company { get; set; }
     }
 }

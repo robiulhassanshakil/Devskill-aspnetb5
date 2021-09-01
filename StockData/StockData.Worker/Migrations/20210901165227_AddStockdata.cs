@@ -2,7 +2,7 @@
 
 namespace StockData.Worker.Migrations
 {
-    public partial class AddCompany : Migration
+    public partial class AddStockdata : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,7 +31,7 @@ namespace StockData.Worker.Migrations
                     Low = table.Column<double>(type: "float", nullable: false),
                     ClosePrice = table.Column<double>(type: "float", nullable: false),
                     YesterdayClosePrice = table.Column<double>(type: "float", nullable: false),
-                    Change = table.Column<double>(type: "float", nullable: false),
+                    Change = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Trade = table.Column<double>(type: "float", nullable: false),
                     Value = table.Column<double>(type: "float", nullable: false),
                     Volume = table.Column<double>(type: "float", nullable: false)
@@ -39,27 +39,16 @@ namespace StockData.Worker.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_StockPrices", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_StockPrices_Companies_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "Companies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StockPrices_CompanyId",
-                table: "StockPrices",
-                column: "CompanyId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "StockPrices");
+                name: "Companies");
 
             migrationBuilder.DropTable(
-                name: "Companies");
+                name: "StockPrices");
         }
     }
 }

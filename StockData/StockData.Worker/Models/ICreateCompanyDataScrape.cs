@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockData.Worker
+namespace StockData.Worker.Models
 {
-    public interface ICreateDateScrape
+    public interface ICreateCompanyDataScrape
     {
-        void LoadDataToStore();
+        void LoadDataToCompany();
     }
 }

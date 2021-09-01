@@ -72,25 +72,7 @@ namespace StockData.Worker.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyId");
-
                     b.ToTable("StockPrices");
-                });
-
-            modelBuilder.Entity("StockData.Stock.Entities.StockPrice", b =>
-                {
-                    b.HasOne("StockData.Stock.Entities.Company", "Company")
-                        .WithMany("StockPrice")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
-                });
-
-            modelBuilder.Entity("StockData.Stock.Entities.Company", b =>
-                {
-                    b.Navigation("StockPrice");
                 });
 #pragma warning restore 612, 618
         }

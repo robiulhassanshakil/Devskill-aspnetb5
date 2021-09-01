@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
-using StockData.Stock.BsinessObjects;
+using StockData.Stock.BusinessObjects;
 using StockData.Stock.Contexts;
 using StockData.Stock.Repositories;
 using StockData.Stock.Services;

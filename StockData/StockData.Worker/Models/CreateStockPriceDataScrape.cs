@@ -5,17 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
-using StockData.Stock.BsinessObjects;
+using StockData.Stock.BusinessObjects;
 using StockData.Stock.Services;
 
-namespace StockData.Worker
+namespace StockData.Worker.Models
 {
    
-    public class CreateDataScrape : ICreateDateScrape
+    public class CreateStockPriceDataScrape : ICreateStockPriceDataScrape
     {
         private readonly IStockService _stockService;
 
-        public CreateDataScrape(IStockService stockService)
+        public CreateStockPriceDataScrape(IStockService stockService)
         {
             _stockService = stockService;
         }

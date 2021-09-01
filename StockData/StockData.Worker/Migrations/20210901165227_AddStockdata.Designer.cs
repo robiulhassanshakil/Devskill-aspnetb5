@@ -9,8 +9,8 @@ using StockData.Stock.Contexts;
 namespace StockData.Worker.Migrations
 {
     [DbContext(typeof(StockDbContext))]
-    [Migration("20210831103901_AddCompany")]
-    partial class AddCompany
+    [Migration("20210901165227_AddStockdata")]
+    partial class AddStockdata
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,8 +42,8 @@ namespace StockData.Worker.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("Change")
-                        .HasColumnType("float");
+                    b.Property<string>("Change")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("ClosePrice")
                         .HasColumnType("float");
@@ -74,25 +74,7 @@ namespace StockData.Worker.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyId");
-
                     b.ToTable("StockPrices");
-                });
-
-            modelBuilder.Entity("StockData.Stock.Entities.StockPrice", b =>
-                {
-                    b.HasOne("StockData.Stock.Entities.Company", "Company")
-                        .WithMany("StockPrice")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
-                });
-
-            modelBuilder.Entity("StockData.Stock.Entities.Company", b =>
-                {
-                    b.Navigation("StockPrice");
                 });
 #pragma warning restore 612, 618
         }

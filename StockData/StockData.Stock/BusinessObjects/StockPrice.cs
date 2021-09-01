@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using StockData.Stock.Services;
 
-namespace StockData.Stock.BsinessObjects
+namespace StockData.Stock.BusinessObjects
 {
     public class StockPrice 
     {

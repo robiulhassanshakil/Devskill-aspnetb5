@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using StockData.Stock.BsinessObjects;
+using StockData.Stock.BusinessObjects;
 using StockData.Stock.UniteOfWorks;
 
 namespace StockData.Stock.Services
@@ -18,6 +18,20 @@ namespace StockData.Stock.Services
         {
             _stockUniteOfWork = stockUniteOfWork;
         }
+
+        public void LoadDataToCompany(List<Company> companies)
+        {
+            foreach (var company in companies)
+            {
+                _stockUniteOfWork.Companies.Add(new Entities.Company()
+                {
+                    TradeCode = company.TradeCode
+
+                });
+                _stockUniteOfWork.Save();
+            }
+        }
+
         public void LoadDataToStore(List<StockPrice> stockprices)
         {
             foreach (var stockprice in stockprices)

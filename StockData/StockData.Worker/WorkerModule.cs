@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 using Microsoft.Extensions.Configuration;
+using StockData.Worker.Models;
 
 namespace StockData.Worker
 {
@@ -24,7 +25,9 @@ namespace StockData.Worker
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<CreateDataScrape>().As<ICreateDateScrape>()
+            builder.RegisterType<CreateStockPriceDataScrape>().As<ICreateStockPriceDataScrape>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<CreateCompanyDataScrape>().As<ICreateCompanyDataScrape>()
                 .InstancePerLifetimeScope();
             base.Load(builder);
         }
