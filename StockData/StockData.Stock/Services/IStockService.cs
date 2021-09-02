@@ -7,5 +7,6 @@ namespace StockData.Stock.Services
     {
         void LoadDataToStore(List<StockPrice> stockPrices);
         void LoadDataToCompany(List<Company> companies);
+        bool IsCompanyDataEmpty();
     }
 }

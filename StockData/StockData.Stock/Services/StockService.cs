@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +16,20 @@ namespace StockData.Stock.Services
         public StockService(IStockUniteOfWork stockUniteOfWork)
         {
             _stockUniteOfWork = stockUniteOfWork;
+        }
+
+        public bool IsCompanyDataEmpty()
+        {
+            var testCount = _stockUniteOfWork.Companies.GetCount();
+
+            if (testCount>0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public void LoadDataToCompany(List<Company> companies)

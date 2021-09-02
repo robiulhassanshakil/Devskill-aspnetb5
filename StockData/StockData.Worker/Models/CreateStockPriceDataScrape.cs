@@ -34,26 +34,6 @@ namespace StockData.Worker.Models
                 var noThead = node.ChildNodes[1];
                 noThead.Remove();
 
-                var sp = new StockPrice
-                {
-                   CompanyId = Int32.Parse(node.SelectSingleNode("tbody/tr/td[1]").InnerText),
-                    LastTradingPrice = double.Parse(node.SelectSingleNode("tbody/tr/td[3]").InnerText),
-                    High = double.Parse(node.SelectSingleNode("tbody/tr/td[4]").InnerText),
-                    Low = double.Parse(node.SelectSingleNode("tbody/tr/td[5]").InnerText),
-                    ClosePrice = double.Parse(node.SelectSingleNode("tbody/tr/td[6]").InnerText),
-                    YesterdayClosePrice = double.Parse(node.SelectSingleNode("tbody/tr/td[7]").InnerText),
-                    Change = node.SelectSingleNode("tbody/tr/td[8]").InnerText,
-                    Trade = double.Parse(node.SelectSingleNode("tbody/tr/td[9]").InnerText),
-                    Value = double.Parse(node.SelectSingleNode("tbody/tr/td[10]").InnerText),
-                    Volume = double.Parse(node.SelectSingleNode("tbody/tr/td[11]").InnerText)
-                    
-                };
-                stockPrices.Add(sp);
-
-                var noTbody = node.ChildNodes[2];
-                noTbody.Remove();
-
-
                 var newnode = node.SelectNodes(".//tr");
                 foreach (var nNode in newnode)
                 {

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using StockData.Stock.BusinessObjects;
 using StockData.Stock.Services;
 
@@ -12,10 +15,17 @@ namespace StockData.Worker.Models
     public class CreateCompanyDataScrape : ICreateCompanyDataScrape
     {
         private readonly IStockService _stockService;
+        
 
         public CreateCompanyDataScrape(IStockService stockService)
         {
             _stockService = stockService;
+        }
+
+        public bool IsCompanyDataEmpty()
+        {
+            var dataResult=_stockService.IsCompanyDataEmpty();
+            return dataResult;
         }
 
         public void LoadDataToCompany()
@@ -31,16 +41,6 @@ namespace StockData.Worker.Models
 
                 var noThead = node.ChildNodes[1];
                 noThead.Remove();
-
-                var cm = new Company()
-                {
-                    TradeCode = node.SelectSingleNode("tbody/tr/td[2]").InnerText
-                    
-                };
-                companies.Add(cm);
-
-                var noTbody = node.ChildNodes[2];
-                noTbody.Remove();
 
 
                 var newnode = node.SelectNodes(".//tr");

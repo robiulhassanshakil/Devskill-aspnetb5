@@ -9,5 +9,6 @@ namespace StockData.Worker.Models
     public interface ICreateCompanyDataScrape
     {
         void LoadDataToCompany();
+        bool IsCompanyDataEmpty();
     }
 }

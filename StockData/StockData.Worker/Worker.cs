@@ -12,7 +12,7 @@ using StockData.Worker.Models;
 
 namespace StockData.Worker
 {
-    
+
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
@@ -28,20 +28,22 @@ namespace StockData.Worker
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-           
-                
-                var StatusReport = MarketStatusChecker();
-                _createCompanyDataScrape.LoadDataToCompany();
 
-                if (StatusReport== "Closed")
+            var data = _createCompanyDataScrape.IsCompanyDataEmpty();
+            if (data == true)
+            {
+                _createCompanyDataScrape.LoadDataToCompany();
+            }
+            var statusReport = MarketStatusChecker();
+            if (statusReport == "Closed")
+            {
+                while (!stoppingToken.IsCancellationRequested)
                 {
-                  while (!stoppingToken.IsCancellationRequested)
-                  {
                     _createStockPriceDataScrape.LoadDataToStore();
                     await Task.Delay(60000, stoppingToken);
-                  }
                 }
-            
+            }
+
         }
 
         private string MarketStatusChecker()
@@ -54,7 +56,7 @@ namespace StockData.Worker
             var singelnode =
                 doc.DocumentNode.SelectSingleNode(
                     "//div[@class='HeaderTop']/span[3]/span");
-            var status=singelnode.InnerText;
+            var status = singelnode.InnerText;
             return status;
         }
 
