@@ -35,7 +35,7 @@ namespace StockData.Worker
                 _createCompanyDataScrape.LoadDataToCompany();
             }
             var statusReport = MarketStatusChecker();
-            if (statusReport == "Closed")
+            if (statusReport != "Closed")
             {
                 while (!stoppingToken.IsCancellationRequested)
                 {
