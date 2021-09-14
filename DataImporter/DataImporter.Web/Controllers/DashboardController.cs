@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using DataImporter.Web.Models.Files;
 using Microsoft.AspNetCore.Http;
 
 namespace DataImporter.Web.Controllers
@@ -30,6 +31,14 @@ namespace DataImporter.Web.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public async Task<IActionResult> UploadContacts(IFormFile file)
+        {
+            var model = new FileUploadModel();
+            model.FileUpload(file);
+
+            return RedirectToAction("ViewContacts","Dashboard");
+        }
         public IActionResult SendMailContacts()
         {
             return View();
@@ -39,9 +48,8 @@ namespace DataImporter.Web.Controllers
             return View();
         }
 
-        public async Task<IActionResult> UploadFile(IFormFile formFile)
-        {
-            return View();
-        }
+        
+
+       
     }
 }

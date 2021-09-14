@@ -12,16 +12,19 @@ namespace DataImporter.Importing.UniteOfWorks
 {
     public class ImportingUnitOfWork : UnitOfWork, IImportingUnitOfWork
     {
-       public IGroupRepository Groups { get; private set; }
-       public IContactRepository Contacts { get; private set; }
+        public IGroupRepository Groups { get; private set; }
+        public IContactRepository Contacts { get; private set; }
+        public IFileRepository Files { get; private set; }
 
-       public ImportingUnitOfWork(IImportingDbContext context,
+        public ImportingUnitOfWork(IImportingDbContext context,
            IGroupRepository groups,
-           IContactRepository contacts
+           IContactRepository contacts,
+           IFileRepository files
        ) : base((DbContext)context)
-       {
-           Groups = groups;
-           Contacts = contacts;
-       }
+        {
+            Groups = groups;
+            Contacts = contacts;
+            Files = files;
+        }
     }
 }

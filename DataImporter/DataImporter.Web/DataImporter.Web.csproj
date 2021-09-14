@@ -23,6 +23,7 @@
 	<ItemGroup>
 	  <Folder Include="Controllers\" />
 	  <Folder Include="Data\" />
+	  <Folder Include="UploadFiles\" />
 	  <Folder Include="Pages\" />
 	  <Folder Include="wwwroot\css\" />
 	  <Folder Include="wwwroot\images\" />

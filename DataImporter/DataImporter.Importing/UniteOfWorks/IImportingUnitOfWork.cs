@@ -12,5 +12,6 @@ namespace DataImporter.Importing.UniteOfWorks
     {
         IGroupRepository Groups { get; }
         IContactRepository Contacts { get; }
+        IFileRepository Files { get; }
     }
 }

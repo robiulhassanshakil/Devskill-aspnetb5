@@ -46,5 +46,6 @@ namespace DataImporter.Importing.Contexts
 
         public DbSet<Group> Groups { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<ExcelFile> Files { get; set; }
     }
 }

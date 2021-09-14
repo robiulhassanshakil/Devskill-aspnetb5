@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataImporter.Importing.Services
 {
-    public class IContactService
+    public interface IContactService
     {
     }
 }

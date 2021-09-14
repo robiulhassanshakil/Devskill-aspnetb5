@@ -44,6 +44,10 @@ namespace DataImporter.Importing
                 .InstancePerLifetimeScope();
             builder.RegisterType<ImportingUnitOfWork>().As<IImportingUnitOfWork>()
                 .InstancePerLifetimeScope();
+            builder.RegisterType<FileRepository>().As<IFileRepository>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<FileService>().As<IFileService>()
+                .InstancePerLifetimeScope();
 
             base.Load(builder);
         }
