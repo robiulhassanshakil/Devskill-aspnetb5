@@ -14,6 +14,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using DataImporter.Importing;
+using DataImporter.Importing.Contexts;
 
 namespace DataImporter.Web
 {
@@ -28,7 +30,9 @@ namespace DataImporter.Web
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json",
                     optional: true)
                 .AddEnvironmentVariables();
+
             WebHostEnvironment = env;
+
             Configuration = builder.Build();
         }
         public IConfiguration Configuration { get; }
@@ -38,7 +42,8 @@ namespace DataImporter.Web
         {
             var connectionInfo = GetConnectionStringAndMigrationAssemblyName();
 
-            
+            builder.RegisterModule(new ImportingModule(connectionInfo.connectionString,
+                connectionInfo.migrationAssemblyName));
             builder.RegisterModule(new WebModule());
         }
 
@@ -53,7 +58,9 @@ namespace DataImporter.Web
                 options.UseSqlServer(connectionInfo.connectionString, m => m.MigrationsAssembly(connectionInfo.migrationAssemblyName)));
 
 
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionInfo.connectionString));
+            services.AddDbContext<ImportingDbContext>(options =>
+                options.UseSqlServer(connectionInfo.connectionString, b =>
+                    b.MigrationsAssembly(connectionInfo.migrationAssemblyName)));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();

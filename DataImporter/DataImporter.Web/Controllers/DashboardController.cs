@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace DataImporter.Web.Controllers
 {
@@ -33,6 +35,11 @@ namespace DataImporter.Web.Controllers
             return View();
         }
         public IActionResult DownloadContacts()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> UploadFile(IFormFile formFile)
         {
             return View();
         }
