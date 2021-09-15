@@ -39,6 +39,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\DataImporter.Common\DataImporter.Common.csproj" />
 	  <ProjectReference Include="..\DataImporter.Importing\DataImporter.Importing.csproj" />
 	</ItemGroup>
 

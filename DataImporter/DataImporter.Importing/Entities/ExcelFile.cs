@@ -10,6 +10,7 @@ namespace DataImporter.Importing.Entities
     public class ExcelFile : IEntity<int>
     {
         public int Id { get; set; }
+        public DateTime DateTime { get; set; }
         public string ExcelFileName { get; set; }
         public string ExcelFilePath { get; set; }
     }

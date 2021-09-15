@@ -14,8 +14,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using DataImporter.Common;
 using DataImporter.Importing;
 using DataImporter.Importing.Contexts;
+
 
 namespace DataImporter.Web
 {
@@ -43,6 +45,8 @@ namespace DataImporter.Web
             var connectionInfo = GetConnectionStringAndMigrationAssemblyName();
 
             builder.RegisterModule(new ImportingModule(connectionInfo.connectionString,
+                connectionInfo.migrationAssemblyName));
+            builder.RegisterModule(new CommonModule(connectionInfo.connectionString,
                 connectionInfo.migrationAssemblyName));
             builder.RegisterModule(new WebModule());
         }

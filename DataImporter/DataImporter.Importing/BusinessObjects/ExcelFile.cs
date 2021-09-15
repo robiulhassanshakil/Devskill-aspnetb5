@@ -8,6 +8,7 @@ namespace DataImporter.Importing.BusinessObjects
 {
     public class ExcelFile
     {
+        public DateTime DateTime { get; set; }
         public string ExcelFileName { get; set; }
         public string ExcelFilePath { get; set; }
     }
