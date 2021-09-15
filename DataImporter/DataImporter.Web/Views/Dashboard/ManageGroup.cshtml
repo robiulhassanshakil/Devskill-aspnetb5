@@ -33,102 +33,21 @@
                             <div class="col-sm-6">
                             </div>
                             <div class="col-sm-6 text-right">
-                                <button class="btn btn-success btn-sm btn-round has-ripple" data-toggle="modal" data-target="#modal-report"><i class="feather icon-plus"></i> Add Group</button>
+
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table id="report-table" class="table table-bordered table-striped mb-0">
+                            <table id="Group" class="table table-bordered table-striped mb-0">
                                 <thead>
-                                <tr>
-                                    <th>Image</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Department</th>
-                                    <th>Options</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Action</th>
+
+                                    </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <img src="assets/images/user/avatar-2.jpg" class="img-fluid img-radius wid-40" alt="">
-                                    </td>
-                                    <td>Micheal Pewd</td>
-                                    <td>doctor@example.com</td>
-                                    <td>+984-46-9388638</td>
-                                    <td>Cardiology</td>
-                                    <td>
-                                        <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                        <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="assets/images/user/avatar-3.jpg" class="img-fluid img-radius wid-40" alt="">
-                                    </td>
-                                    <td>Erich Mcbride</td>
-                                    <td>xidim@gmail.com</td>
-                                    <td>+612-92-1385682</td>
-                                    <td>Anesthetics</td>
-                                    <td>
-                                        <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                        <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="assets/images/user/avatar-5.jpg" class="img-fluid img-radius wid-40" alt="">
-                                    </td>
-                                    <td>Micheal Pewd</td>
-                                    <td>doctor@example.com</td>
-                                    <td>+984-46-9388638</td>
-                                    <td>Cardiology</td>
-                                    <td>
-                                        <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                        <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="assets/images/user/avatar-4.jpg" class="img-fluid img-radius wid-40" alt="">
-                                    </td>
-                                    <td>Erich Mcbride</td>
-                                    <td>xidim@gmail.com</td>
-                                    <td>+612-92-1385682</td>
-                                    <td>Anesthetics</td>
-                                    <td>
-                                        <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                        <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="assets/images/user/avatar-1.jpg" class="img-fluid img-radius wid-40" alt="">
-                                    </td>
-                                    <td>Micheal Pewd</td>
-                                    <td>doctor@example.com</td>
-                                    <td>+984-46-9388638</td>
-                                    <td>Cardiology</td>
-                                    <td>
-                                        <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                        <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="assets/images/user/avatar-3.jpg" class="img-fluid img-radius wid-40" alt="">
-                                    </td>
-                                    <td>Erich Mcbride</td>
-                                    <td>xidim@gmail.com</td>
-                                    <td>+612-92-1385682</td>
-                                    <td>Anesthetics</td>
-                                    <td>
-                                        <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                        <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
-                                    </td>
-                                </tr>
-                                </tbody>
+
                             </table>
+                            <partial name="_DeletePopupPartial" />
                         </div>
                     </div>
                 </div>
@@ -138,40 +57,49 @@
         <!-- [ Main Content ] end -->
     </div>
 </div>
-<div class="modal fade" id="modal-report" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Add Group</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label class="floating-label" for="Name">Group Name</label>
-                                <input type="text" class="form-control" id="groupname" placeholder="">
-                            </div>
-                        </div>
-                        
-                        <div class="col-sm-12">
-                            <button class="btn btn-primary">Submit</button>
-                            <button class="btn btn-danger">Clear</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 @section Scripts{
+
     <script>
-        // DataTable start
-        $('#report-table').DataTable();
-        // DataTable end
+        $(function () {
+            $('#Group').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": "GetGroupData",
+                "columnDefs": [
+                    {
+                        "orderable": false,
+                        "targets": 1,
+                        "render": function (data, type, row) {
+                            return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='GroupEdit/${data}'" value='${data}'>
+                                                <i class="feather icon-edit">
+                                                </i>
+                                                &nbsp;Edit
+                                            </button>
+                                            <button type="submit" class="btn btn-danger btn-sm show-bs-modal" href="#" data-id='${data}' value='${data}'>
+                                                <i class="feather icon-trash-2">
+                                                </i>
+                                                &nbsp;Delete
+                                            </button>`;
+                        }
+                    }
+                ]
+            });
+            $('#Group').on('click', '.show-bs-modal', function (event) {
+                var id = $(this).data("id");
+                var modal = $("#modal-default");
+                modal.find('.modal-body p').text('Are you sure you want to delete this record?')
+                $("#deleteId").val(id);
+                $("#deleteForm").attr("action", "groupdelete")
+                modal.modal('show');
+            });
+
+            $("#deleteButton").click(function () {
+                $("#deleteForm").submit();
+            });
+
+        });
+
     </script>
 }

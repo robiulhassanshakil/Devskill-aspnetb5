@@ -1,4 +1,4 @@
-﻿
+﻿@model DataImporter.Importing.BusinessObjects.Group;
 @{
     ViewData["Title"] = "UploadContacts";
 }
@@ -31,13 +31,17 @@
                         <h5>File Upload</h5>
                     </div>
                     <div class="card-body">
-                        <form method="post" asp-controller="Dashboard" asp-action="UploadContacts" asp-antiforgery="true" enctype="multipart/form-data"  class="dropzone">
-                            <div  class="fallback" class="dropzone">
+                        <form method="post" asp-controller="Dashboard" asp-action="UploadContacts" asp-antiforgery="true" enctype="multipart/form-data" class="dropzone">
+                            <div class="text-center m-t-20">
+                                <select asp-for="Id" asp-items="@(new SelectList(ViewBag.message,"Id","Name"))"></select>
+                            </div>
+
+                            <div class="fallback" class="dropzone">
                                 <input name="file" type="file" multiple />
                             </div>
                         </form>
                         <div class="text-center m-t-20">
-                            <a href=@Url.Action("ViewContacts","Dashboard")><button class="btn btn-primary">Upload Now</button></a>
+                            <a href=@Url.Action("ViewContacts", "Dashboard")><button type='submit' class="btn btn-primary">Upload Now</button></a>
                         </div>
                     </div>
                 </div>

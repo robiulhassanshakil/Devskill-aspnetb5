@@ -7,7 +7,9 @@ using Autofac;
 using AutoMapper;
 using DataImporter.Common.Utilities;
 using DataImporter.Importing.BusinessObjects;
+using DataImporter.Importing.Exceptions;
 using DataImporter.Importing.Services;
+using DataImporter.Web.Models.GroupModel;
 using Microsoft.AspNetCore.Http;
 
 namespace DataImporter.Web.Models.Files
@@ -33,30 +35,39 @@ namespace DataImporter.Web.Models.Files
             _dateTime = dateTime;
         }
 
-        public async Task FileUpload(IFormFile formFile)
+        public async Task FileUpload(IFormFile formFile,Group group)
         {
-            string fileext = Path.GetExtension(formFile.FileName);
-            if (fileext == ".xlsx" || fileext == ".xlsm" || fileext == ".xls" || fileext == ".xlsb")
+            if (group.Id==0)
             {
-                var fileName = formFile.FileName;
-                var filePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "UploadFiles"));
-                
-                using (var stream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create))
-                {
-                    await formFile.CopyToAsync(stream);
-                }
-                
-
-                var file = new ExcelFile()
-                {
-                    ExcelFileName= formFile.FileName,
-                    ExcelFilePath = filePath,
-                    DateTime = _dateTime.Now
-                };
-
-                _fileService.FileUploadToDb(file);
-
+                throw new InvalidParameterException("Select Group");
             }
+            else
+            {
+                string fileext = Path.GetExtension(formFile.FileName);
+                if (fileext == ".xlsx" || fileext == ".xlsm" || fileext == ".xls" || fileext == ".xlsb")
+                {
+                    var fileName = formFile.FileName;
+                    var filePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "UploadFiles"));
+
+                    using (var stream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(stream);
+                    }
+
+
+                    var file = new ExcelFile()
+                    {
+                        ExcelFileName = formFile.FileName,
+                        ExcelFilePath = filePath,
+                        DateTime = _dateTime.Now,
+                        GroupId = group.Id
+                    };
+
+                    _fileService.FileUploadToDb(file);
+
+                }
+            }
+           
         }
     }
 }

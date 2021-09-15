@@ -274,3 +274,83 @@ System.InvalidOperationException: StatusCode cannot be set because the response 
 2021-09-15 14:14:49.146 +06:00 [INF] Application Starting up
 2021-09-15 14:16:50.702 +06:00 [INF] Application Starting up
 2021-09-15 14:58:19.361 +06:00 [INF] Application Starting up
+2021-09-15 16:12:24.169 +06:00 [INF] Application Starting up
+2021-09-15 16:18:49.876 +06:00 [INF] Application Starting up
+2021-09-15 16:19:13.064 +06:00 [ERR] Create Group Failed
+AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> Group
+System.Object -> DataImporter.Importing.BusinessObjects.Group
+   at lambda_method581(Closure , Object , Group , ResolutionContext )
+   at DataImporter.Web.Models.GroupModel.CreateGroupModel.CreateGroup() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Models\GroupModel\CreateGroupModel.cs:line 31
+   at DataImporter.Web.Controllers.DashboardController.CreateGroup(CreateGroupModel model) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Controllers\DashboardController.cs:line 38
+2021-09-15 16:24:47.932 +06:00 [INF] Application Starting up
+2021-09-15 16:26:09.136 +06:00 [ERR] Create Group Failed
+AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> Group
+System.Object -> DataImporter.Importing.BusinessObjects.Group
+   at lambda_method569(Closure , Object , Group , ResolutionContext )
+   at DataImporter.Web.Models.GroupModel.CreateGroupModel.CreateGroup() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Models\GroupModel\CreateGroupModel.cs:line 31
+   at DataImporter.Web.Controllers.DashboardController.CreateGroup(CreateGroupModel model) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Controllers\DashboardController.cs:line 38
+2021-09-15 16:27:06.242 +06:00 [INF] Application Starting up
+2021-09-15 16:28:24.016 +06:00 [INF] Application Starting up
+2021-09-15 16:31:32.069 +06:00 [ERR] Create Group Failed
+AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> Group
+System.Object -> DataImporter.Importing.BusinessObjects.Group
+   at lambda_method569(Closure , Object , Group , ResolutionContext )
+   at DataImporter.Web.Models.GroupModel.CreateGroupModel.CreateGroup()
+   at DataImporter.Web.Controllers.DashboardController.CreateGroup(CreateGroupModel model)
+2021-09-15 16:31:57.425 +06:00 [INF] Application Starting up
+2021-09-15 16:32:17.931 +06:00 [ERR] Create Group Failed
+AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> Group
+System.Object -> DataImporter.Importing.BusinessObjects.Group
+   at lambda_method569(Closure , Object , Group , ResolutionContext )
+   at DataImporter.Web.Models.GroupModel.CreateGroupModel.CreateGroup() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Models\GroupModel\CreateGroupModel.cs:line 30
+   at DataImporter.Web.Controllers.DashboardController.CreateGroup(CreateGroupModel model) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Controllers\DashboardController.cs:line 38
+2021-09-15 16:32:52.648 +06:00 [ERR] Create Group Failed
+AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> Group
+System.Object -> DataImporter.Importing.BusinessObjects.Group
+   at lambda_method569(Closure , Object , Group , ResolutionContext )
+   at DataImporter.Web.Models.GroupModel.CreateGroupModel.CreateGroup() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Models\GroupModel\CreateGroupModel.cs:line 30
+   at DataImporter.Web.Controllers.DashboardController.CreateGroup(CreateGroupModel model) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Controllers\DashboardController.cs:line 38
+2021-09-15 16:33:50.390 +06:00 [INF] Application Starting up
+2021-09-15 16:37:18.488 +06:00 [INF] Application Starting up
+2021-09-15 16:48:28.949 +06:00 [INF] Application Starting up
+2021-09-15 16:48:54.052 +06:00 [ERR] Create Group Failed
+DataImporter.Importing.Exceptions.DuplicateTitleException: Group title already exists
+   at DataImporter.Importing.Services.GroupService.CreateGroup(Group group) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Importing\Services\GroupService.cs:line 33
+   at DataImporter.Web.Models.GroupModel.CreateGroupModel.CreateGroup() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Models\GroupModel\CreateGroupModel.cs:line 32
+   at DataImporter.Web.Controllers.DashboardController.CreateGroup(CreateGroupModel model) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Controllers\DashboardController.cs:line 38
+2021-09-15 18:21:30.313 +06:00 [INF] Application Starting up
+2021-09-15 22:05:20.057 +06:00 [INF] Application Starting up
+2021-09-15 22:06:17.789 +06:00 [INF] Application Starting up
+2021-09-15 22:07:31.118 +06:00 [INF] Application Starting up
+2021-09-15 22:11:31.167 +06:00 [INF] Application Starting up
+2021-09-15 22:12:10.734 +06:00 [INF] Application Starting up
+2021-09-15 22:13:22.036 +06:00 [INF] Application Starting up
+2021-09-15 22:14:55.783 +06:00 [INF] Application Starting up
+2021-09-15 22:15:59.494 +06:00 [INF] Application Starting up
+2021-09-15 22:24:27.037 +06:00 [INF] Application Starting up
+2021-09-15 22:27:08.353 +06:00 [INF] Application Starting up
+2021-09-15 22:35:58.067 +06:00 [INF] Application Starting up
+2021-09-15 22:46:42.918 +06:00 [INF] Application Starting up
+2021-09-15 22:48:17.388 +06:00 [INF] Application Starting up
+2021-09-15 22:55:03.411 +06:00 [INF] Application Starting up
+2021-09-15 23:00:55.349 +06:00 [INF] Application Starting up
+2021-09-15 23:02:22.175 +06:00 [INF] Application Starting up
+2021-09-15 23:56:51.938 +06:00 [INF] Application Starting up
+2021-09-15 23:58:17.531 +06:00 [INF] Application Starting up
+2021-09-15 23:59:02.621 +06:00 [INF] Application Starting up
+2021-09-15 23:59:53.763 +06:00 [INF] Application Starting up

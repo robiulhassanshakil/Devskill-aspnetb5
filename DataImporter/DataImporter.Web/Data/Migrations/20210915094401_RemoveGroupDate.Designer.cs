@@ -4,14 +4,16 @@ using DataImporter.Importing.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DataImporter.Web.Data.Migrations
+namespace DataImporter.Web.Migrations.ImportingDb
 {
     [DbContext(typeof(ImportingDbContext))]
-    partial class ImportingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210915094401_RemoveGroupDate")]
+    partial class RemoveGroupDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,12 +60,7 @@ namespace DataImporter.Web.Data.Migrations
                     b.Property<string>("ExcelFilePath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GroupId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("GroupId");
 
                     b.ToTable("Files");
                 });
@@ -94,22 +91,9 @@ namespace DataImporter.Web.Data.Migrations
                     b.Navigation("Group");
                 });
 
-            modelBuilder.Entity("DataImporter.Importing.Entities.ExcelFile", b =>
-                {
-                    b.HasOne("DataImporter.Importing.Entities.Group", "Group")
-                        .WithMany("ExcelFiles")
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Group");
-                });
-
             modelBuilder.Entity("DataImporter.Importing.Entities.Group", b =>
                 {
                     b.Navigation("Contacts");
-
-                    b.Navigation("ExcelFiles");
                 });
 #pragma warning restore 612, 618
         }

@@ -4,14 +4,16 @@ using DataImporter.Importing.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DataImporter.Web.Data.Migrations
+namespace DataImporter.Web.Migrations.ImportingDb
 {
     [DbContext(typeof(ImportingDbContext))]
-    partial class ImportingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210915192407_addGroupWithContact")]
+    partial class addGroupWithContact
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

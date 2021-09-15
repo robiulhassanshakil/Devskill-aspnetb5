@@ -14,5 +14,6 @@ namespace DataImporter.Importing.Entities
         public Group Group { get; set; }
         public string Key { get; set; }
         public string Value { get; set; }
+
     }
 }
