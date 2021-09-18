@@ -23,32 +23,49 @@
         </div>
         <!-- [ breadcrumb ] end -->
         <!-- [ Main Content ] start -->
+
         <div class="row">
-            <!-- [ file-upload ] start -->
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h5>File Upload</h5>
-                    </div>
+                <div class="card-header">
+                    <h5>File Upload</h5>
+                </div>
                     <div class="card-body">
-                        <form method="post" asp-controller="Dashboard" asp-action="UploadContacts" asp-antiforgery="true" enctype="multipart/form-data" class="dropzone">
-                            <div class="text-center m-t-20">
-                                <select asp-for="Id" asp-items="@(new SelectList(ViewBag.message,"Id","Name"))"></select>
+                        <form method="post" asp-controller="Dashboard" asp-action="UploadContacts" asp-antiforgery="true" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="">Groups</label>
+                                    </div>
+                                    <select asp-for="Id" asp-items="@(new SelectList(ViewBag.message, "Id", "Name"))"></select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Upload</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input"  id="inputFile" name="fileSelect">
+                                        <label class="custom-file-label" for="inputFile" >Choose file</label>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="fallback" class="dropzone">
-                                <input name="file" type="file" multiple />
-                            </div>
+                            <button type='submit' class="btn btn-primary">Upload Now</button>
                         </form>
-                        <div class="text-center m-t-20">
-                            <a href=@Url.Action("ViewContacts", "Dashboard")><button type='submit' class="btn btn-primary">Upload Now</button></a>
-                        </div>
                     </div>
                 </div>
             </div>
-            <!-- [ file-upload ] end -->
+            <!-- [ Main Content ] end -->
         </div>
-        <!-- [ Main Content ] end -->
     </div>
 </section>
-
+@section Scripts
+{
+    <script>
+        $('#inputFile').on('change',function(){
+            //get the file name
+            var fileName = $(this).val();
+            //replace the "Choose a file" label
+            $(this).next('.custom-file-label').html(fileName);
+        })
+    </script>
+}

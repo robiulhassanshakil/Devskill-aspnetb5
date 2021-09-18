@@ -3,13 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using DataImporter.Importing.BusinessObjects;
 using DataImporter.Web.Models.Commons;
 using DataImporter.Web.Models.Files;
 using DataImporter.Web.Models.GroupModel;
+using ExcelDataReader;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace DataImporter.Web.Controllers
 {
@@ -89,15 +92,15 @@ namespace DataImporter.Web.Controllers
         {
             var model = new AllGroupForContacts();
             var gl=model.LoadAllGroup();
-            gl.Insert(0, new Group() { Id = 0, Name = "--Select Country Name--" });
+            gl.Insert(0, new Group() { Id = 0, Name = "--Select Group Name--" });
             ViewBag.Message = gl;
             return View();
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> UploadContacts(IFormFile file, Group group)
+        public async Task<IActionResult> UploadContacts(IFormFile fileSelect, Group group)
         {
             var model = new FileUploadModel();
-            model.FileUpload(file, group);
+            model.FileUpload(fileSelect, group);
 
             return RedirectToAction("ViewContacts","Dashboard");
         }
@@ -110,8 +113,31 @@ namespace DataImporter.Web.Controllers
             return View();
         }
 
-        
+        public async Task<IActionResult> ConvertExcelToJson()
+        {
+            var inFilePath = @"xx\Wave.xlsx";
+            var outFilePath = @"xx\text.json";
 
-       
+            using (var inFile = System.IO.File.Open(inFilePath, FileMode.Open, FileAccess.Read))
+            using (var outFile = System.IO.File.CreateText(outFilePath))
+            {
+                using (var reader = ExcelReaderFactory.CreateReader(inFile, new ExcelReaderConfiguration()
+                    { FallbackEncoding = Encoding.GetEncoding(1252) }))
+                {
+                    var ds = reader.AsDataSet(new ExcelDataSetConfiguration()
+                    {
+                        ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
+                        {
+                            UseHeaderRow = true
+                        }
+                    });
+                    var table = ds.Tables[0];
+                    var json = JsonConvert.SerializeObject(table, Formatting.Indented);
+                    outFile.Write(json);
+                }
+            }
+            return Ok();
+        }
+
     }
 }

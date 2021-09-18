@@ -35,7 +35,7 @@ namespace DataImporter.Web.Models.Files
             _dateTime = dateTime;
         }
 
-        public async Task FileUpload(IFormFile formFile,Group group)
+        public async Task FileUpload(IFormFile file,Group group)
         {
             if (group.Id==0)
             {
@@ -43,27 +43,27 @@ namespace DataImporter.Web.Models.Files
             }
             else
             {
-                string fileext = Path.GetExtension(formFile.FileName);
+                string fileext = Path.GetExtension(file.FileName);
                 if (fileext == ".xlsx" || fileext == ".xlsm" || fileext == ".xls" || fileext == ".xlsb")
                 {
-                    var fileName = formFile.FileName;
+                    var fileName = file.FileName;
                     var filePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "UploadFiles"));
 
                     using (var stream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create))
                     {
-                        await formFile.CopyToAsync(stream);
+                        await file.CopyToAsync(stream);
                     }
 
 
-                    var file = new ExcelFile()
+                    var excelFile = new ExcelFile()
                     {
-                        ExcelFileName = formFile.FileName,
+                        ExcelFileName = file.FileName,
                         ExcelFilePath = filePath,
                         DateTime = _dateTime.Now,
                         GroupId = group.Id
                     };
 
-                    _fileService.FileUploadToDb(file);
+                    _fileService.FileUploadToDb(excelFile);
 
                 }
             }
