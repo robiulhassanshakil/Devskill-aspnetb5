@@ -10,7 +10,7 @@ namespace DataImporter.Importing.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<Contact> Contacts { get; set; }
+        public List<ExcelData> ExcelDatas { get; set; }
         public  List<ExcelFile> ExcelFiles { get; set; }
     }
 }

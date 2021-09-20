@@ -36,17 +36,18 @@ namespace DataImporter.Importing
 
             builder.RegisterType<GroupRepository>().As<IGroupRepository>()
                 .InstancePerLifetimeScope();
-            builder.RegisterType<ContactRepository>().As<IContactRepository>()
-                .InstancePerLifetimeScope();
-            builder.RegisterType<ContactService>().As<IContactService>()
-                .InstancePerLifetimeScope();
             builder.RegisterType<GroupService>().As<IGroupService>()
                 .InstancePerLifetimeScope();
             builder.RegisterType<ImportingUnitOfWork>().As<IImportingUnitOfWork>()
                 .InstancePerLifetimeScope();
-            builder.RegisterType<FileRepository>().As<IFileRepository>()
+            builder.RegisterType<ExcelFileRepository>().As<IExcelFileRepository>()
                 .InstancePerLifetimeScope();
-            builder.RegisterType<FileService>().As<IFileService>()
+            builder.RegisterType<ExcelDataRepository>().As<IExcelDataRepository>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<ExcelFieldDataRepository>().As<IExcelFieldDataRepository>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<ExcelFileService>().As<IExcelFileService>()
                 .InstancePerLifetimeScope();
 
             base.Load(builder);

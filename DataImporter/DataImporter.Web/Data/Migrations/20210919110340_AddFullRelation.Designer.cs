@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DataImporter.Web.Migrations.ImportingDb
+namespace DataImporter.Web.Data.Migrations
 {
     [DbContext(typeof(ImportingDbContext))]
-    [Migration("20210915094401_RemoveGroupDate")]
-    partial class RemoveGroupDate
+    [Migration("20210919110340_AddFullRelation")]
+    partial class AddFullRelation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,17 +21,37 @@ namespace DataImporter.Web.Migrations.ImportingDb
                 .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DataImporter.Importing.Entities.Contact", b =>
+            modelBuilder.Entity("DataImporter.Importing.Entities.ExcelData", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Key")
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
+                    b.ToTable("ExcelData");
+                });
+
+            modelBuilder.Entity("DataImporter.Importing.Entities.ExcelFieldData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ExcelDataId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Value")
@@ -39,9 +59,9 @@ namespace DataImporter.Web.Migrations.ImportingDb
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GroupId");
+                    b.HasIndex("ExcelDataId");
 
-                    b.ToTable("Contacts");
+                    b.ToTable("ExcelFieldData");
                 });
 
             modelBuilder.Entity("DataImporter.Importing.Entities.ExcelFile", b =>
@@ -51,18 +71,23 @@ namespace DataImporter.Web.Migrations.ImportingDb
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("DateTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("ExcelFileName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ExcelFilePath")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Files");
+                    b.HasIndex("GroupId");
+
+                    b.ToTable("ExcelFile");
                 });
 
             modelBuilder.Entity("DataImporter.Importing.Entities.Group", b =>
@@ -77,13 +102,13 @@ namespace DataImporter.Web.Migrations.ImportingDb
 
                     b.HasKey("Id");
 
-                    b.ToTable("Groups");
+                    b.ToTable("Group");
                 });
 
-            modelBuilder.Entity("DataImporter.Importing.Entities.Contact", b =>
+            modelBuilder.Entity("DataImporter.Importing.Entities.ExcelData", b =>
                 {
                     b.HasOne("DataImporter.Importing.Entities.Group", "Group")
-                        .WithMany("Contacts")
+                        .WithMany("ExcelDatas")
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -91,9 +116,38 @@ namespace DataImporter.Web.Migrations.ImportingDb
                     b.Navigation("Group");
                 });
 
+            modelBuilder.Entity("DataImporter.Importing.Entities.ExcelFieldData", b =>
+                {
+                    b.HasOne("DataImporter.Importing.Entities.ExcelData", "ExcelData")
+                        .WithMany("ExcelFieldDatas")
+                        .HasForeignKey("ExcelDataId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ExcelData");
+                });
+
+            modelBuilder.Entity("DataImporter.Importing.Entities.ExcelFile", b =>
+                {
+                    b.HasOne("DataImporter.Importing.Entities.Group", "Group")
+                        .WithMany("ExcelFiles")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Group");
+                });
+
+            modelBuilder.Entity("DataImporter.Importing.Entities.ExcelData", b =>
+                {
+                    b.Navigation("ExcelFieldDatas");
+                });
+
             modelBuilder.Entity("DataImporter.Importing.Entities.Group", b =>
                 {
-                    b.Navigation("Contacts");
+                    b.Navigation("ExcelDatas");
+
+                    b.Navigation("ExcelFiles");
                 });
 #pragma warning restore 612, 618
         }

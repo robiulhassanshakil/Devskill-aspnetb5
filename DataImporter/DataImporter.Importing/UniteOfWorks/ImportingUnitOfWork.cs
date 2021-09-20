@@ -13,18 +13,25 @@ namespace DataImporter.Importing.UniteOfWorks
     public class ImportingUnitOfWork : UnitOfWork, IImportingUnitOfWork
     {
         public IGroupRepository Groups { get; private set; }
-        public IContactRepository Contacts { get; private set; }
-        public IFileRepository Files { get; private set; }
+        
+        public IExcelFileRepository ExcelFiles { get; private set; }
+
+        public IExcelFieldDataRepository ExcelFieldDatas { get; private set; }
+
+        public IExcelDataRepository ExcelDatas { get; private set; }
 
         public ImportingUnitOfWork(IImportingDbContext context,
            IGroupRepository groups,
-           IContactRepository contacts,
-           IFileRepository files
+           IExcelFileRepository excelFiles,
+           IExcelFieldDataRepository excelFieldDatas,
+           IExcelDataRepository excelDatas
+
        ) : base((DbContext)context)
         {
             Groups = groups;
-            Contacts = contacts;
-            Files = files;
+            ExcelFiles = excelFiles;
+            ExcelDatas = excelDatas;
+            ExcelFieldDatas = excelFieldDatas;
         }
     }
 }

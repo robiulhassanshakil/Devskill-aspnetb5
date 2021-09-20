@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace DataImporter.Importing.Entities
 {
-    public class Contact : IEntity<int>
+    public class ExcelFieldData : IEntity<int>
     {
         public int Id { get; set; }
-        public int GroupId { get; set; }
-        public Group Group { get; set; }
-        public string Key { get; set; }
+        public string Name { get; set; }
         public string Value { get; set; }
+        public int ExcelDataId { get; set; }
+        public ExcelData ExcelData { get; set; }
 
     }
 }

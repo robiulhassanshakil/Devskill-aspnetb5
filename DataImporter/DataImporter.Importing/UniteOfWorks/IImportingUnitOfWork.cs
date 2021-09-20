@@ -11,7 +11,8 @@ namespace DataImporter.Importing.UniteOfWorks
     public interface IImportingUnitOfWork : IUnitOfWork
     {
         IGroupRepository Groups { get; }
-        IContactRepository Contacts { get; }
-        IFileRepository Files { get; }
+        IExcelFileRepository ExcelFiles { get; }
+        IExcelFieldDataRepository ExcelFieldDatas { get; }
+        IExcelDataRepository ExcelDatas { get; }
     }
 }

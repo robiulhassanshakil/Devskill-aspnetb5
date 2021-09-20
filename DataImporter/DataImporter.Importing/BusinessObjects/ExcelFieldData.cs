@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace DataImporter.Importing.BusinessObjects
 {
-    public class Contact
+    public class ExcelFieldData
     {
         public int Id { get; set; }
-        public int GroupId { get; set; }
-        public string Key { get; set; }
+        public string Name { get; set; }
         public string Value { get; set; }
+        public int ExcelDataId { get; set; }
     }
 }

@@ -12,12 +12,12 @@ using Microsoft.AspNetCore.Http;
 
 namespace DataImporter.Importing.Services
 {
-    public class FileService : IFileService
+    public class ExcelFileService : IExcelFileService
     {
         private readonly IImportingUnitOfWork _importingUnitOfWork;
         private readonly IMapper _mapper;
 
-        public FileService(IImportingUnitOfWork importingUnitOfWork, IMapper mapper)
+        public ExcelFileService(IImportingUnitOfWork importingUnitOfWork, IMapper mapper)
         {
             _importingUnitOfWork = importingUnitOfWork;
             _mapper = mapper;
@@ -27,7 +27,7 @@ namespace DataImporter.Importing.Services
         {
             if (file == null)
                 throw new InvalidParameterException("File was not provided");
-            _importingUnitOfWork.Files.Add(_mapper.Map<Entities.ExcelFile>(file));
+            _importingUnitOfWork.ExcelFiles.Add(_mapper.Map<Entities.ExcelFile>(file));
             _importingUnitOfWork.Save();
         }
     }

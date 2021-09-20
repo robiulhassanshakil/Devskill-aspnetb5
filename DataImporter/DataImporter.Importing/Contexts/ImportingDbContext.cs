@@ -36,18 +36,22 @@ namespace DataImporter.Importing.Contexts
 
             // one to many relationship
             modelBuilder.Entity<Group>()
-                .HasMany(g => g.Contacts)
+                .HasMany(g => g.ExcelFiles)
                 .WithOne(c => c.Group);
             modelBuilder.Entity<Group>()
-                .HasMany(g => g.ExcelFiles)
+                .HasMany(g => g.ExcelDatas)
                 .WithOne(E => E.Group);
 
+            modelBuilder.Entity<ExcelData>()
+                .HasMany(g => g.ExcelFieldDatas)
+                .WithOne(E => E.ExcelData);
 
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<Group> Groups { get; set; }
-        public DbSet<Contact> Contacts { get; set; }
-        public DbSet<ExcelFile> Files { get; set; }
+        public DbSet<Group> Group { get; set; }
+        public DbSet<ExcelFieldData> ExcelFieldData { get; set; }
+        public DbSet<ExcelData> ExcelData { get; set; }
+        public DbSet<ExcelFile> ExcelFile { get; set; }
     }
 }

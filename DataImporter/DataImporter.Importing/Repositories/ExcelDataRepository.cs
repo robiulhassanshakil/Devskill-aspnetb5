@@ -10,11 +10,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataImporter.Importing.Repositories
 {
-    public class FileRepository : Repository<ExcelFile, int>, IFileRepository
+    public class ExcelDataRepository : Repository<ExcelData, int>, IExcelDataRepository
     {
-        public FileRepository(IImportingDbContext context)
+        public ExcelDataRepository(IImportingDbContext context)
             : base((DbContext)context)
         {
+
         }
     }
 }

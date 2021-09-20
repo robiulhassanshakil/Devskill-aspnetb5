@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace DataImporter.Importing.Services
 {
-    public interface IFileService
+    public interface IExcelFileService
     {
         
         void FileUploadToDb(ExcelFile file);

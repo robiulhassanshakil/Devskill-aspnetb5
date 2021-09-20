@@ -16,19 +16,19 @@ namespace DataImporter.Web.Models.Files
 {
     public class FileUploadModel
     {
-        private readonly IFileService _fileService;
+        private readonly IExcelFileService _fileService;
         private readonly IMapper _mapper;
         private readonly IDateTimeUtility _dateTime;
 
 
         public FileUploadModel()
         {
-            _fileService= Startup.AutofacContainer.Resolve<IFileService>();
+            _fileService= Startup.AutofacContainer.Resolve<IExcelFileService>();
             _mapper = Startup.AutofacContainer.Resolve<IMapper>();
             _dateTime= Startup.AutofacContainer.Resolve<IDateTimeUtility>();
 
         }
-        public FileUploadModel(IFileService fileService,IMapper mapper,IDateTimeUtility dateTime)
+        public FileUploadModel(IExcelFileService fileService,IMapper mapper,IDateTimeUtility dateTime)
         {
             _fileService = fileService;
             _mapper = mapper;
@@ -48,8 +48,8 @@ namespace DataImporter.Web.Models.Files
                 {
                     var fileName = file.FileName;
                     var filePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "UploadFiles"));
-
-                    using (var stream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create))
+                    var filePathWithName = Path.Combine(filePath, fileName);
+                    using (var stream = new FileStream(filePathWithName, FileMode.Create))
                     {
                         await file.CopyToAsync(stream);
                     }
@@ -58,7 +58,8 @@ namespace DataImporter.Web.Models.Files
                     var excelFile = new ExcelFile()
                     {
                         ExcelFileName = file.FileName,
-                        ExcelFilePath = filePath,
+                        ExcelFilePath = filePathWithName,
+                        Status = "Incomplete",
                         DateTime = _dateTime.Now,
                         GroupId = group.Id
                     };

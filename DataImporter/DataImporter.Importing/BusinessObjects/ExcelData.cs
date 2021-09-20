@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataImporter.Data;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace DataImporter.Importing.BusinessObjects
 {
-    public class ExcelFile
+    public class ExcelData 
     {
-        public DateTime DateTime { get; set; }
-        public string ExcelFileName { get; set; }
-        public string ExcelFilePath { get; set;}
-        public string Status { get; set; }
+        public int Id { get; set; }
+        public DateTime CreateDate { get; set; }
         public int GroupId { get; set; }
+
     }
 }

@@ -28,7 +28,8 @@ namespace DataImporter.Web.Models.GroupModel
         public List<Group> LoadAllGroup()
         {
           var Group=_groupService.GetAllGroup().ToList();
-
+         
+            Group.Insert(0,new Group() { Id = 0, Name = "--Select Group Name--" });
             return Group;
         }
     }
