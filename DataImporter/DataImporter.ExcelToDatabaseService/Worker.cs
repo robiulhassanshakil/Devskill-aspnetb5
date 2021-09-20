@@ -1,21 +1,18 @@
+using DataImporter.ExcelToDatabaseService.Model;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using DataImporter.ExcelToDatabaseService.Model;
 
 namespace DataImporter.ExcelToDatabaseService
 {
     public class Worker : BackgroundService
-    {   
-        
+    {
+
         private readonly ILogger<Worker> _logger;
         private readonly IImportingDataModel _importingDataModel;
 
-        public Worker(ILogger<Worker> logger,IImportingDataModel importingDataModel)
+        public Worker(ILogger<Worker> logger, IImportingDataModel importingDataModel)
         {
             _logger = logger;
             _importingDataModel = importingDataModel;
