@@ -26,7 +26,7 @@ namespace DataImporter.ExcelToDatabaseService
             while (!stoppingToken.IsCancellationRequested)
             {
                 _importingDataModel.ImportDatabase();
-                await Task.Delay(6000, stoppingToken);
+                await Task.Delay(10000, stoppingToken);
             }
         }
     }

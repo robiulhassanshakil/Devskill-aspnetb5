@@ -25,13 +25,17 @@ namespace DataImporter.ExcelToDatabaseService.Model
 
         public void ImportDatabase()
         {
-            var filesStatus = _importingUnitOfWork.ExcelFiles.GetAll();
+            var files = _importingUnitOfWork.ExcelFiles.GetAll();
 
-            foreach (var file in filesStatus)
+            
+
+            foreach (var file in files)
             {
-                 
-                if (String.Compare(file.Status.ToLower(), "incomplete") == 0)
+               
+
+                if (String.CompareOrdinal(file.Status.ToLower(), "incomplete") == 0)
                 {
+                    
                     var filePath = file.ExcelFilePath;
 
                     System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
@@ -59,14 +63,13 @@ namespace DataImporter.ExcelToDatabaseService.Model
                             List<ExcelFieldData> excelFieldDatas=new List<ExcelFieldData>();
                             for (int j = 0; j < column.Count; j++)
                             {
-                                var eniFieldData = new ExcelFieldData()
+                                var excelFieldData = new ExcelFieldData()
                                 {
                                     Name = dataSet.Tables[0].Columns[j].ColumnName,
                                     Value = dataSet.Tables[0].Rows[i][j].ToString(),
                                 };
 
-                                excelFieldDatas.Add(eniFieldData);
-
+                                excelFieldDatas.Add(excelFieldData);
 
                                 //
                             }
@@ -77,16 +80,22 @@ namespace DataImporter.ExcelToDatabaseService.Model
                                 ExcelFieldDatas= excelFieldDatas
 
                             });
-
-                            
                         }
-                        _importingUnitOfWork.Save();
                     }
+
+                    file.Status = "Completed";
                 }
-                
 
                 
             }
+
+            _importingUnitOfWork.Save();
         }
+
+       
+
+       
+
+
     }
 }
