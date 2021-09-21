@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataImporter.Importing", "D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataImporter.Common", "DataImporter.Common\DataImporter.Common.csproj", "{19F09DE8-E49A-436B-8B3F-98DCD313A87F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataImporter.ExcelToDatabaseService", "DataImporter.ExcelToDatabaseService\DataImporter.ExcelToDatabaseService.csproj", "{DECDBC1D-09FE-4B6A-9528-2501AE6822AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataImporter.ExcelToDatabaseService", "DataImporter.ExcelToDatabaseService\DataImporter.ExcelToDatabaseService.csproj", "{DECDBC1D-09FE-4B6A-9528-2501AE6822AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataImporter.Membership", "DataImporter.Membership\DataImporter.Membership.csproj", "{0A516B1B-7CC0-4337-AA24-E27BC204FB61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{DECDBC1D-09FE-4B6A-9528-2501AE6822AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DECDBC1D-09FE-4B6A-9528-2501AE6822AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DECDBC1D-09FE-4B6A-9528-2501AE6822AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A516B1B-7CC0-4337-AA24-E27BC204FB61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A516B1B-7CC0-4337-AA24-E27BC204FB61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A516B1B-7CC0-4337-AA24-E27BC204FB61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A516B1B-7CC0-4337-AA24-E27BC204FB61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataImporter.Importing.BusinessObjects;
 using DataImporter.Web.Models.Commons;
+using DataImporter.Web.Models.Contact;
 using DataImporter.Web.Models.Files;
 using DataImporter.Web.Models.GroupModel;
 using ExcelDataReader;
@@ -76,7 +77,7 @@ namespace DataImporter.Web.Controllers
                 model.Update();
             }
 
-            return RedirectToAction(nameof(ManageGroup));
+            return RedirectToAction("ManageGroup");
         }
         public IActionResult GroupDelete(int id)
         {
@@ -86,6 +87,8 @@ namespace DataImporter.Web.Controllers
         }
         public IActionResult ViewContacts()
         {
+            var model = new ContactListModel();
+            model.loadData();
             return View();
         }
         public IActionResult UploadContacts()
@@ -101,7 +104,7 @@ namespace DataImporter.Web.Controllers
             var model = new FileUploadModel();
             model.FileUpload(fileSelect, group);
 
-            return RedirectToAction("ViewContacts","Dashboard");
+            return RedirectToAction("UploadContacts","Dashboard");
         }
         public IActionResult SendMailContacts()
         {

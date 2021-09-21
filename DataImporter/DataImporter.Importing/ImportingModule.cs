@@ -49,6 +49,8 @@ namespace DataImporter.Importing
 
             builder.RegisterType<ExcelFileService>().As<IExcelFileService>()
                 .InstancePerLifetimeScope();
+            builder.RegisterType<ContactService>().As<IContactService>()
+                .InstancePerLifetimeScope();
 
             base.Load(builder);
         }

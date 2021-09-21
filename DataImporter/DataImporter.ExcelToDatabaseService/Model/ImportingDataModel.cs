@@ -27,7 +27,8 @@ namespace DataImporter.ExcelToDatabaseService.Model
         {
             var files = _importingUnitOfWork.ExcelFiles.GetAll();
 
-            
+
+           
 
             foreach (var file in files)
             {
@@ -84,18 +85,15 @@ namespace DataImporter.ExcelToDatabaseService.Model
                     }
 
                     file.Status = "Completed";
+                    File.Delete(filePath);
                 }
+               
 
-                
             }
 
             _importingUnitOfWork.Save();
         }
 
-       
-
-       
-
-
     }
+
 }

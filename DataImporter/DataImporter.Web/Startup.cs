@@ -1,4 +1,4 @@
-using DataImporter.Web.Data;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -17,6 +17,12 @@ using Autofac.Extensions.DependencyInjection;
 using DataImporter.Common;
 using DataImporter.Importing;
 using DataImporter.Importing.Contexts;
+using DataImporter.Membership;
+using DataImporter.Membership.Contexts;
+using DataImporter.Membership.Entities;
+using DataImporter.Membership.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 
 
 namespace DataImporter.Web
@@ -46,9 +52,11 @@ namespace DataImporter.Web
 
             builder.RegisterModule(new ImportingModule(connectionInfo.connectionString,
                 connectionInfo.migrationAssemblyName));
-            builder.RegisterModule(new CommonModule(connectionInfo.connectionString,
+            builder.RegisterModule(new CommonModule());
+            builder.RegisterModule(new MembershipModule(connectionInfo.connectionString,
                 connectionInfo.migrationAssemblyName));
             builder.RegisterModule(new WebModule());
+
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -66,18 +74,46 @@ namespace DataImporter.Web
                 options.UseSqlServer(connectionInfo.connectionString, b =>
                     b.MigrationsAssembly(connectionInfo.migrationAssemblyName)));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services
+                .AddIdentity<ApplicationUser, Role>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddUserManager<UserManager>()
+                .AddRoleManager<RoleManager>()
+                .AddSignInManager<SignInManager>()
+                .AddDefaultUI()
+                .AddDefaultTokenProviders();
 
-            services.ConfigureApplicationCookie(options =>
+            services.Configure<IdentityOptions>(options =>
             {
-                // Cookie settings
-                options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-                options.LoginPath = "/Account/Signin";
-                options.AccessDeniedPath = "/Account/AccessDenied";
-                options.SlidingExpiration = true;
+                // Password settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 1;
+
+                // Lockout settings.
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings.
+                options.User.AllowedUserNameCharacters =
+                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = false;
             });
+
+            services.AddAuthentication()
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                {
+                    options.LoginPath = new PathString("/Account/Login");
+                    options.AccessDeniedPath = new PathString("/Account/Login");
+                    options.LogoutPath = new PathString("/Account/Logout");
+                    options.Cookie.Name = "CustomerPortal.Identity";
+                    options.SlidingExpiration = true;
+                    options.ExpireTimeSpan = TimeSpan.FromDays(1);
+                });
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromSeconds(100);

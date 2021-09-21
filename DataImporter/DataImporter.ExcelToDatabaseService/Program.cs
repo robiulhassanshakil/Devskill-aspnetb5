@@ -65,8 +65,7 @@ namespace DataImporter.ExcelToDatabaseService
                         connectionInfo.migrationAssemblyName));
                     builder.RegisterModule(new ImportingModule(connectionInfo.connectionString,
                         connectionInfo.migrationAssemblyName));
-                    builder.RegisterModule(new CommonModule(connectionInfo.connectionString,
-                        connectionInfo.migrationAssemblyName));
+                    builder.RegisterModule(new CommonModule());
 
                 })
                 .ConfigureServices((hostContext, services) =>

@@ -1,7 +1,8 @@
-﻿
+﻿@model RegisterModel;
 @{
-    Layout = "_Layout 2";
+    Layout = "_Layout_2";
     ViewData["Title"] = "Register";
+    
 }
 
 <div class="auth-wrapper align-items-stretch aut-bg-img">
@@ -16,41 +17,52 @@
         <div class="auth-side-form">
             <div class=" auth-content">
                 <img src="~/assets/images/auth/auth-logo-dark.png" alt="" class="img-fluid mb-4 d-block d-xl-none d-lg-none">
-                <h4 class="mb-3 f-w-400">Sign up</h4>
-                <div class="form-group mb-3">
-                    <label class="floating-label" for="Username">First Name</label>
-                    <input type="text" class="form-control" id="Username" placeholder="">
-                </div>
-                <div class="form-group mb-3">
-                    <label class="floating-label" for="Username">Last Name</label>
-                    <input type="text" class="form-control" id="Username" placeholder="">
-                </div>
-                <div class="form-group mb-3">
-                    <label class="floating-label" for="Email">Email address</label>
-                    <input type="text" class="form-control" id="Email" placeholder="">
-                </div>
-                <div class="form-group mb-4">
-                    <label class="floating-label" for="Password">Password</label>
-                    <input type="password" class="form-control" id="Password" placeholder="">
-                </div>
-                <div class="form-group mb-4">
-                    <label class="floating-label" for="Password">Confirm Password</label>
-                    <input type="password" class="form-control" id="Password" placeholder="">
-                </div>
-                <div class="custom-control custom-checkbox  text-left mb-4 mt-2">
-                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                    <label class="custom-control-label" for="customCheck1">Send me the <a href="#!"> Newsletter</a> weekly.</label>
-                </div>
-                <button class="btn btn-primary btn-block mb-4">Sign up</button>
+                <form asp-action="Register" asp-controller="Account" method="post">
+                    <h4 class="mb-3 f-w-400">Sign up</h4>
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group mb-3">
+                        <label class="floating-label" asp-for="FirstName"> First Name</label>
+                        <input type="text" class="form-control" asp-for="FirstName">
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="floating-label" asp-for="LastName"> Last Name</label>
+                        <input type="text" class="form-control" asp-for="LastName">
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="floating-label" asp-for="Email">Email address</label>
+                        <input type="email" class="form-control" asp-for="Email">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="floating-label" asp-for="Password">Password</label>
+                        <input type="password" class="form-control" asp-for="Password">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="floating-label" asp-for="ConfirmPassword">Confirm Password</label>
+                        <input type="password" class="form-control" asp-for="ConfirmPassword">
+                    </div>
+                    <button class="btn btn-primary btn-block mb-4">Sign up</button>
+                </form>
                 <div class="text-center">
                     <div class="saprator my-4"><span>OR</span></div>
                     <button class="btn text-white bg-facebook mb-2 mr-2  wid-40 px-0 hei-40 rounded-circle"><i class="fab fa-facebook-f"></i></button>
                     <button class="btn text-white bg-googleplus mb-2 mr-2 wid-40 px-0 hei-40 rounded-circle"><i class="fab fa-google-plus-g"></i></button>
                     <button class="btn text-white bg-twitter mb-2  wid-40 px-0 hei-40 rounded-circle"><i class="fab fa-twitter"></i></button>
-                    <p class="mt-4">Already have an account? <a href="@Url.Action("Login","Account")" class="f-w-400">Signin</a></p>
+                    <p class="mt-4">Already have an account? <a href="@Url.ActionLink("Login","Account")" class="f-w-400">Signin</a></p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+  @section Scripts
+  {<partial name="_ValidationScriptsPartial" />
+      <script src="~/assets/js/vendor-all.min.js"></script>
+      <script src="~/assets/js/plugins/bootstrap.min.js"></script>
+      <script src="~/assets/js/ripple.js"></script>
+      <script src="~/assets/js/pcoded.min.js"></script>
+
+  }
+    
 
