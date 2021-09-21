@@ -10,14 +10,11 @@
         <a href="#!" class="b-brand">
             <!-- ========   change your logo hear   ============ -->
             <img src="~/assets/images/logo.png" alt="" class="logo">
-
         </a>
         <a href="#!" class="mob-toggler">
             <i class="feather icon-more-vertical"></i>
         </a>
     </div>
-
-
 
     <ui class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
@@ -32,11 +29,8 @@
                             {
                                 <a id="manage" class="nav-link text-dark" asp-controller="Dashboard" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
                                 <form id="logoutForm" class="form-inline" asp-controller="Account" asp-action="Logout" asp-route-returnUrl="@Url.ActionLink("Login", "Account")">
-                                    <button id="logout" type="submit" class="dud-logout">Logout</button>
+                                    <button id="logout" class="btn btn-primary btn-sm btn-round has-ripple" type="submit">Logout</button>
                                 </form>
-                                @*<a href="auth-signin.html" class="dud-logout" title="Logout">
-                                    <i class="feather icon-log-out"></i>
-                                </a>*@
                             }
                             else
                             {
