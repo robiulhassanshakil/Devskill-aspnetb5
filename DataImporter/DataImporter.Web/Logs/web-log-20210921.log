@@ -471,3 +471,10 @@ System.InvalidOperationException: The supplied URL is not local. A URL with an a
 2021-09-21 19:50:36.827 +06:00 [INF] User logged out.
 2021-09-21 19:53:23.418 +06:00 [INF] Application Starting up
 2021-09-21 19:54:33.357 +06:00 [INF] Application Starting up
+2021-09-21 20:01:33.931 +06:00 [INF] Application Starting up
+2021-09-21 20:03:48.544 +06:00 [INF] Application Starting up
+2021-09-21 20:07:51.305 +06:00 [INF] Application Starting up
+2021-09-21 20:08:31.252 +06:00 [INF] Application Starting up
+2021-09-21 20:08:59.961 +06:00 [INF] User created a new account with password.
+2021-09-21 20:09:04.297 +06:00 [INF] User logged out.
+2021-09-21 20:09:21.671 +06:00 [INF] User logged in.
