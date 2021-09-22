@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 
 namespace DataImporter.Web.Models.Account
 {
@@ -26,6 +29,26 @@ namespace DataImporter.Web.Models.Account
 
         [TempData]
         public string ErrorMessage { get; set; }
+        public  bool ReCaptchaPassed(string gRecaptchaResponse)
+        {
+            HttpClient httpClient = new HttpClient();
+
+            var res = httpClient.GetAsync($"https://www.google.com/recaptcha/api/siteverify?secret=6Lf4UoQcAAAAAPGiw0S121dheQznt25gfQ1vUyt2&response={gRecaptchaResponse}").Result;
+
+            if (res.StatusCode != HttpStatusCode.OK)
+            {
+                return false;
+            }
+            string JSONres = res.Content.ReadAsStringAsync().Result;
+            dynamic JSONdata = JObject.Parse(JSONres);
+
+            if (JSONdata.success != "true" || JSONdata.score <= 0.5m)
+            {
+                return false;
+            }
+
+            return true;
+        }
 
     }
 }

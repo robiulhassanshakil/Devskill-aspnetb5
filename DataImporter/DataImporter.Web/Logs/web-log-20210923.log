@@ -84,3 +84,10 @@ Cannot resolve parameter 'System.Net.Http.HttpClient client' of constructor 'Voi
 2021-09-23 02:23:10.363 +06:00 [INF] Sending HTTP request POST "https://www.google.com/recaptcha/api/siteverify?secret=6Lf4UoQcAAAAAPGiw0S121dheQznt25gfQ1vUyt2&response=&remoteip=::1"
 2021-09-23 02:23:10.993 +06:00 [INF] Received HTTP response headers after 627.6072ms - 200
 2021-09-23 02:23:10.994 +06:00 [INF] End processing HTTP request after 641.0168ms - 200
+2021-09-23 04:12:16.153 +06:00 [INF] Application Starting up
+2021-09-23 04:12:59.087 +06:00 [INF] Application Starting up
+2021-09-23 04:14:14.801 +06:00 [INF] User logged in.
+2021-09-23 04:15:51.464 +06:00 [INF] Application Starting up
+2021-09-23 04:16:22.980 +06:00 [INF] User logged in.
+2021-09-23 04:17:23.825 +06:00 [INF] Application Starting up
+2021-09-23 04:23:40.841 +06:00 [INF] Application Starting up

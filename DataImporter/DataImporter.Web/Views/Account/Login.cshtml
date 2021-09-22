@@ -30,7 +30,7 @@
                         <input type="password" class="form-control" asp-for="Password">
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
-                   
+                    <input type="hidden" id="foo" name="foo" />
                     <div class="custom-control custom-checkbox text-left mb-4 mt-2">
                         <input type="checkbox" class="custom-control-input" asp-for="RememberMe">
                         <label class="custom-control-label" asp-for="RememberMe">@Html.DisplayNameFor(m => m.RememberMe)</label>
@@ -52,8 +52,14 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    
 
-
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lf4UoQcAAAAAAKL9Iwt_LdLQhBIytySD2aiMnzr"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('6Lf4UoQcAAAAAAKL9Iwt_LdLQhBIytySD2aiMnzr', { action: 'login' }).then(function (token) {
+                document.getElementById("foo").value = token;
+            });
+        });
+    </script>
 }
 
