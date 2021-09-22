@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using DataImporter.Membership.Entities;
-using DataImporter.Importing.Entities;
 
 namespace DataImporter.Membership.Contexts
 {

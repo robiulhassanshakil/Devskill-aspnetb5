@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataImporter.Importing.Entities;
+using DataImporter.Membership.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataImporter.Importing.Contexts
@@ -35,7 +36,11 @@ namespace DataImporter.Importing.Contexts
         {
 
             // one to many relationship
-            
+            modelBuilder.Entity<ApplicationUser>()
+                .ToTable("AspNetUsers", T => T.ExcludeFromMigrations())
+                .HasMany<Group>()
+                .WithOne(x => x.ApplicationUser);
+
             modelBuilder.Entity<Group>()
                 .HasMany(g => g.ExcelFiles)
                 .WithOne(c => c.Group);
