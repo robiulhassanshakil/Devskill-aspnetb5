@@ -1,4 +1,6 @@
 ﻿using System;
+using DataImporter.Membership.Contexts;
+using DataImporter.Membership.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;

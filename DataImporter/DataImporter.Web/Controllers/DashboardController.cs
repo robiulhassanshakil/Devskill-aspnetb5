@@ -11,12 +11,14 @@ using DataImporter.Web.Models.Contact;
 using DataImporter.Web.Models.Files;
 using DataImporter.Web.Models.GroupModel;
 using ExcelDataReader;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace DataImporter.Web.Controllers
 {
+    [Authorize(Policy = "RestrictedArea")]
     public class DashboardController : Controller
     {
         private readonly ILogger<DashboardController> _logger;
@@ -94,9 +96,9 @@ namespace DataImporter.Web.Controllers
         public IActionResult UploadContacts()
         {
             var model = new AllGroupForContacts();
-            var gl=model.LoadAllGroup();
-            ViewBag.Message = gl;
-            return View();
+            var groupdata=model.LoadAllGroup();
+            
+            return View(groupdata);
         }
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> UploadContacts(IFormFile fileSelect, Group group)

@@ -1,4 +1,5 @@
-﻿@model LoginModel
+﻿
+@model LoginModel
 @{
     Layout = "_Layout_2";
     ViewData["Title"] = "Login";
@@ -29,8 +30,9 @@
                         <input type="password" class="form-control" asp-for="Password">
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
+                   
                     <div class="custom-control custom-checkbox text-left mb-4 mt-2">
-                        <input type="checkbox" class="custom-control-input"asp-for="RememberMe">
+                        <input type="checkbox" class="custom-control-input" asp-for="RememberMe">
                         <label class="custom-control-label" asp-for="RememberMe">@Html.DisplayNameFor(m => m.RememberMe)</label>
                     </div>
                     <button class="btn btn-block btn-primary mb-4">Signin</button>
@@ -50,10 +52,8 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script src="~/assets/js/vendor-all.min.js"></script>
-    <script src="~/assets/js/plugins/bootstrap.min.js"></script>
-    <script src="~/assets/js/ripple.js"></script>
-    <script src="~/assets/js/pcoded.min.js"></script>
+    
+
 
 }
 

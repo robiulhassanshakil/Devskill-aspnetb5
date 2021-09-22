@@ -79,6 +79,7 @@ namespace DataImporter.ExcelToDatabaseService.Model
                                 CreateDate = _dateTimeUtility.Now,
                                 GroupId = file.GroupId,
                                 ExcelFieldDatas= excelFieldDatas
+                                
 
                             });
                         }

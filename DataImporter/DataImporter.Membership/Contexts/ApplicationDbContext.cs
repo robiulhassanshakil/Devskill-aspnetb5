@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using DataImporter.Membership.Entities;
+using DataImporter.Importing.Entities;
 
 namespace DataImporter.Membership.Contexts
 {
@@ -37,7 +38,6 @@ namespace DataImporter.Membership.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
 
             base.OnModelCreating(modelBuilder);
         }

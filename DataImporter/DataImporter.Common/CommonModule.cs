@@ -11,7 +11,15 @@ namespace DataImporter.Common
             
             builder.RegisterType<DateTimeUtility>().As<IDateTimeUtility>()
                 .InstancePerLifetimeScope();
-
+            builder.RegisterType<EmailService>().As<IEmailService>()
+                .WithParameter("host", "smtp.gmail.com")
+                .WithParameter("port", 465)
+                .WithParameter("username", "victorshakil9102@gmail.com")
+                .WithParameter("password", ".")
+                .WithParameter("useSsl", true)
+                .WithParameter("from", "victorshakil9102@gmail.com")
+                .InstancePerLifetimeScope();
+                
             base.Load(builder);
         }
     }

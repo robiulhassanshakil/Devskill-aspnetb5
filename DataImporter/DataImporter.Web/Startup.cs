@@ -21,6 +21,7 @@ using DataImporter.Membership;
 using DataImporter.Membership.Contexts;
 using DataImporter.Membership.Entities;
 using DataImporter.Membership.Services;
+using DataImporter.Web.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 
@@ -69,6 +70,7 @@ namespace DataImporter.Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionInfo.connectionString, m => m.MigrationsAssembly(connectionInfo.migrationAssemblyName)));
 
+            
 
             services.AddDbContext<ImportingDbContext>(options =>
                 options.UseSqlServer(connectionInfo.connectionString, b =>
@@ -80,18 +82,19 @@ namespace DataImporter.Web
                 .AddUserManager<UserManager>()
                 .AddRoleManager<RoleManager>()
                 .AddSignInManager<SignInManager>()
-                .AddDefaultUI()
                 .AddDefaultTokenProviders();
+                
 
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
-                options.Password.RequireDigit = false;
+                options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
                 options.Password.RequireNonAlphanumeric = true;
-                options.Password.RequireUppercase = false;
+                options.Password.RequireUppercase = true;
                 options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 1;
+                options.SignIn.RequireConfirmedEmail = true;
 
                 // Lockout settings.
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
@@ -107,6 +110,7 @@ namespace DataImporter.Web
             services.AddAuthentication()
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
                 {
+                    
                     options.LoginPath = new PathString("/Account/Login");
                     options.AccessDeniedPath = new PathString("/Account/Login");
                     options.LogoutPath = new PathString("/Account/Logout");
@@ -121,6 +125,22 @@ namespace DataImporter.Web
                 options.Cookie.IsEssential = true;
             });
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ImporterAccess", policy =>
+                {
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireRole("Importer");
+                });
+                options.AddPolicy("RestrictedArea", policy =>
+                {
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireClaim("view_permission", "true");
+                });
+            });
+
+
+            /*services.Configure<SmtpConfiguration>(Configuration.GetSection("Smtp"));*/
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddControllersWithViews();
@@ -162,7 +182,7 @@ namespace DataImporter.Web
                 );
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
+                    pattern: "{controller=Account}/{action=Login}/{id?}");
                 endpoints.MapRazorPages();
             });
         }
