@@ -1,6 +1,7 @@
 ﻿using DataImporter.Importing.BusinessObjects;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,7 @@ namespace DataImporter.Importing.Services
             if (group == null)
                 throw new InvalidParameterException("Group was not provided");
 
-            if (IsNameAlreadyUsed(group.Name))
+            if (IsNameAlreadyUsed(group.Name,group.ApplicationUserId))
                 throw new DuplicateTitleException("Group title already exists");
 
 
@@ -46,9 +47,9 @@ namespace DataImporter.Importing.Services
             _importingUnitOfWork.Save();
         }
 
-        public IList<Group> GetAllGroup()
+        public IList<Group> GetAllGroup(Guid applicationuser)
         {
-            var groupEntities=_importingUnitOfWork.Groups.GetAll();
+            var groupEntities=_importingUnitOfWork.Groups.Get(x=>x.ApplicationUserId== applicationuser,"");
             var groups = new List<Group>();
 
             foreach (var gp in groupEntities)
@@ -69,10 +70,10 @@ namespace DataImporter.Importing.Services
 
         }
 
-        public (IList<Group> records, int total, int totalDisplay) GetGroups(int pageIndex, int pageSize, string searchText, string sortText)
+        public (IList<Group> records, int total, int totalDisplay) GetGroups(int pageIndex, int pageSize, string searchText, string sortText,Guid applicationUser)
         {
             var groupData = _importingUnitOfWork.Groups.GetDynamic(
-                string.IsNullOrWhiteSpace(searchText) ? null : x => x.Name.Contains(searchText),
+                string.IsNullOrWhiteSpace(searchText) ? x=>x.ApplicationUserId == applicationUser : x => x.Name.Contains(searchText)&& x.ApplicationUserId==applicationUser,
                 sortText, string.Empty, pageIndex, pageSize);
             var resultData = (from gp in groupData.data
                 select (_mapper.Map<Group>(gp))).ToList();
@@ -99,7 +100,7 @@ namespace DataImporter.Importing.Services
             }
         }
 
-        private bool IsNameAlreadyUsed(string name) =>
-            _importingUnitOfWork.Groups.GetCount(x => x.Name == name) > 0;
+        private bool IsNameAlreadyUsed(string name,Guid userId) =>
+            _importingUnitOfWork.Groups.GetCount(x => x.Name == name && x.ApplicationUserId==userId) > 0;
     }
 }

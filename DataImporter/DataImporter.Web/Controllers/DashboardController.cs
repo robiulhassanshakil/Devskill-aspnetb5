@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataImporter.Importing.BusinessObjects;
+using DataImporter.Membership.Entities;
 using DataImporter.Web.Models.Commons;
 using DataImporter.Web.Models.Contact;
 using DataImporter.Web.Models.Files;
@@ -13,6 +14,7 @@ using DataImporter.Web.Models.GroupModel;
 using ExcelDataReader;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -22,10 +24,12 @@ namespace DataImporter.Web.Controllers
     public class DashboardController : Controller
     {
         private readonly ILogger<DashboardController> _logger;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public DashboardController(ILogger<DashboardController> logger)
+        public DashboardController(ILogger<DashboardController> logger, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
@@ -39,7 +43,8 @@ namespace DataImporter.Web.Controllers
         {
             var DataTableModel = new DataTablesAjaxRequestModel(Request);
             var model = new GroupListModel();
-            var data = model.GetGroupData(DataTableModel);
+            var applicationuser = Guid.Parse(_userManager.GetUserId(HttpContext.User));
+            var data = model.GetGroupData(DataTableModel, applicationuser);
             return Json(data);
         }
         public IActionResult CreateGroup()
@@ -50,11 +55,13 @@ namespace DataImporter.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult CreateGroup(CreateGroupModel model)
         {
+            
             if (ModelState.IsValid)
             {
                 try
                 {
-                    model.CreateGroup();
+                   var applicationuser= Guid.Parse(_userManager.GetUserId(HttpContext.User));
+                    model.CreateGroup(applicationuser);
                 }
                 catch (Exception ex)
                 {
@@ -87,27 +94,35 @@ namespace DataImporter.Web.Controllers
             model.Delete(id);
             return RedirectToAction("ManageGroup");
         }
-        public IActionResult ViewContacts()
+        public IActionResult ViewContactsStatus()
         {
-            var model = new ContactListModel();
-            model.loadData();
             return View();
+        }
+        public JsonResult ViewContactsGetData()
+        {
+            var dataTableModel = new DataTablesAjaxRequestModel(Request);
+            var model = new ContactListModel();
+            var applicationuser = Guid.Parse(_userManager.GetUserId(HttpContext.User));
+            var data = model.LoadData(dataTableModel, applicationuser);
+            return Json(data);
         }
         public IActionResult UploadContacts()
         {
             var model = new AllGroupForContacts();
-            var groupdata=model.LoadAllGroup();
+            var applicationuser = Guid.Parse(_userManager.GetUserId(HttpContext.User));
+            model.LoadAllGroup(applicationuser);
             
-            return View(groupdata);
+            return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> UploadContacts(IFormFile fileSelect, Group group)
+        public IActionResult UploadContacts(IFormFile fileSelect, AllGroupForContacts allGroupForContacts)
         {
             var model = new FileUploadModel();
-            model.FileUpload(fileSelect, group);
+            model.FileUpload(fileSelect, allGroupForContacts);
 
-            return RedirectToAction("UploadContacts","Dashboard");
+            return View();
         }
+
         public IActionResult SendMailContacts()
         {
             return View();

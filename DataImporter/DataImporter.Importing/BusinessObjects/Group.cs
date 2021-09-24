@@ -10,5 +10,6 @@ namespace DataImporter.Importing.BusinessObjects
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public Guid ApplicationUserId { get; set; }
     }
 }

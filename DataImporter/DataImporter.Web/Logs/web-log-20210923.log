@@ -91,3 +91,245 @@ Cannot resolve parameter 'System.Net.Http.HttpClient client' of constructor 'Voi
 2021-09-23 04:16:22.980 +06:00 [INF] User logged in.
 2021-09-23 04:17:23.825 +06:00 [INF] Application Starting up
 2021-09-23 04:23:40.841 +06:00 [INF] Application Starting up
+2021-09-23 15:09:33.928 +06:00 [INF] Application Starting up
+2021-09-23 15:10:10.260 +06:00 [INF] User logged in.
+2021-09-23 15:10:22.787 +06:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The model item passed into the ViewDataDictionary is of type 'System.Collections.Generic.List`1[DataImporter.Importing.BusinessObjects.Group]', but this ViewDataDictionary instance requires a model item of type 'DataImporter.Importing.BusinessObjects.Group'.
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary.EnsureCompatible(Object value)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary..ctor(ViewDataDictionary source, Object model, Type declaredModelType)
+   at lambda_method862(Closure , ViewDataDictionary )
+   at Microsoft.AspNetCore.Mvc.Razor.RazorPagePropertyActivator.CreateViewDataDictionary(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorPagePropertyActivator.Activate(Object page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorPageActivator.Activate(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ActionContext actionContext, IView view, ViewDataDictionary viewData, ITempDataDictionary tempData, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.MigrationsEndPointMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-09-23 15:35:14.465 +06:00 [INF] Application Starting up
+2021-09-23 15:35:29.852 +06:00 [INF] User logged in.
+2021-09-23 17:19:31.401 +06:00 [INF] Application Starting up
+2021-09-23 17:19:44.116 +06:00 [WRN] Invalid password for user.
+2021-09-23 17:19:44.119 +06:00 [WRN] User failed to provide the correct password.
+2021-09-23 17:19:50.689 +06:00 [INF] User logged in.
+2021-09-23 17:30:03.334 +06:00 [INF] Application Starting up
+2021-09-23 17:31:57.087 +06:00 [INF] User created a new account with password.
+2021-09-23 17:31:59.333 +06:00 [ERR] An unhandled exception has occurred while executing the request.
+MailKit.Security.AuthenticationException: 535: 5.7.8 Username and Password not accepted. Learn more at
+5.7.8  https://support.google.com/mail/?p=BadCredentials w11sm5925947pgf.5 - gsmtp
+ ---> MailKit.Net.Smtp.SmtpCommandException: 5.7.8 Username and Password not accepted. Learn more at
+5.7.8  https://support.google.com/mail/?p=BadCredentials w11sm5925947pgf.5 - gsmtp
+   --- End of inner exception stack trace ---
+   at MailKit.Net.Smtp.SmtpClient.AuthenticateAsync(Encoding encoding, ICredentials credentials, Boolean doAsync, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.Authenticate(Encoding encoding, ICredentials credentials, CancellationToken cancellationToken)
+   at MailKit.MailService.Authenticate(Encoding encoding, String userName, String password, CancellationToken cancellationToken)
+   at MailKit.MailService.Authenticate(String userName, String password, CancellationToken cancellationToken)
+   at DataImporter.Common.Utilities.EmailService.SendEmail(String receiver, String subject, String body) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Common\Utilities\EmailService.cs:line 44
+   at DataImporter.Web.Controllers.AccountController.RegisterConfirmation(String email, String returnUrl) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Controllers\AccountController.cs:line 115
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.MigrationsEndPointMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-09-23 17:33:52.478 +06:00 [INF] Application Starting up
+2021-09-23 17:34:53.512 +06:00 [INF] User created a new account with password.
+2021-09-23 17:36:19.739 +06:00 [INF] User created a new account with password.
+2021-09-23 17:38:19.510 +06:00 [INF] Application Starting up
+2021-09-23 17:38:42.383 +06:00 [INF] Application Starting up
+2021-09-23 17:39:04.572 +06:00 [INF] Application Starting up
+2021-09-23 17:39:30.350 +06:00 [INF] User logged in.
+2021-09-23 21:32:52.238 +06:00 [INF] Application Starting up
+2021-09-23 21:33:17.577 +06:00 [INF] User logged in.
+2021-09-23 21:55:36.481 +06:00 [INF] Application Starting up
+2021-09-23 21:55:52.288 +06:00 [INF] User logged in.
+2021-09-23 22:00:24.542 +06:00 [INF] Application Starting up
+2021-09-23 22:00:58.709 +06:00 [INF] User logged in.
+2021-09-23 22:10:23.551 +06:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: A second operation was started on this context before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DataImporter.Data.Repository`2.Get(Expression`1 filter, String includeProperties) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Data\Repository.cs:line 87
+   at DataImporter.Importing.Services.GroupService.GetAllGroup(Guid applicationuser) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Importing\Services\GroupService.cs:line 52
+   at DataImporter.Web.Models.GroupModel.AllGroupForContacts.LoadAllGroup(Guid applicationuser) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Models\GroupModel\AllGroupForContacts.cs:line 32
+   at DataImporter.Web.Controllers.DashboardController.UploadContacts() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Controllers\DashboardController.cs:line 107
+   at lambda_method817(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.MigrationsEndPointMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-09-23 22:13:05.458 +06:00 [INF] Application Starting up
+2021-09-23 22:13:26.783 +06:00 [INF] User logged in.
+2021-09-23 22:15:26.229 +06:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: A second operation was started on this context before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DataImporter.Data.Repository`2.Get(Expression`1 filter, String includeProperties) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Data\Repository.cs:line 87
+   at DataImporter.Importing.Services.GroupService.GetAllGroup(Guid applicationuser) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Importing\Services\GroupService.cs:line 52
+   at DataImporter.Web.Models.GroupModel.AllGroupForContacts.LoadAllGroup(Guid applicationuser) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Models\GroupModel\AllGroupForContacts.cs:line 32
+   at DataImporter.Web.Controllers.DashboardController.UploadContacts() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Controllers\DashboardController.cs:line 107
+   at lambda_method817(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.MigrationsEndPointMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-09-23 22:15:57.011 +06:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: A second operation was started on this context before a previous operation completed. This is usually caused by different threads concurrently using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DataImporter.Data.Repository`2.Get(Expression`1 filter, String includeProperties) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Data\Repository.cs:line 87
+   at DataImporter.Importing.Services.GroupService.GetAllGroup(Guid applicationuser) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Importing\Services\GroupService.cs:line 52
+   at DataImporter.Web.Models.GroupModel.AllGroupForContacts.LoadAllGroup(Guid applicationuser) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Models\GroupModel\AllGroupForContacts.cs:line 32
+   at DataImporter.Web.Controllers.DashboardController.UploadContacts() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Controllers\DashboardController.cs:line 107
+   at lambda_method817(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.MigrationsEndPointMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-09-23 22:17:11.428 +06:00 [INF] Application Starting up
+2021-09-23 22:17:28.363 +06:00 [INF] User logged in.
+2021-09-23 22:21:45.377 +06:00 [INF] Application Starting up
+2021-09-23 22:23:34.597 +06:00 [INF] Application Starting up
+2021-09-23 22:24:53.387 +06:00 [INF] Application Starting up
+2021-09-23 22:25:10.066 +06:00 [INF] User logged in.
+2021-09-23 22:28:38.239 +06:00 [INF] Application Starting up
+2021-09-23 22:29:05.629 +06:00 [INF] Application Starting up
+2021-09-23 22:29:26.728 +06:00 [INF] User logged in.
+2021-09-23 22:29:37.056 +06:00 [ERR] Create Group Failed
+DataImporter.Importing.Exceptions.DuplicateTitleException: Group title already exists
+   at DataImporter.Importing.Services.GroupService.CreateGroup(Group group) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Importing\Services\GroupService.cs:line 34
+   at DataImporter.Web.Models.GroupModel.CreateGroupModel.CreateGroup(Guid applicationuser) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Models\GroupModel\CreateGroupModel.cs:line 37
+   at DataImporter.Web.Controllers.DashboardController.CreateGroup(CreateGroupModel model) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Controllers\DashboardController.cs:line 64
+2021-09-23 22:29:53.407 +06:00 [ERR] Create Group Failed
+DataImporter.Importing.Exceptions.DuplicateTitleException: Group title already exists
+   at DataImporter.Importing.Services.GroupService.CreateGroup(Group group) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Importing\Services\GroupService.cs:line 34
+   at DataImporter.Web.Models.GroupModel.CreateGroupModel.CreateGroup(Guid applicationuser) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Models\GroupModel\CreateGroupModel.cs:line 37
+   at DataImporter.Web.Controllers.DashboardController.CreateGroup(CreateGroupModel model) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Controllers\DashboardController.cs:line 64
+2021-09-23 22:29:58.072 +06:00 [ERR] Create Group Failed
+DataImporter.Importing.Exceptions.DuplicateTitleException: Group title already exists
+   at DataImporter.Importing.Services.GroupService.CreateGroup(Group group) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Importing\Services\GroupService.cs:line 34
+   at DataImporter.Web.Models.GroupModel.CreateGroupModel.CreateGroup(Guid applicationuser) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Models\GroupModel\CreateGroupModel.cs:line 37
+   at DataImporter.Web.Controllers.DashboardController.CreateGroup(CreateGroupModel model) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Controllers\DashboardController.cs:line 64
+2021-09-23 22:36:22.231 +06:00 [INF] Application Starting up
+2021-09-23 22:36:39.079 +06:00 [INF] User logged in.
+2021-09-23 22:38:42.387 +06:00 [ERR] Create Group Failed
+DataImporter.Importing.Exceptions.DuplicateTitleException: Group title already exists
+   at DataImporter.Importing.Services.GroupService.CreateGroup(Group group) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Importing\Services\GroupService.cs:line 34
+   at DataImporter.Web.Models.GroupModel.CreateGroupModel.CreateGroup(Guid applicationuser) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Models\GroupModel\CreateGroupModel.cs:line 37
+   at DataImporter.Web.Controllers.DashboardController.CreateGroup(CreateGroupModel model) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Controllers\DashboardController.cs:line 64
+2021-09-23 22:42:57.980 +06:00 [INF] Application Starting up
+2021-09-23 22:43:14.261 +06:00 [INF] User logged in.
+2021-09-23 22:45:10.280 +06:00 [INF] Application Starting up
+2021-09-23 23:06:51.468 +06:00 [INF] Application Starting up
+2021-09-23 23:07:09.914 +06:00 [INF] User logged in.
+2021-09-23 23:08:36.721 +06:00 [INF] Application Starting up
+2021-09-23 23:08:54.032 +06:00 [INF] User logged in.
+2021-09-23 23:09:40.564 +06:00 [INF] Application Starting up
+2021-09-23 23:10:05.436 +06:00 [INF] User logged in.
+2021-09-23 23:13:35.468 +06:00 [INF] Application Starting up
+2021-09-23 23:13:57.268 +06:00 [INF] User logged in.
+2021-09-23 23:23:48.466 +06:00 [INF] Application Starting up
+2021-09-23 23:24:07.637 +06:00 [INF] User logged in.
+2021-09-23 23:36:47.962 +06:00 [INF] Application Starting up
+2021-09-23 23:37:04.431 +06:00 [INF] User logged in.
+2021-09-23 23:38:20.598 +06:00 [INF] Application Starting up
+2021-09-23 23:38:48.126 +06:00 [INF] User logged in.
+2021-09-23 23:40:34.814 +06:00 [INF] Application Starting up
+2021-09-23 23:40:47.300 +06:00 [INF] User logged in.

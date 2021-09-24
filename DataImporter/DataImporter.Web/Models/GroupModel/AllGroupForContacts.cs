@@ -14,6 +14,8 @@ namespace DataImporter.Web.Models.GroupModel
         private readonly IGroupService _groupService;
         private readonly IMapper _mapper;
 
+        public List<Group> Groups = new List<Group>();
+        public int GroupId { get; set; }
         public AllGroupForContacts()
         {
             _groupService = Startup.AutofacContainer.Resolve<IGroupService>();
@@ -25,12 +27,13 @@ namespace DataImporter.Web.Models.GroupModel
             _mapper = mapper;
         }
 
-        public List<Group> LoadAllGroup()
+        public List<Group> LoadAllGroup(Guid applicationuser)
         {
-          var Group=_groupService.GetAllGroup().ToList();
-         
-            Group.Insert(0,new Group() { Id = 0, Name = "--Select Group Name--" });
-            return Group;
+            Groups = _groupService.GetAllGroup(applicationuser).ToList();
+
+            Groups.Insert(0,new Group() { Id = 0, Name = "--Select Group Name--" });
+
+            return Groups;
         }
     }
 }

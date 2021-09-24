@@ -4,14 +4,16 @@ using DataImporter.Importing.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataImporter.Web.Data.Migrations
 {
     [DbContext(typeof(ImportingDbContext))]
-    partial class ImportingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210923172205_AddExcelfile")]
+    partial class AddExcelfile
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,6 +27,9 @@ namespace DataImporter.Web.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
@@ -74,9 +79,6 @@ namespace DataImporter.Web.Data.Migrations
 
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("ImportDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
@@ -181,7 +183,7 @@ namespace DataImporter.Web.Data.Migrations
             modelBuilder.Entity("DataImporter.Importing.Entities.ExcelFieldData", b =>
                 {
                     b.HasOne("DataImporter.Importing.Entities.ExcelData", "ExcelData")
-                        .WithMany("ExcelFieldData")
+                        .WithMany("ExcelFieldDatas")
                         .HasForeignKey("ExcelDataId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -213,7 +215,7 @@ namespace DataImporter.Web.Data.Migrations
 
             modelBuilder.Entity("DataImporter.Importing.Entities.ExcelData", b =>
                 {
-                    b.Navigation("ExcelFieldData");
+                    b.Navigation("ExcelFieldDatas");
                 });
 
             modelBuilder.Entity("DataImporter.Importing.Entities.Group", b =>

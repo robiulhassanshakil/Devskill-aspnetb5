@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Autofac;
 using AutoMapper;
 using DataImporter.Importing.Services;
@@ -21,13 +22,13 @@ namespace DataImporter.Web.Models.GroupModel
             _groupService = groupService;
             _mapper = mapper;
         }
-        internal object GetGroupData(DataTablesAjaxRequestModel dataTableModel)
+        internal object GetGroupData(DataTablesAjaxRequestModel dataTableModel,Guid applicationUser)
         {
             var data = _groupService.GetGroups(
                 dataTableModel.PageIndex,
                 dataTableModel.PageSize,
                 dataTableModel.SearchText,
-                dataTableModel.GetSortText(new string[] { "Name" }));
+                dataTableModel.GetSortText(new string[] { "Name" }),applicationUser);
 
             return new
             {

@@ -1,4 +1,4 @@
-﻿@model DataImporter.Importing.BusinessObjects.Group;
+﻿@model AllGroupForContacts;
 @{
     ViewData["Title"] = "UploadContacts";
 }
@@ -14,7 +14,7 @@
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="@Url.Action("Index","Dashboard")"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="@Url.Action("ViewContacts","Dashboard")">Contacts</a></li>
+                            <li class="breadcrumb-item"><a href="@Url.Action("ViewContactsStatus","Dashboard")">Contacts</a></li>
                             <li class="breadcrumb-item"><a href="@Url.Action("UploadContacts","Dashboard")">Upload Contacts</a></li>
                         </ul>
                     </div>
@@ -37,7 +37,7 @@
                                     <div class="input-group-prepend">
                                         <label class="input-group-text" for="">Groups</label>
                                     </div>
-                                    <select asp-for="Id" asp-items="@(new SelectList(ViewBag.message, "Id", "Name"))"></select>
+                                    <select required asp-for="GroupId" asp-items="@(new SelectList(Model.Groups , "Id","Name"))"></select>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">

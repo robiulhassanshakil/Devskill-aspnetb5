@@ -76,9 +76,9 @@ namespace DataImporter.ExcelToDatabaseService.Model
                             }
                             _importingUnitOfWork.ExcelDatas.Add(new ExcelData()
                             {
-                                CreateDate = _dateTimeUtility.Now,
+                                 
                                 GroupId = file.GroupId,
-                                ExcelFieldDatas= excelFieldDatas
+                                ExcelFieldData= excelFieldDatas
                                 
 
                             });

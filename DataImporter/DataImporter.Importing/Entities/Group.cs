@@ -14,7 +14,7 @@ namespace DataImporter.Importing.Entities
         public string Name { get; set; }
         public  Guid ApplicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
-        public List<ExcelData> ExcelDatas { get; set; }
-        public  List<ExcelFile> ExcelFiles { get; set; }
+        public List<ExcelData> ExcelData { get; set; }
+        public  List<ExcelFile> ExcelFile { get; set; }
     }
 }

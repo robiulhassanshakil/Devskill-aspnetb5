@@ -23,7 +23,7 @@ namespace DataImporter.Importing.Services
             _mapper = mapper;
         }
 
-        public void FileUploadToDb(ExcelFile file)
+        public  void FileUploadToDb(ExcelFile file)
         {
             if (file == null)
                 throw new InvalidParameterException("File was not provided");

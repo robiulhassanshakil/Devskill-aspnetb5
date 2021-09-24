@@ -11,8 +11,7 @@ namespace DataImporter.Importing.Entities
     public class ExcelData : IEntity<int>
     {
         public int Id { get; set; }
-        public DateTime CreateDate { get; set; }
-        public List<ExcelFieldData> ExcelFieldDatas { get; set; }
+        public List<ExcelFieldData> ExcelFieldData { get; set; }
         public int GroupId { get; set; }
         public Group Group { get; set; }
         

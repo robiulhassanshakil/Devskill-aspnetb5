@@ -35,9 +35,9 @@ namespace DataImporter.Web.Models.Files
             _dateTime = dateTime;
         }
 
-        public async Task FileUpload(IFormFile file,Group group)
+        public void FileUpload(IFormFile file,AllGroupForContacts allGroupForContacts)
         {
-            if (group.Id==0)
+            if (allGroupForContacts.GroupId==0)
             {
                 throw new InvalidParameterException("Select Group");
             }
@@ -51,7 +51,7 @@ namespace DataImporter.Web.Models.Files
                     var filePathWithName = Path.Combine(filePath, fileName);
                     using (var stream = new FileStream(filePathWithName, FileMode.Create))
                     {
-                        await file.CopyToAsync(stream);
+                         file.CopyToAsync(stream);
                     }
 
 
@@ -60,8 +60,8 @@ namespace DataImporter.Web.Models.Files
                         ExcelFileName = file.FileName,
                         ExcelFilePath = filePathWithName,
                         Status = "Incomplete",
-                        DateTime = _dateTime.Now,
-                        GroupId = group.Id
+                        ImportDate = _dateTime.Now,
+                        GroupId = allGroupForContacts.GroupId
                     };
 
                     _fileService.FileUploadToDb(excelFile);

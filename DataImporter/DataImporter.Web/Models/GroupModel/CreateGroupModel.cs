@@ -12,6 +12,7 @@ namespace DataImporter.Web.Models.GroupModel
         [Required, MaxLength(200, ErrorMessage = "Name should be less than 200 Characters")]
         public string Name { get; set; }
 
+
         private readonly IGroupService _groupService;
         private readonly IMapper _mapper;
         public CreateGroupModel()
@@ -25,9 +26,13 @@ namespace DataImporter.Web.Models.GroupModel
             _mapper = mapper;
         }
 
-        internal void CreateGroup()
+        internal void CreateGroup(Guid applicationuser)
         {
-            var group = _mapper.Map<Group>(this);
+            var group = new Group()
+            {
+                Name = Name,
+                ApplicationUserId = applicationuser
+            };
 
             _groupService.CreateGroup(group);
         }

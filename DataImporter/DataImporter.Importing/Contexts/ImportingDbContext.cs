@@ -42,14 +42,14 @@ namespace DataImporter.Importing.Contexts
                 .WithOne(x => x.ApplicationUser);
 
             modelBuilder.Entity<Group>()
-                .HasMany(g => g.ExcelFiles)
+                .HasMany(g => g.ExcelFile)
                 .WithOne(c => c.Group);
             modelBuilder.Entity<Group>()
-                .HasMany(g => g.ExcelDatas)
+                .HasMany(g => g.ExcelData)
                 .WithOne(E => E.Group);
 
             modelBuilder.Entity<ExcelData>()
-                .HasMany(g => g.ExcelFieldDatas)
+                .HasMany(g => g.ExcelFieldData)
                 .WithOne(E => E.ExcelData);
 
             base.OnModelCreating(modelBuilder);
