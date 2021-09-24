@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataImporter.Web.Data.Migrations
 {
     [DbContext(typeof(ImportingDbContext))]
-    [Migration("20210924111853_AddDateTimeInExcel")]
-    partial class AddDateTimeInExcel
+    [Migration("20210924163521_AddData")]
+    partial class AddData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

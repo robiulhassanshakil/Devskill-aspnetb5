@@ -2,8 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using DataImporter.Membership.Entities;
+using DataImporter.Membership.Seeds;
 
 namespace DataImporter.Membership.Contexts
 {
@@ -37,7 +39,8 @@ namespace DataImporter.Membership.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.Entity<Role>()
+                .HasData(DataSeed.Roles);
             base.OnModelCreating(modelBuilder);
         }
     }

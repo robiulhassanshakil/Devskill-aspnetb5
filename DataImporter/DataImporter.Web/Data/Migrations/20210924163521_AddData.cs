@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataImporter.Web.Data.Migrations
 {
-    public partial class addApplication : Migration
+    public partial class AddData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,7 +33,6 @@ namespace DataImporter.Web.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     GroupId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -55,6 +54,7 @@ namespace DataImporter.Web.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ExcelFileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ExcelFilePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImportDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     GroupId = table.Column<int>(type: "int", nullable: false)
                 },

@@ -138,7 +138,7 @@ namespace DataImporter.Web.Controllers
             token = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token));
             var result = await _userManager.ConfirmEmailAsync(user, token);
             confirmEmailModel.StatusMessage = result.Succeeded ? "Thank you for confirming your email." : "Error confirming your email.";
-            return View();
+            return RedirectToAction("Login","Account");
         }
 
         public async Task<IActionResult> Login(string returnUrl = null)

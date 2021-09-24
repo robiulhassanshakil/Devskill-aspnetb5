@@ -40,10 +40,14 @@ namespace DataImporter.Importing.Contexts
                 .ToTable("AspNetUsers", T => T.ExcludeFromMigrations())
                 .HasMany<Group>()
                 .WithOne(x => x.ApplicationUser);
+                
+
 
             modelBuilder.Entity<Group>()
                 .HasMany(g => g.ExcelFile)
                 .WithOne(c => c.Group);
+                
+
             modelBuilder.Entity<Group>()
                 .HasMany(g => g.ExcelData)
                 .WithOne(E => E.Group);
