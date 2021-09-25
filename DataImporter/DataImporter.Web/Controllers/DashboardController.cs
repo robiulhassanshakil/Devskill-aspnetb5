@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ using DataImporter.Web.Models.Commons;
 using DataImporter.Web.Models.Contact;
 using DataImporter.Web.Models.Files;
 using DataImporter.Web.Models.GroupModel;
+using DataImporter.Web.Views.Dashboard;
 using ExcelDataReader;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -109,19 +111,20 @@ namespace DataImporter.Web.Controllers
         public IActionResult UploadContacts()
         {
             var model = new AllGroupForContacts();
-            var applicationuser = Guid.Parse(_userManager.GetUserId(HttpContext.User));
-            model.LoadAllGroup(applicationuser);
-            
+            model.LoadAllGroup();
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult UploadContacts(IFormFile fileSelect, AllGroupForContacts allGroupForContacts)
+        public IActionResult PreviewExcelFile(IFormFile fileSelect, AllGroupForContacts allGroupForContacts)
         {
             var model = new FileUploadModel();
-            model.FileUpload(fileSelect, allGroupForContacts);
 
-            return View();
+             model.FileUpload(fileSelect, allGroupForContacts);
+
+             return View(model);
         }
+
+        
 
         public IActionResult SendMailContacts()
         {
@@ -131,6 +134,8 @@ namespace DataImporter.Web.Controllers
         {
             return View();
         }
+
+       
 
 
     }

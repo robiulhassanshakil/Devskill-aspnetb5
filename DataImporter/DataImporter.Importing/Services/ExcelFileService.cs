@@ -27,7 +27,14 @@ namespace DataImporter.Importing.Services
         {
             if (file == null)
                 throw new InvalidParameterException("File was not provided");
-            _importingUnitOfWork.ExcelFiles.Add(_mapper.Map<Entities.ExcelFile>(file));
+            _importingUnitOfWork.ExcelFiles.Add(new Entities.ExcelFile()
+            {
+                ExcelFileName = file.ExcelFileName,
+                ExcelFilePath = file.ExcelFilePath,
+                GroupId = file.GroupId,
+                ImportDate = file.ImportDate,
+                Status = file.Status
+            });
             _importingUnitOfWork.Save();
         }
     }
