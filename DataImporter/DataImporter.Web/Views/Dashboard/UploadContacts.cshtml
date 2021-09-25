@@ -37,7 +37,7 @@
                                     <div class="input-group-prepend">
                                         <label class="input-group-text" for="">Groups</label>
                                     </div>
-                                    <select required asp-for="GroupId" asp-items="@(new SelectList(Model.Groups , "Id","Name"))"></select>
+                                    <select required  asp-for="GroupId" id="Gp" asp-items="@(new SelectList(Model.Groups , "Id","Name"))"></select>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -59,13 +59,20 @@
     </div>
 </section>
 @section Scripts
-{
+{    
+    
+    
     <script>
-        $('#inputFile').on('change',function(){
+         $('#inputFile').on('change',function(){
             //get the file name
             var fileName = $(this).val();
             //replace the "Choose a file" label
             $(this).next('.custom-file-label').html(fileName);
         })
+        $(document).ready(function() {
+            $('#Gp').select2({
+                width:"18%", // need to override the changed default
+            });
+        });
     </script>
 }
