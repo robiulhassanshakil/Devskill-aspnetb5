@@ -23,6 +23,9 @@ namespace DataImporter.Web.Models.Files
         private readonly IDateTimeUtility _dateTime;
 
         public DataTable DataTable{ get; set; }
+        public string ExcelFileName { get; set; }
+        public string ExcelFilePath { get; set; }
+        public int GroupId { get; set; }
         
         public FileUploadModel()
         {
@@ -47,17 +50,18 @@ namespace DataImporter.Web.Models.Files
             }
             else
             {
+                GroupId = allGroupForContacts.GroupId;
                 string fileext = Path.GetExtension(file.FileName);
                 if (fileext == ".xlsx" || fileext == ".xlsm" || fileext == ".xls" || fileext == ".xlsb")
                 {
-                    var fileName = file.FileName;
+                     ExcelFileName = file.FileName;
                     var filePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "UploadFiles"));
-                    var filePathWithName = Path.Combine(filePath, fileName);
-                    using (var stream = new FileStream(filePathWithName, FileMode.Create))
+                     ExcelFilePath = Path.Combine(filePath, ExcelFileName);
+                    using (var stream = new FileStream(ExcelFilePath, FileMode.Create))
                     {
                          file.CopyToAsync(stream);
                     }
-                    using (var stream = new FileStream(filePathWithName, FileMode.Open, FileAccess.Read))
+                    using (var stream = new FileStream(ExcelFilePath, FileMode.Open, FileAccess.Read))
                     {
 
                         IExcelDataReader reader;

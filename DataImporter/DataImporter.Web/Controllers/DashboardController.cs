@@ -12,7 +12,6 @@ using DataImporter.Web.Models.Commons;
 using DataImporter.Web.Models.Contact;
 using DataImporter.Web.Models.Files;
 using DataImporter.Web.Models.GroupModel;
-using DataImporter.Web.Views.Dashboard;
 using ExcelDataReader;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -114,6 +113,7 @@ namespace DataImporter.Web.Controllers
             model.LoadAllGroup();
             return View(model);
         }
+
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult PreviewExcelFile(IFormFile fileSelect, AllGroupForContacts allGroupForContacts)
         {
@@ -123,8 +123,17 @@ namespace DataImporter.Web.Controllers
 
              return View(model);
         }
+        public IActionResult CreateExcelFileStatus(FileUploadModel fileUploadModel)
+        {
+            return RedirectToAction("ViewContactsStatus","Dashboard");
+        }
+        public IActionResult ClearExcelFile(FileUploadModel fileUploadModel)
+        {   
 
-        
+            return RedirectToAction("UploadContacts","Dashboard");
+        }
+
+
 
         public IActionResult SendMailContacts()
         {

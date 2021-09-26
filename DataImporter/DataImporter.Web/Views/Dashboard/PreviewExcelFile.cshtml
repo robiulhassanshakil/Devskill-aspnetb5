@@ -31,13 +31,7 @@
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row align-items-center m-l-0">
-                            <div class="col-sm-6">
-                            </div>
-                            <div class="col-sm-6 text-right">
 
-                            </div>
-                        </div>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped mb-0">
                                 <thead>
@@ -61,9 +55,9 @@
                                                     @foreach (DataColumn dataColumn in Model.DataTable.Columns)
                                                     {
 
-                                                    <td>
-                                                       @row[dataColumn]
-                                                    </td>
+                                                        <td>
+                                                            @row[dataColumn]
+                                                        </td>
 
                                                     }
                                                 </tr>
@@ -75,6 +69,29 @@
                                 </tbody>
                             </table>
                         </div>
+                        <br />
+                        <br />
+                        <div class="row align-items-center m-l-0">
+                            <div class="col-sm-6 text-left">
+                                <form asp-action="CreateExcelFileStatus" asp-controller="Dashboard" Method="post">
+                                    <input type="hidden" asp-for=GroupId value=@Model.GroupId />
+                                    <input type="hidden" asp-for=ExcelFileName value=@Model.ExcelFileName />
+                                    <input type="hidden" asp-for=ExcelFilePath value=@Model.ExcelFilePath />
+                                    <button type='submit' class="btn btn-primary"> Import </button>
+                                </form>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <form asp-action="ClearExcelFile" asp-controller="Dashboard" Method="post">
+                                    <input type="hidden" asp-for=ExcelFilePath value=@Model.ExcelFilePath />
+                                    <button type='submit' class="btn btn-danger">  Cancel </button>
+                                </form>
+                            </div>
+                        </div>
+                     
+
+                        
+                            
+                    
                     </div>
                 </div>
             </div>
