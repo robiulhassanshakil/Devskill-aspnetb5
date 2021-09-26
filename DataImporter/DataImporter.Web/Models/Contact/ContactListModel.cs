@@ -39,7 +39,7 @@ namespace DataImporter.Web.Models.Contact
                 dataTableModel.PageIndex,
                 dataTableModel.PageSize,
                 dataTableModel.SearchText,
-                dataTableModel.GetSortText(new string[] {"Name","ExcelFileName","DateTime","Status"}), applicationUserId);
+                dataTableModel.GetSortText(new string[] {"Name","ExcelFileName","ImportDate","Status"}), applicationUserId);
 
             return new
             {
@@ -50,7 +50,7 @@ namespace DataImporter.Web.Models.Contact
                         {
                             record.GroupName,
                             record.ExcelFileName,
-                            record.ImportDate.ToShortTimeString(),
+                            record.ImportDate.ToString(),
                             record.Status
                         }
                     ).ToArray()
