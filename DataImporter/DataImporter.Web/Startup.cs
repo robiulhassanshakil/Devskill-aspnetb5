@@ -92,7 +92,7 @@ namespace DataImporter.Web
                 options.Password.RequireLowercase = true;
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequireUppercase = true;
-                options.Password.RequiredLength = 4;
+                options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 1;
                 options.SignIn.RequireConfirmedEmail = true;
 
@@ -162,6 +162,7 @@ namespace DataImporter.Web
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();

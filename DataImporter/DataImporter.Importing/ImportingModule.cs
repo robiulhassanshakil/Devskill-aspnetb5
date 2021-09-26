@@ -51,8 +51,6 @@ namespace DataImporter.Importing
                 .InstancePerLifetimeScope();
             builder.RegisterType<ContactService>().As<IContactService>()
                 .InstancePerLifetimeScope();
-            builder.RegisterType<ImportingDataService>().As<IImportingDataService>()
-                .InstancePerLifetimeScope();
 
             base.Load(builder);
         }
