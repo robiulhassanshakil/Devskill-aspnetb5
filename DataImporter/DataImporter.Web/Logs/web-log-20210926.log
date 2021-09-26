@@ -424,3 +424,14 @@ System.InvalidOperationException: StatusCode cannot be set because the response 
 2021-09-26 20:41:32.326 +06:00 [INF] User logged in.
 2021-09-26 20:42:13.859 +06:00 [INF] Application Starting up
 2021-09-26 20:42:27.285 +06:00 [INF] User logged in.
+2021-09-26 22:48:37.970 +06:00 [INF] Application Starting up
+2021-09-26 22:48:52.381 +06:00 [INF] User logged in.
+2021-09-26 22:49:14.943 +06:00 [ERR] Create Group Failed
+DataImporter.Importing.Exceptions.DuplicateTitleException: Group title already exists
+   at DataImporter.Importing.Services.GroupService.CreateGroup(Group group) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Importing\Services\GroupService.cs:line 34
+   at DataImporter.Web.Models.GroupModel.CreateGroupModel.CreateGroup(Guid applicationuser) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Models\GroupModel\CreateGroupModel.cs:line 37
+   at DataImporter.Web.Controllers.DashboardController.CreateGroup(CreateGroupModel model) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Controllers\DashboardController.cs:line 65
+2021-09-26 22:58:08.385 +06:00 [INF] Application Starting up
+2021-09-26 22:58:22.584 +06:00 [INF] User logged in.
+2021-09-26 23:03:44.515 +06:00 [INF] Application Starting up
+2021-09-26 23:03:56.814 +06:00 [INF] User logged in.

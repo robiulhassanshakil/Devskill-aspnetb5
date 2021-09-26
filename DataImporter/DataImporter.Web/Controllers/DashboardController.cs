@@ -103,14 +103,15 @@ namespace DataImporter.Web.Controllers
         {
             var dataTableModel = new DataTablesAjaxRequestModel(Request);
             var model = new ContactListModel();
-            var applicationuser = Guid.Parse(_userManager.GetUserId(HttpContext.User));
-            var data = model.LoadData(dataTableModel, applicationuser);
+            var applicationuserId = Guid.Parse(_userManager.GetUserId(HttpContext.User));
+            var data = model.LoadData(dataTableModel, applicationuserId);
             return Json(data);
         }
         public IActionResult UploadContacts()
         {
             var model = new AllGroupForContacts();
-            model.LoadAllGroup();
+            var applicationuserId = Guid.Parse(_userManager.GetUserId(HttpContext.User));
+            model.LoadAllGroup(applicationuserId);
             return View(model);
         }
 
@@ -119,17 +120,18 @@ namespace DataImporter.Web.Controllers
         {
             var model = new FileUploadModel();
 
-             model.FileUpload(fileSelect, allGroupForContacts);
+             model.PreviewExcelLoad(fileSelect, allGroupForContacts);
 
              return View(model);
         }
         public IActionResult CreateExcelFileStatus(FileUploadModel fileUploadModel)
-        {
+        {    
+            fileUploadModel.ExcelFileUpload();
             return RedirectToAction("ViewContactsStatus","Dashboard");
         }
         public IActionResult ClearExcelFile(FileUploadModel fileUploadModel)
         {   
-
+            fileUploadModel.ExcelFileCancel();
             return RedirectToAction("UploadContacts","Dashboard");
         }
 

@@ -32,9 +32,8 @@ namespace DataImporter.Web.Models.GroupModel
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public List<Group> LoadAllGroup()
+        public List<Group> LoadAllGroup(Guid applicationuserId)
         {
-            var applicationuserId = Guid.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
             Groups = _groupService.GetAllGroup(applicationuserId).ToList();
 
             Groups.Insert(0,new Group() { Id = 0, Name = "--Select Group Name--" });

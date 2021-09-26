@@ -41,7 +41,7 @@ namespace DataImporter.Web.Models.Files
             _dateTime = dateTime;
         }
 
-        public void FileUpload(IFormFile file,AllGroupForContacts allGroupForContacts)
+        public void PreviewExcelLoad(IFormFile file,AllGroupForContacts allGroupForContacts)
         {
            
             if (allGroupForContacts.GroupId==0)
@@ -63,9 +63,7 @@ namespace DataImporter.Web.Models.Files
                     }
                     using (var stream = new FileStream(ExcelFilePath, FileMode.Open, FileAccess.Read))
                     {
-
                         IExcelDataReader reader;
-
 
                        reader = ExcelDataReader.ExcelReaderFactory.CreateReader(stream);
 
@@ -77,39 +75,30 @@ namespace DataImporter.Web.Models.Files
                                 UseHeaderRow = true
                             }
                         };
-
-                       var dataset = reader.AsDataSet(conf);
+                        var dataset = reader.AsDataSet(conf);
 
                         DataTable = dataset.Tables[0];
-                        // Now you can get data from each sheet by its index or its "name"
-                        /*var singleTable = dataSet.Tables[0];*/
-
-
-
                     }
-                     
-                    
-
-                    //1. Reading Excel file
-                   
-                    /*
-                                        var excelFile = new ExcelFile()
-                                        {
-                                            ExcelFileName = file.FileName,
-                                            ExcelFilePath = filePathWithName,
-                                            Status = "Incomplete",
-                                            ImportDate = _dateTime.Now,
-                                            GroupId = allGroupForContacts.GroupId
-                                        };
-
-                                        _fileService.FileUploadToDb(excelFile);*/
-
-
-
                 }
             }
+        }
 
-            
+        public void ExcelFileUpload()
+        {
+            var excelFile = new ExcelFile()
+            {
+                ExcelFileName = ExcelFileName,
+                ExcelFilePath = ExcelFilePath,
+                Status = "Incomplete",
+                ImportDate = _dateTime.Now,
+                GroupId = GroupId
+            };
+            _fileService.FileUploadToDb(excelFile);
+        }
+
+        public void ExcelFileCancel()
+        {
+            File.Delete(ExcelFilePath);
         }
     }
 }
