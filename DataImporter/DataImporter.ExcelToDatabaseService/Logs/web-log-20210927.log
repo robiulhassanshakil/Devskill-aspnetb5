@@ -844,3 +844,262 @@ Cannot resolve parameter 'DataImporter.Common.Utilities.IDateTimeUtility dateTim
 2021-09-27 15:26:44.855 +06:00 [INF] Application Starting up
 2021-09-27 15:27:20.259 +06:00 [INF] Application Starting up
 2021-09-27 15:30:47.823 +06:00 [INF] Application Starting up
+2021-09-27 16:05:37.561 +06:00 [INF] Application Starting up
+2021-09-27 16:10:34.747 +06:00 [INF] Application Starting up
+2021-09-27 16:15:26.416 +06:00 [INF] Application Starting up
+2021-09-27 16:17:21.409 +06:00 [INF] Application Starting up
+2021-09-27 16:17:24.240 +06:00 [FTL] Application start-up failed
+System.IO.FileNotFoundException: Could not find file 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'.
+File name: 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.Open(String path, FileMode mode, FileAccess access)
+   at DataImporter.ExcelToDatabaseService.Model.ImportingDataModel.ImportDatabase() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Model\ImportingDataModel.cs:line 45
+   at DataImporter.ExcelToDatabaseService.Worker.ExecuteAsync(CancellationToken stoppingToken) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Worker.cs:line 25
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at DataImporter.ExcelToDatabaseService.Program.Main(String[] args) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Program.cs:line 43
+2021-09-27 16:18:35.675 +06:00 [INF] Application Starting up
+2021-09-27 16:19:54.703 +06:00 [INF] Application Starting up
+2021-09-27 16:19:57.458 +06:00 [FTL] Application start-up failed
+System.IO.FileNotFoundException: Could not find file 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'.
+File name: 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.Open(String path, FileMode mode, FileAccess access)
+   at DataImporter.ExcelToDatabaseService.Model.ImportingDataModel.ImportDatabase() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Model\ImportingDataModel.cs:line 45
+   at DataImporter.ExcelToDatabaseService.Worker.ExecuteAsync(CancellationToken stoppingToken) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Worker.cs:line 25
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at DataImporter.ExcelToDatabaseService.Program.Main(String[] args) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Program.cs:line 43
+2021-09-27 16:20:07.533 +06:00 [INF] Application Starting up
+2021-09-27 16:20:10.504 +06:00 [FTL] Application start-up failed
+System.IO.FileNotFoundException: Could not find file 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'.
+File name: 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.Open(String path, FileMode mode, FileAccess access)
+   at DataImporter.ExcelToDatabaseService.Model.ImportingDataModel.ImportDatabase() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Model\ImportingDataModel.cs:line 45
+   at DataImporter.ExcelToDatabaseService.Worker.ExecuteAsync(CancellationToken stoppingToken) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Worker.cs:line 25
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at DataImporter.ExcelToDatabaseService.Program.Main(String[] args) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Program.cs:line 43
+2021-09-27 16:21:29.948 +06:00 [INF] Application Starting up
+2021-09-27 16:21:33.776 +06:00 [FTL] Application start-up failed
+System.IO.FileNotFoundException: Could not find file 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'.
+File name: 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.Open(String path, FileMode mode, FileAccess access)
+   at DataImporter.ExcelToDatabaseService.Model.ImportingDataModel.ImportDatabase() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Model\ImportingDataModel.cs:line 45
+   at DataImporter.ExcelToDatabaseService.Worker.ExecuteAsync(CancellationToken stoppingToken) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Worker.cs:line 25
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at DataImporter.ExcelToDatabaseService.Program.Main(String[] args) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Program.cs:line 43
+2021-09-27 16:22:15.132 +06:00 [INF] Application Starting up
+2021-09-27 16:22:18.137 +06:00 [FTL] Application start-up failed
+System.IO.FileNotFoundException: Could not find file 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'.
+File name: 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.Open(String path, FileMode mode, FileAccess access)
+   at DataImporter.ExcelToDatabaseService.Model.ImportingDataModel.ImportDatabase() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Model\ImportingDataModel.cs:line 45
+   at DataImporter.ExcelToDatabaseService.Worker.ExecuteAsync(CancellationToken stoppingToken) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Worker.cs:line 25
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at DataImporter.ExcelToDatabaseService.Program.Main(String[] args) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Program.cs:line 43
+2021-09-27 16:23:52.172 +06:00 [INF] Application Starting up
+2021-09-27 16:23:54.827 +06:00 [FTL] Application start-up failed
+System.IO.FileNotFoundException: Could not find file 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'.
+File name: 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.Open(String path, FileMode mode, FileAccess access)
+   at DataImporter.ExcelToDatabaseService.Model.ImportingDataModel.ImportDatabase() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Model\ImportingDataModel.cs:line 44
+   at DataImporter.ExcelToDatabaseService.Worker.ExecuteAsync(CancellationToken stoppingToken) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Worker.cs:line 25
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at DataImporter.ExcelToDatabaseService.Program.Main(String[] args) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Program.cs:line 43
+2021-09-27 16:25:32.541 +06:00 [INF] Application Starting up
+2021-09-27 16:25:35.528 +06:00 [FTL] Application start-up failed
+System.IO.FileNotFoundException: Could not find file 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'.
+File name: 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.Open(String path, FileMode mode, FileAccess access)
+   at DataImporter.ExcelToDatabaseService.Model.ImportingDataModel.ImportDatabase() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Model\ImportingDataModel.cs:line 45
+   at DataImporter.ExcelToDatabaseService.Worker.ExecuteAsync(CancellationToken stoppingToken) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Worker.cs:line 25
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at DataImporter.ExcelToDatabaseService.Program.Main(String[] args) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Program.cs:line 43
+2021-09-27 16:25:54.998 +06:00 [INF] Application Starting up
+2021-09-27 16:25:56.896 +06:00 [FTL] Application start-up failed
+System.IO.FileNotFoundException: Could not find file 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'.
+File name: 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.Open(String path, FileMode mode, FileAccess access)
+   at DataImporter.ExcelToDatabaseService.Model.ImportingDataModel.ImportDatabase() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Model\ImportingDataModel.cs:line 45
+   at DataImporter.ExcelToDatabaseService.Worker.ExecuteAsync(CancellationToken stoppingToken) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Worker.cs:line 25
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at DataImporter.ExcelToDatabaseService.Program.Main(String[] args) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Program.cs:line 43
+2021-09-27 16:26:02.934 +06:00 [INF] Application Starting up
+2021-09-27 16:26:05.016 +06:00 [FTL] Application start-up failed
+System.IO.FileNotFoundException: Could not find file 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'.
+File name: 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.Open(String path, FileMode mode, FileAccess access)
+   at DataImporter.ExcelToDatabaseService.Model.ImportingDataModel.ImportDatabase() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Model\ImportingDataModel.cs:line 45
+   at DataImporter.ExcelToDatabaseService.Worker.ExecuteAsync(CancellationToken stoppingToken) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Worker.cs:line 25
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at DataImporter.ExcelToDatabaseService.Program.Main(String[] args) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Program.cs:line 43
+2021-09-27 16:26:33.660 +06:00 [INF] Application Starting up
+2021-09-27 16:26:36.183 +06:00 [FTL] Application start-up failed
+System.IO.FileNotFoundException: Could not find file 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'.
+File name: 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.Open(String path, FileMode mode, FileAccess access)
+   at DataImporter.ExcelToDatabaseService.Model.ImportingDataModel.ImportDatabase() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Model\ImportingDataModel.cs:line 45
+   at DataImporter.ExcelToDatabaseService.Worker.ExecuteAsync(CancellationToken stoppingToken) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Worker.cs:line 25
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at DataImporter.ExcelToDatabaseService.Program.Main(String[] args) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Program.cs:line 43
+2021-09-27 16:28:02.849 +06:00 [INF] Application Starting up
+2021-09-27 16:28:04.951 +06:00 [FTL] Application start-up failed
+System.IO.FileNotFoundException: Could not find file 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'.
+File name: 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.Open(String path, FileMode mode, FileAccess access)
+   at DataImporter.ExcelToDatabaseService.Model.ImportingDataModel.ImportDatabase() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Model\ImportingDataModel.cs:line 45
+   at DataImporter.ExcelToDatabaseService.Worker.ExecuteAsync(CancellationToken stoppingToken) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Worker.cs:line 25
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at DataImporter.ExcelToDatabaseService.Program.Main(String[] args) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Program.cs:line 43
+2021-09-27 16:28:08.696 +06:00 [INF] Application Starting up
+2021-09-27 16:28:10.563 +06:00 [FTL] Application start-up failed
+System.IO.FileNotFoundException: Could not find file 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'.
+File name: 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.Open(String path, FileMode mode, FileAccess access)
+   at DataImporter.ExcelToDatabaseService.Model.ImportingDataModel.ImportDatabase() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Model\ImportingDataModel.cs:line 45
+   at DataImporter.ExcelToDatabaseService.Worker.ExecuteAsync(CancellationToken stoppingToken) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Worker.cs:line 25
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at DataImporter.ExcelToDatabaseService.Program.Main(String[] args) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Program.cs:line 43
+2021-09-27 16:30:30.342 +06:00 [INF] Application Starting up
+2021-09-27 16:36:23.220 +06:00 [INF] Application Starting up
+2021-09-27 16:42:24.510 +06:00 [INF] Application Starting up
+2021-09-27 16:46:57.000 +06:00 [INF] Application Starting up
+2021-09-27 16:50:57.071 +06:00 [INF] Application Starting up
+2021-09-27 17:00:20.794 +06:00 [INF] Application Starting up
+2021-09-27 17:05:54.833 +06:00 [INF] Application Starting up
+2021-09-27 17:05:58.191 +06:00 [FTL] Application start-up failed
+System.IO.FileNotFoundException: Could not find file 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'.
+File name: 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.Open(String path, FileMode mode, FileAccess access)
+   at DataImporter.ExcelToDatabaseService.Model.ImportingDataModel.ImportDatabase() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Model\ImportingDataModel.cs:line 45
+   at DataImporter.ExcelToDatabaseService.Worker.ExecuteAsync(CancellationToken stoppingToken) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Worker.cs:line 25
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at DataImporter.ExcelToDatabaseService.Program.Main(String[] args) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Program.cs:line 43
+2021-09-27 17:07:04.242 +06:00 [INF] Application Starting up
+2021-09-27 17:12:14.921 +06:00 [INF] Application Starting up
+2021-09-27 17:12:55.611 +06:00 [FTL] Application start-up failed
+System.IO.FileNotFoundException: Could not find file 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'.
+File name: 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.Open(String path, FileMode mode, FileAccess access)
+   at DataImporter.ExcelToDatabaseService.Model.ImportingDataModel.ImportDatabase() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Model\ImportingDataModel.cs:line 45
+   at DataImporter.ExcelToDatabaseService.Worker.ExecuteAsync(CancellationToken stoppingToken) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Worker.cs:line 25
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at DataImporter.ExcelToDatabaseService.Program.Main(String[] args) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Program.cs:line 43
+2021-09-27 17:15:18.592 +06:00 [INF] Application Starting up
+2021-09-27 17:15:21.772 +06:00 [FTL] Application start-up failed
+System.IO.FileNotFoundException: Could not find file 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'.
+File name: 'F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\UploadFiles\School.xlsx'
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.Open(String path, FileMode mode, FileAccess access)
+   at DataImporter.ExcelToDatabaseService.Model.ImportingDataModel.ImportDatabase() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Model\ImportingDataModel.cs:line 45
+   at DataImporter.ExcelToDatabaseService.Worker.ExecuteAsync(CancellationToken stoppingToken) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Worker.cs:line 25
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at DataImporter.ExcelToDatabaseService.Program.Main(String[] args) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.ExcelToDatabaseService\Program.cs:line 43
+2021-09-27 17:16:19.843 +06:00 [INF] Application Starting up
+2021-09-27 17:21:30.684 +06:00 [INF] Application Starting up
+2021-09-27 17:24:44.512 +06:00 [INF] Application Starting up
+2021-09-27 17:47:34.151 +06:00 [INF] Application Starting up
+2021-09-27 18:07:03.722 +06:00 [INF] Application Starting up
+2021-09-27 18:08:38.221 +06:00 [INF] Application Starting up
+2021-09-27 18:12:44.972 +06:00 [INF] Application Starting up
+2021-09-27 18:15:44.952 +06:00 [INF] Application Starting up

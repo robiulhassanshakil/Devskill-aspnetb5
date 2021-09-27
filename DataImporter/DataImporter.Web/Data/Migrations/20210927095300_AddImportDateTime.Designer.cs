@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataImporter.Web.Data.Migrations
 {
     [DbContext(typeof(ImportingDbContext))]
-    [Migration("20210924163521_AddData")]
-    partial class AddData
+    [Migration("20210927095300_AddImportDateTime")]
+    partial class AddImportDateTime
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,6 +30,9 @@ namespace DataImporter.Web.Data.Migrations
 
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("ImportDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

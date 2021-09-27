@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataImporter.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210924163442_AddAllData")]
-    partial class AddAllData
+    [Migration("20210927095347_ApplicationAdded")]
+    partial class ApplicationAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -119,6 +119,15 @@ namespace DataImporter.Web.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("b4381958-19c5-47d9-ae74-b81c845cf9cf"),
+                            ConcurrencyStamp = "e75e5bf1-346f-464e-9b7c-a57761d0cb68",
+                            Name = "Importer",
+                            NormalizedName = "IMPORTER"
+                        });
                 });
 
             modelBuilder.Entity("DataImporter.Membership.Entities.RoleClaim", b =>

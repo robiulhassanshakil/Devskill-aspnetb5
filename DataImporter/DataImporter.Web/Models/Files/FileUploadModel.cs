@@ -59,7 +59,7 @@ namespace DataImporter.Web.Models.Files
                      ExcelFilePath = Path.Combine(filePath, ExcelFileName);
                     using (var stream = new FileStream(ExcelFilePath, FileMode.Create))
                     {
-                         file.CopyToAsync(stream);
+                       file.CopyTo(stream);
                     }
                     using (var stream = new FileStream(ExcelFilePath, FileMode.Open, FileAccess.Read))
                     {

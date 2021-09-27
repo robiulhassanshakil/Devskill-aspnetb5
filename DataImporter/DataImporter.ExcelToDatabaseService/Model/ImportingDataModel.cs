@@ -27,16 +27,11 @@ namespace DataImporter.ExcelToDatabaseService.Model
         {
             var files = _importingUnitOfWork.ExcelFiles.GetAll();
 
-
-           
-
             foreach (var file in files)
             {
-               
-
                 if (String.CompareOrdinal(file.Status.ToLower(), "incomplete") == 0)
                 {
-                    
+
                     var filePath = file.ExcelFilePath;
 
                     System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
@@ -56,45 +51,40 @@ namespace DataImporter.ExcelToDatabaseService.Model
                         };
 
                         DataSet dataSet = excelDataReader.AsDataSet(conf);
-                        DataRowCollection row = dataSet.Tables["Sheet1"].Rows;
-                        DataColumnCollection column = dataSet.Tables["Sheet1"].Columns;
+                        DataTable dataTable = dataSet.Tables[0];
+                        DataRowCollection row = dataTable.Rows;
+                        DataColumnCollection column = dataTable.Columns;
 
                         for (int i = 0; i < row.Count; i++)
                         {
-                            List<ExcelFieldData> excelFieldDatas=new List<ExcelFieldData>();
+                            _importingUnitOfWork.ExcelDatas.Add(new ExcelData()
+                            {
+                                GroupId = file.GroupId,
+                                ImportDate = _dateTimeUtility.Now
+                            });
+                            _importingUnitOfWork.Save();
+
+                            var exceldataId = _importingUnitOfWork.ExcelDatas.GetAll().Last().Id;
+
                             for (int j = 0; j < column.Count; j++)
                             {
                                 var excelFieldData = new ExcelFieldData()
                                 {
-                                    Name = dataSet.Tables[0].Columns[j].ColumnName,
-                                    Value = dataSet.Tables[0].Rows[i][j].ToString(),
+                                    Name = dataTable.Columns[j].ColumnName,
+                                    Value = dataTable.Rows[i][j].ToString(),
+                                    ExcelDataId = exceldataId
                                 };
-
-                                excelFieldDatas.Add(excelFieldData);
-
-                                //
+                                _importingUnitOfWork.ExcelFieldDatas.Add(excelFieldData);
+                                _importingUnitOfWork.Save();
                             }
-                            _importingUnitOfWork.ExcelDatas.Add(new ExcelData()
-                            {
-                                 
-                                GroupId = file.GroupId,
-                                ExcelFieldData= excelFieldDatas
-                                
-
-                            });
                         }
                     }
-
                     file.Status = "Completed";
                     File.Delete(filePath);
                 }
-               
-
             }
-
             _importingUnitOfWork.Save();
         }
-
     }
 
 }

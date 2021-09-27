@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataImporter.Web.Data.Migrations
 {
-    public partial class AddAllData : Migration
+    public partial class ApplicationAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -153,6 +153,11 @@ namespace DataImporter.Web.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { new Guid("b4381958-19c5-47d9-ae74-b81c845cf9cf"), "e75e5bf1-346f-464e-9b7c-a57761d0cb68", "Importer", "IMPORTER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

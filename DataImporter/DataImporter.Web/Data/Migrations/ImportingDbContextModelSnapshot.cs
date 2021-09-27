@@ -29,6 +29,9 @@ namespace DataImporter.Web.Data.Migrations
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("ImportDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.HasIndex("GroupId");
