@@ -7,5 +7,6 @@ namespace DataImporter.Importing.Services
     {
         
         void FileUploadToDb(ExcelFile file);
+        void GetExcelDatabase(int groupId);
     }
 }

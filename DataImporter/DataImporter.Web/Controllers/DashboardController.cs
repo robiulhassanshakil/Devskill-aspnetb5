@@ -10,6 +10,7 @@ using DataImporter.Importing.BusinessObjects;
 using DataImporter.Membership.Entities;
 using DataImporter.Web.Models.Commons;
 using DataImporter.Web.Models.Contact;
+using DataImporter.Web.Models.ExcelData;
 using DataImporter.Web.Models.Files;
 using DataImporter.Web.Models.GroupModel;
 using ExcelDataReader;
@@ -135,6 +136,21 @@ namespace DataImporter.Web.Controllers
             return RedirectToAction("UploadContacts","Dashboard");
         }
 
+        public IActionResult ViewContacts()
+        {
+            var model = new AllGroupForContacts();
+            var applicationuserId = Guid.Parse(_userManager.GetUserId(HttpContext.User));
+            model.LoadAllGroup(applicationuserId);
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult ViewContacts(int groupId)
+        {
+            groupId = 1;
+            var model = new ExcelFromDatabase();
+            model.GetExcelDatabase(1);
+            return View();
+        }
 
 
         public IActionResult SendMailContacts()
