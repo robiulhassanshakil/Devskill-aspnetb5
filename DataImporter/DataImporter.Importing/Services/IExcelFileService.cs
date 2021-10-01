@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using DataImporter.Importing.BusinessObjects;
 using Microsoft.AspNetCore.Http;
 
@@ -11,5 +13,8 @@ namespace DataImporter.Importing.Services
         (DataTable dataTable,int ExceldataId) GetExcelDatabase(int groupId);
         string GetExcelFileName(int groupId);
         void ExportFileHistoryCreate(ExportFileHistory exportFileHistory);
+        (IList<ExportFileHistory> records, int total, int totalDisplay) GetExcelFileHistory(int pageIndex, int pageSize, string searchText, string sortText, Guid applicationUser);
+        int GetGroupId(int excelLastId);
+        DataTable GetExcelDataForHistoryDownload(int groupId, int excelLastDataId);
     }
 }

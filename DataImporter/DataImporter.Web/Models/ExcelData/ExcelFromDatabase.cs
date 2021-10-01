@@ -78,5 +78,28 @@ namespace DataImporter.Web.Models.ExcelData
             };
             _excelFileService.ExportFileHistoryCreate(exportFileHistory);
         }
+
+        public int GetGroupId(int excelLastId)
+        {
+           var groupid= _excelFileService.GetGroupId(excelLastId);
+
+           return groupid;
+        }
+
+        internal byte[] GetExcelDatabaseForHistory(int groupId, int excelLastDataId)
+        {
+            var dataTableAndExcelData = _excelFileService.GetExcelDataForHistoryDownload(groupId, excelLastDataId);
+            ExcelFileName = _excelFileService.GetExcelFileName(groupId);
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            byte[] fileContents;
+            using (var package = new ExcelPackage())
+            {
+                var workSheet = package.Workbook.Worksheets.Add(ExcelFileName);
+                workSheet.Cells["A1"].LoadFromDataTable(dataTableAndExcelData, true);
+                fileContents = package.GetAsByteArray();
+            }
+            return fileContents;
+        }
     }
 }

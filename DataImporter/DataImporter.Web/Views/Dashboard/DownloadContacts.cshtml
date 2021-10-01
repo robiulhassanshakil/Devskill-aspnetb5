@@ -41,14 +41,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>Java</td>
-                                    <td>xidim@gmail.com</td>
-                                    <td>12-07-21</td>
-                                    <td>
-                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Download </a>
-                                    </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -72,16 +64,16 @@
                         "orderable": false,
                         "targets": 3,
                         "render": function (data, type, row) {
-                            return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='GroupEdit/${data}'" value='${data}'>
+                            return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='Download/${data}'" value='${data}'>
                                                     <i class="feather icon-edit">
                                                     </i>
-                                                    &nbsp;Edit
+                                                    &nbsp;Download
                                                 </button>`;
                         }
                     }
                 ]
             });
-            
+           
 
         });
     </script>

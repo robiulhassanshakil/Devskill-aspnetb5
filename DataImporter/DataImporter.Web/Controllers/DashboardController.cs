@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataImporter.Importing.BusinessObjects;
+using DataImporter.Importing.Exceptions;
 using DataImporter.Membership.Entities;
 using DataImporter.Web.Models.Commons;
 using DataImporter.Web.Models.Contact;
@@ -188,11 +189,32 @@ namespace DataImporter.Web.Controllers
         public JsonResult DownloadHistoryData()
         {
             var dataTableModel = new DataTablesAjaxRequestModel(Request);
-            var model = new ContactListModel();
+            var model = new ExportHistoryListModel();
             var applicationuserId = Guid.Parse(_userManager.GetUserId(HttpContext.User));
-            var data = model.LoadData(dataTableModel, applicationuserId);
+            var data = model.LoadDataExcelHistory(dataTableModel, applicationuserId);
             return Json(data);
 
+        }
+        public IActionResult Download(int id)  
+        {
+            if (id == 0)
+            {
+                throw new InvalidParameterException("Download cant be found");
+            }
+            var model = new ExcelFromDatabase();
+            var groupId = model.GetGroupId(id);
+
+            var fileContents = model.GetExcelDatabaseForHistory(groupId,id);
+            var excelFileName = model.ExcelFileName;
+            string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            string fileName = $"{excelFileName}.xlsx";
+            if (fileContents == null || fileContents.Length == 0)
+            {
+                return NotFound();
+            }
+            
+            
+            return File(fileContents, contentType, fileName);
         }
 
     }

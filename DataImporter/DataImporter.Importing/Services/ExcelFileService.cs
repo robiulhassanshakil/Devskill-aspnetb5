@@ -123,5 +123,68 @@ namespace DataImporter.Importing.Services
             });
             _importingUnitOfWork.Save();
         }
+
+        public (IList<ExportFileHistory> records, int total, int totalDisplay) GetExcelFileHistory(int pageIndex, int pageSize, string searchText, string sortText, Guid applicationUser)
+        {
+            var groupData = _importingUnitOfWork.Groups.GetDynamic(
+                string.IsNullOrWhiteSpace(searchText) ? x => x.ApplicationUserId == applicationUser : x => x.Name.Contains(searchText) && x.ApplicationUserId == applicationUser,
+                null, "ExportFileHistory", pageIndex, pageSize, true);
+
+            var exportFilesHistory = new List<ExportFileHistory>();
+
+            foreach (var gp in groupData.data)
+            {
+                foreach (var exportFileHistory in gp.ExportFileHistory)
+                {
+                    var exportHistory = new ExportFileHistory()
+                    {
+                         GroupName = gp.Name,
+                         Email= exportFileHistory.Email,
+                         ExportDate = exportFileHistory.ExportDate,
+                         ExportLastExcelFieldId = exportFileHistory.ExportLastExcelFieldId
+                    };
+                    exportFilesHistory.Add(exportHistory);
+                }
+            }
+
+            return (exportFilesHistory, groupData.total, groupData.totalDisplay);
+        }
+
+        public int GetGroupId(int excelLastId)
+        {
+            var groupid = _importingUnitOfWork.ExcelDatas.GetById(excelLastId).GroupId;
+            return groupid;
+        }
+
+        public DataTable GetExcelDataForHistoryDownload(int groupId, int excelLastDataId)
+        {
+            var allDatas = _importingUnitOfWork.ExcelDatas.Get(x => x.GroupId == groupId  , null, "ExcelFieldData", true);
+
+            var datafilter = (from excelData in allDatas
+                where excelData.Id <= excelLastDataId
+                select excelData).ToList();
+
+
+            var allExcelFieldData = new List<ExcelFieldData>();
+            var coloumCounter = 0;
+            foreach (var allData in datafilter)
+            {
+                coloumCounter = 0;
+                foreach (var excelFieldData in allData.ExcelFieldData)
+                {
+                    coloumCounter++;
+                    var oneExcelFielData = new ExcelFieldData()
+                    {
+                        ExcelDataId = excelFieldData.ExcelDataId,
+                        Name = excelFieldData.Name,
+                        Value = excelFieldData.Value
+                    };
+                    allExcelFieldData.Add(oneExcelFielData);
+                }
+            }
+
+            var dataTable = ConvertExcelDataFieldToDataTable(allExcelFieldData, coloumCounter);
+            return dataTable;
+        }
     }
 }
