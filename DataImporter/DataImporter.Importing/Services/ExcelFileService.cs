@@ -39,9 +39,12 @@ namespace DataImporter.Importing.Services
             _importingUnitOfWork.Save();
         }
 
-        public void GetExcelDatabase(int groupId)
+        public (DataTable dataTable, int ExceldataId) GetExcelDatabase(int groupId)
         {
             var allDatas = _importingUnitOfWork.ExcelDatas.Get(x => x.GroupId == groupId, null, "ExcelFieldData", true);
+
+            int LastExcelDataId = allDatas.LastOrDefault().Id;
+                
 
             var allExcelFieldData = new List<ExcelFieldData>();
             var coloumCounter = 0;
@@ -60,13 +63,12 @@ namespace DataImporter.Importing.Services
                     allExcelFieldData.Add(oneExcelFielData);
                 }
             }
+            
+            var dataTable=ConvertExcelDataFieldToDataTable(allExcelFieldData, coloumCounter);
 
-
-
-            convertExcelDataFieldToDataTable(allExcelFieldData, coloumCounter);
-
+            return (dataTable, LastExcelDataId);
         }
-        public static DataTable convertExcelDataFieldToDataTable(List<ExcelFieldData> allExcelFieldData,int coloumCounter)
+        public DataTable ConvertExcelDataFieldToDataTable(List<ExcelFieldData> allExcelFieldData,int coloumCounter)
         {
             var rows = allExcelFieldData.Count / coloumCounter;
             DataTable dataTable = new DataTable();
@@ -88,7 +90,6 @@ namespace DataImporter.Importing.Services
             {
                 allvalueList.Add(excelFieldData.Value);
             }
-
             var z = 0;
             for (int i = 0; i < rows; i++)
             {
@@ -101,36 +102,26 @@ namespace DataImporter.Importing.Services
 
                 dataTable.Rows.Add(dataRow);
             }
-           
-           /* foreach (DataColumn dataTableColumn in dataTable.Columns)
-            {
-                
-                   DataRow dataRow = dataTable.NewRow();
-
-                foreach (var excelFieldData in allExcelFieldData)
-                {
-                    dataRow[dataTableColumn] = excelFieldData.Value;
-                }
-                    
-                
-            }*/
-            /*foreach (string row in data.Split('$'))
-            {
-                DataRow dataRow = dataTable.NewRow();
-                foreach (string cell in row.Split('|'))
-                {
-                    string[] keyValue = cell.Split('~');
-                    if (!columnsAdded)
-                    {
-                        DataColumn dataColumn = new DataColumn(keyValue[0]);
-                        dataTable.Columns.Add(dataColumn);
-                    }
-                    dataRow[keyValue[0]] = keyValue[1];
-                }
-                columnsAdded = true;
-                dataTable.Rows.Add(dataRow);
-            }*/
             return dataTable;
+        }
+
+        public string GetExcelFileName(int groupId)
+        {
+            var excelFileName = _importingUnitOfWork.Groups.GetById(groupId).Name;
+
+            return excelFileName;
+        }
+
+        public void ExportFileHistoryCreate(ExportFileHistory exportFileHistory)
+        {
+            _importingUnitOfWork.ExportFileHistories.Add(new Entities.ExportFileHistory()
+            {
+                GroupId = exportFileHistory.GroupId,
+                ExportDate = exportFileHistory.ExportDate,
+                Email = exportFileHistory.Email,
+                ExportLastExcelFieldId = exportFileHistory.ExportLastExcelFieldId
+            });
+            _importingUnitOfWork.Save();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using DataImporter.Importing.BusinessObjects;
+﻿using System.Data;
+using DataImporter.Importing.BusinessObjects;
 using Microsoft.AspNetCore.Http;
 
 namespace DataImporter.Importing.Services
@@ -7,6 +8,8 @@ namespace DataImporter.Importing.Services
     {
         
         void FileUploadToDb(ExcelFile file);
-        void GetExcelDatabase(int groupId);
+        (DataTable dataTable,int ExceldataId) GetExcelDatabase(int groupId);
+        string GetExcelFileName(int groupId);
+        void ExportFileHistoryCreate(ExportFileHistory exportFileHistory);
     }
 }

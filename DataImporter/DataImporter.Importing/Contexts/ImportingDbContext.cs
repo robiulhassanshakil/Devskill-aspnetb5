@@ -46,7 +46,10 @@ namespace DataImporter.Importing.Contexts
             modelBuilder.Entity<Group>()
                 .HasMany(g => g.ExcelFile)
                 .WithOne(c => c.Group);
-                
+
+            modelBuilder.Entity<Group>()
+                .HasMany(g => g.ExportFileHistory)
+                .WithOne(c => c.Group);
 
             modelBuilder.Entity<Group>()
                 .HasMany(g => g.ExcelData)
@@ -63,5 +66,7 @@ namespace DataImporter.Importing.Contexts
         public DbSet<ExcelFieldData> ExcelFieldData { get; set; }
         public DbSet<ExcelData> ExcelData { get; set; }
         public DbSet<ExcelFile> ExcelFile { get; set; }
+
+        public DbSet<ExportFileHistory> ExportFileHistory { get; set; }
     }
 }

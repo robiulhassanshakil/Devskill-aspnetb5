@@ -8,6 +8,7 @@ using AutoMapper;
 using DataImporter.Importing.BusinessObjects;
 using DataImporter.Importing.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DataImporter.Web.Models.GroupModel
 {
@@ -19,6 +20,7 @@ namespace DataImporter.Web.Models.GroupModel
 
         public List<Group> Groups { get; set; }
         public int GroupId { get; set; }
+        
         public AllGroupForContacts()
         {
             _groupService = Startup.AutofacContainer.Resolve<IGroupService>();
@@ -39,6 +41,16 @@ namespace DataImporter.Web.Models.GroupModel
             Groups.Insert(0,new Group() { Id = 0, Name = "--Select Group Name--" });
 
             return Groups;
+        }
+
+        public string Groupname(int groupId)
+        {
+            var name = (from gp in Groups
+                where gp.Id == groupId
+                select gp.Name);
+
+            return name.ToString();
+
         }
     }
 }

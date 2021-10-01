@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using OfficeOpenXml;
 
 namespace DataImporter.Web.Controllers
 {
@@ -49,6 +50,8 @@ namespace DataImporter.Web.Controllers
             var data = model.GetGroupData(DataTableModel, applicationuser);
             return Json(data);
         }
+
+
         public IActionResult CreateGroup()
         {
            
@@ -143,15 +146,34 @@ namespace DataImporter.Web.Controllers
             model.LoadAllGroup(applicationuserId);
             return View(model);
         }
-        [HttpPost]
-        public IActionResult ViewContacts(int groupId)
-        {
-            groupId = 1;
-            var model = new ExcelFromDatabase();
-            model.GetExcelDatabase(1);
-            return View();
-        }
 
+        [HttpPost]
+        public string ViewContactsForExcelSend(int GroupId)
+        {
+            
+            var model = new ExcelFromDatabase();
+            var jsondata=model.GetExcelDatabaseToJson(GroupId);
+
+            return jsondata;
+        }
+        [HttpPost]
+        public IActionResult ExcelFileDownload(AllGroupForContacts allGroupForContacts)
+        {
+            
+            var model = new ExcelFromDatabase();
+            var groupId = allGroupForContacts.GroupId;
+            var fileContents = model.GetExcelDatabase(groupId);
+            var excelFileName = model.ExcelFileName;
+            string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            string fileName = $"{excelFileName}.xlsx";
+            if (fileContents==null||fileContents.Length==0)
+            {
+                return NotFound();
+            }
+            var lastExcelFile = model.ExcelLastId;
+            model.CreateExportHistory(groupId, lastExcelFile);
+            return File(fileContents, contentType, fileName);
+        }
 
         public IActionResult SendMailContacts()
         {
@@ -162,8 +184,16 @@ namespace DataImporter.Web.Controllers
             return View();
         }
 
-       
 
+        public JsonResult DownloadHistoryData()
+        {
+            var dataTableModel = new DataTablesAjaxRequestModel(Request);
+            var model = new ContactListModel();
+            var applicationuserId = Guid.Parse(_userManager.GetUserId(HttpContext.User));
+            var data = model.LoadData(dataTableModel, applicationuserId);
+            return Json(data);
+
+        }
 
     }
 }

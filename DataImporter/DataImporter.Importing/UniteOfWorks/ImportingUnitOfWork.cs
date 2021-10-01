@@ -20,11 +20,13 @@ namespace DataImporter.Importing.UniteOfWorks
 
         public IExcelDataRepository ExcelDatas { get; private set; }
 
+        public IExportFileHistoryRepository ExportFileHistories { get; private set; }
         public ImportingUnitOfWork(IImportingDbContext context,
            IGroupRepository groups,
            IExcelFileRepository excelFiles,
            IExcelFieldDataRepository excelFieldDatas,
-           IExcelDataRepository excelDatas
+           IExcelDataRepository excelDatas,
+           IExportFileHistoryRepository exportFileHistories
 
        ) : base((DbContext)context)
         {
@@ -32,6 +34,7 @@ namespace DataImporter.Importing.UniteOfWorks
             ExcelFiles = excelFiles;
             ExcelDatas = excelDatas;
             ExcelFieldDatas = excelFieldDatas;
+            ExportFileHistories = exportFileHistories;
         }
     }
 }

@@ -31,7 +31,7 @@
                     <div class="card-body">
                         
                         <div class="table-responsive">
-                            <table id="report-table" class="table table-bordered table-striped mb-0">
+                            <table id="DownloadHistory" class="table table-bordered table-striped mb-0">
                                 <thead>
                                     <tr>
                                         <th>Group Name</th>
@@ -41,59 +41,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Dev skill</td>
-                                        <td>doctor@example.com</td>
-                                        <td>12-07-21</td>
-                                        <td>
+                                <tr>
+                                    <td>Java</td>
+                                    <td>xidim@gmail.com</td>
+                                    <td>12-07-21</td>
+                                    <td>
                                             <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Download </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-
-                                        <td>C#</td>
-                                        <td>xidim@gmail.com</td>
-                                        <td>12-07-21</td>
-                                        <td>
-                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Download </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-
-                                        <td>Asp.net</td>
-                                        <td>doctor@example.com</td>
-                                        <td>12-07-21</td>
-                                        <td>
-                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Download </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-
-                                        <td>Php</td>
-                                        <td>xidim@gmail.com</td>
-                                        <td>12-07-21</td>
-                                        <td>
-                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Download </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-
-                                        <td>Python</td>
-                                        <td>doctor@example.com</td>
-                                        <td>12-07-21</td>
-                                        <td>
-                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Download </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-
-                                        <td>Java</td>
-                                        <td>xidim@gmail.com</td>
-                                        <td>12-07-21</td>
-                                        <td>
-                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Download </a>
-
-                                        </td>
+                                    </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -108,8 +62,27 @@
 </div>
 @section Scripts{
     <script>
-        // DataTable start
-        $('#report-table').DataTable();
-        // DataTable end
+        $(function () {
+            $('#DownloadHistory').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": "DownloadHistoryData",
+                "columnDefs": [
+                    {
+                        "orderable": false,
+                        "targets": 3,
+                        "render": function (data, type, row) {
+                            return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='GroupEdit/${data}'" value='${data}'>
+                                                    <i class="feather icon-edit">
+                                                    </i>
+                                                    &nbsp;Edit
+                                                </button>`;
+                        }
+                    }
+                ]
+            });
+            
+
+        });
     </script>
 }

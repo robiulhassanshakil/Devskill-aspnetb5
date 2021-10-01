@@ -91,7 +91,8 @@ namespace DataImporter.Importing.Services
             var groupEntity = _importingUnitOfWork.Groups.GetById(group.Id);
             if (groupEntity != null)
             {
-                _mapper.Map(group, groupEntity);
+                groupEntity.Name = group.Name;
+                groupEntity.Id = group.Id;
                 _importingUnitOfWork.Save();
             }
             else

@@ -1,6 +1,5 @@
-﻿@model AllGroupForContacts;
-
-
+﻿@using DataImporter.Importing.BusinessObjects
+@model AllGroupForContacts;
 
 <section class="pcoded-main-container">
     <div class="pcoded-content">
@@ -31,19 +30,33 @@
                         <h5>File Upload</h5>
                     </div>
                     <div class="card-body">
-                        <form method="post" asp-controller="Dashboard" asp-action="ViewContacts" asp-antiforgery="true" enctype="multipart/form-data">
+                        <form method="post"  asp-action="ExcelFileDownload" asp-antiforgery="true" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <label class="input-group-text" for="">Groups</label>
                                     </div>
-                                    <select required  asp-for="GroupId" id="Gp" asp-items="@(new SelectList(Model.Groups , "Id","Name"))"></select>
+                                    <select required asp-for="GroupId" id="Gp" asp-items="@(new SelectList(Model.Groups , "Id","Name"))"></select>
                                 </div>
                             </div>
-                            <button type='submit' class="btn btn-primary">Search Now</button>
+                            <button type='submit' class="btn btn-primary">Search Group</button>
                         </form>
-
-
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row align-items-center m-l-0">
+                            <div class="col-sm-6">
+                            </div>
+                            <div class="col-sm-6 text-right">
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="ViewContactFromDatabase" class="table table-bordered table-striped mb-0">
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -53,15 +66,36 @@
 </section>
 @section Scripts
 {
-
-
     <script>
-
         $(document).ready(function () {
             $('#Gp').select2({
                 width: "18%", // need to override the changed default
             });
         });
+        $(function () {
+            $("#Gp").on('click',function(){
+                var getValue=$(this).val();
+
+                debugger;
+
+              
+                
+                "ajax": {
+                    type: "POST",
+                    url: "@Url.Action("ViewContactsForExcelSend")",
+                    data: { GroupId: getValue },
+                    dataType: "json",
+                    success: function(response) {
+                        console.log(response);
+                    }
+                   },
+
+
+                
+               
+            });
+        });
     </script>
+
 }
 

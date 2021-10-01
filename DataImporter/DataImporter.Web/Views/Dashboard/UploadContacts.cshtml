@@ -31,7 +31,7 @@
                     <h5>File Upload</h5>
                 </div>
                     <div class="card-body">
-                        <form method="post" asp-controller="Dashboard" asp-action="PreviewExcelFile" asp-antiforgery="true" enctype="multipart/form-data">
+                        <form method="post"  asp-action="PreviewExcelFile" asp-antiforgery="true" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -63,16 +63,18 @@
     
     
     <script>
-         $('#inputFile').on('change',function(){
-            //get the file name
-            var fileName = $(this).val();
-            //replace the "Choose a file" label
-            $(this).next('.custom-file-label').html(fileName);
-        })
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#Gp').select2({
-                width:"18%", // need to override the changed default
+                width: "18%", // need to override the changed default
             });
         });
+        $('#inputFile').on('change',
+            function() {
+                //get the file name
+                var fileName = $(this).val();
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(fileName);
+            });
+
     </script>
 }
