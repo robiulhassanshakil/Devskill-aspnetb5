@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,39 +12,70 @@ namespace DataImporter.Common.Utilities
 {
     public class EmailService : IEmailService
     {
-        private readonly string _host;
-        private readonly int _port;
-        private readonly string _username;
-        private readonly string _password;
-        private readonly bool _useSsl;
-        private readonly string _from;
+        private readonly EmailConfiguration _emailConfiguration;
 
-        public EmailService(string host,int port,string username,string password, bool useSsl,string from)
+
+        public EmailService(EmailConfiguration emailConfiguration)
         {
-            _host = host;
-            _port = port;
-            _username = username;
-            _password = password;
-            _useSsl = useSsl;
-            _from = from;
+            _emailConfiguration = emailConfiguration;
         }
-        public void SendEmail(string receiver, string subject, string body)
+
+        public void SendEmail(Message message)
         {
-            var message = new MimeMessage();
-            message.From.Add(new MailboxAddress(_from, _from));
-            message.To.Add(new MailboxAddress(receiver, receiver));
-            message.Subject = subject;
-            message.Body = new TextPart(TextFormat.Html)
+            var emailMessage = CreateEmailMessage(message);
+
+            Send(emailMessage);
+        }
+
+        private MimeMessage CreateEmailMessage(Message message)
+        {
+            var emailMessage = new MimeMessage();
+            emailMessage.From.Add(new MailboxAddress(_emailConfiguration.From));
+            emailMessage.To.AddRange(message.To);
+            emailMessage.Subject = message.Subject;
+            var bodyBuilder = new BodyBuilder()
             {
-                Text = body,
+                HtmlBody = message.Content
             };
+            if (message.FileContent!=null)
+            {
+                
 
-            using var client = new SmtpClient();
-            client.Timeout = 60000;
-            client.Connect(_host, _port,_useSsl);
-            client.Authenticate(_username, _password);
-            client.Send(message);
-            client.Disconnect(true);
+                    bodyBuilder.Attachments.Add(message.FileName, message.FileContent,
+                        ContentType.Parse(message.ContentType));
+                
+            }
+
+            emailMessage.Body = bodyBuilder.ToMessageBody();
+
+            return emailMessage;
         }
+
+        private void Send(MimeMessage mailMessage)
+        {
+            using (var client=new SmtpClient())
+            {
+                try
+                {
+                    client.Connect(_emailConfiguration.SmtpServer, _emailConfiguration.Port,
+                        _emailConfiguration.UseSsl);
+                    client.AuthenticationMechanisms.Remove("XOAUTH2");
+                    client.Authenticate(_emailConfiguration.UserName, _emailConfiguration.Password);
+
+                    client.Send(mailMessage);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+                finally
+                {
+                    client.Disconnect(true);
+                    client.Dispose();
+                }
+            }
+        }
+
     }
 }

@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataImporter.Common.Utilities;
 using DataImporter.Importing.BusinessObjects;
 using DataImporter.Importing.Exceptions;
 using DataImporter.Membership.Entities;
@@ -29,11 +30,14 @@ namespace DataImporter.Web.Controllers
     {
         private readonly ILogger<DashboardController> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IEmailService _emailService;
 
-        public DashboardController(ILogger<DashboardController> logger, UserManager<ApplicationUser> userManager)
+
+        public DashboardController(ILogger<DashboardController> logger, UserManager<ApplicationUser> userManager,IEmailService emailService)
         {
             _logger = logger;
             _userManager = userManager;
+            _emailService = emailService;
         }
         public IActionResult Index()
         {
@@ -176,10 +180,7 @@ namespace DataImporter.Web.Controllers
             return File(fileContents, contentType, fileName);
         }
 
-        public IActionResult SendMailContacts()
-        {
-            return View();
-        }
+        
         public IActionResult DownloadContacts()
         {
             return View();
@@ -214,6 +215,36 @@ namespace DataImporter.Web.Controllers
             }
             
             
+            return File(fileContents, contentType, fileName);
+        }
+
+        public IActionResult SendMailContacts(int id)
+        {
+            id = 119;
+            if (id == 0)
+            {
+                throw new InvalidParameterException("Download cant be found");
+            }
+            var model = new ExcelFromDatabase();
+            var groupId = model.GetGroupId(id);
+
+            var fileContents = model.GetExcelDatabaseForHistory(groupId, id);
+            var excelFileName = model.ExcelFileName;
+            string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            string fileName = $"{excelFileName}.xlsx";
+            if (fileContents == null || fileContents.Length == 0)
+            {
+                return NotFound();
+            }
+
+
+
+            
+
+            var message = new Message(new string[] { "kratosrobin467@gmail.com" }, "Attachment", $"Check the Attachments .",fileContents,fileName,contentType);
+            _emailService.SendEmail(message);
+            
+
             return File(fileContents, contentType, fileName);
         }
 

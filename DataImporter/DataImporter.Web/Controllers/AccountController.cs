@@ -111,9 +111,9 @@ namespace DataImporter.Web.Controllers
 
                 registerConfirmation.EmailConfirmationUrl = Url.ActionLink(
                     "ConfirmEmail","Account", new { userId = userId,token = token},Request.Scheme);
-
-                _emailService.SendEmail(registerConfirmation.Email, "Confirm your email",
-                    $"Please confirm your account by {HtmlEncoder.Default.Encode(registerConfirmation.EmailConfirmationUrl)}.");
+                var message = new Message(new string[] {$"{registerConfirmation.Email}"},"Confirm Account", $"Please confirm your account by {HtmlEncoder.Default.Encode(registerConfirmation.EmailConfirmationUrl)}.");
+                
+                _emailService.SendEmail(message);
 
 
             }

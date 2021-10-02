@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using DataImporter.Common;
+using DataImporter.Common.Utilities;
 using DataImporter.Importing;
 using DataImporter.Importing.Contexts;
 using DataImporter.Membership;
@@ -140,7 +141,12 @@ namespace DataImporter.Web
             });
 
 
-            /*services.Configure<SmtpConfiguration>(Configuration.GetSection("Smtp"));*/
+            var emailConfig = Configuration.GetSection("EmailConfiguration")
+                .Get<EmailConfiguration>();
+
+            services.AddSingleton(emailConfig);
+            
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddControllersWithViews();
