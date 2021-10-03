@@ -83,8 +83,44 @@ namespace DataImporter.Web.Models.Files
             }
         }
 
-        public void ExcelFileUpload()
+        public bool ExcelFileUpload()
         {
+            var ImportColumnCheck = _fileService.GetExcelDatabase(GroupId);
+
+            DataTable = ImportColumnCheck.dataTable;
+            DataTable dataTable = new DataTable();
+            using (var stream = new FileStream(ExcelFilePath, FileMode.Open, FileAccess.Read))
+            {
+                IExcelDataReader reader;
+
+                reader = ExcelDataReader.ExcelReaderFactory.CreateReader(stream);
+
+                //// reader.IsFirstRowAsColumnNames
+                var conf = new ExcelDataSetConfiguration
+                {
+                    ConfigureDataTable = _ => new ExcelDataTableConfiguration
+                    {
+                        UseHeaderRow = true
+                    }
+                };
+                var dataset = reader.AsDataSet(conf);
+
+                dataTable = dataset.Tables[0];
+            }
+
+            if (dataTable.Columns.Count != DataTable.Columns.Count)
+            {
+                return false;
+            }
+
+            for (int j = 0; j < DataTable.Columns.Count; j++)
+            {
+                if (!dataTable.Columns.Contains(DataTable.Columns[j].ColumnName))
+                {
+                    return false;
+                }
+            }
+            
             var excelFile = new ExcelFile()
             {
                 ExcelFileName = ExcelFileName,
@@ -94,6 +130,8 @@ namespace DataImporter.Web.Models.Files
                 GroupId = GroupId
             };
             _fileService.FileUploadToDb(excelFile);
+
+            return true;
         }
 
         public void ExcelFileCancel()

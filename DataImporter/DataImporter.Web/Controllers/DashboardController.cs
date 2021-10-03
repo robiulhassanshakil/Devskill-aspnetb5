@@ -19,6 +19,7 @@ using ExcelDataReader;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using OfficeOpenXml;
@@ -95,7 +96,6 @@ namespace DataImporter.Web.Controllers
             {
                 model.Update();
             }
-
             return RedirectToAction("ManageGroup");
         }
         public IActionResult GroupDelete(int id)
@@ -128,14 +128,18 @@ namespace DataImporter.Web.Controllers
         public IActionResult PreviewExcelFile(IFormFile fileSelect, AllGroupForContacts allGroupForContacts)
         {
             var model = new FileUploadModel();
-
-             model.PreviewExcelLoad(fileSelect, allGroupForContacts);
-
+            model.PreviewExcelLoad(fileSelect, allGroupForContacts);
              return View(model);
         }
         public IActionResult CreateExcelFileStatus(FileUploadModel fileUploadModel)
         {    
-            fileUploadModel.ExcelFileUpload();
+            var model=fileUploadModel.ExcelFileUpload();
+            if (model==false)
+            {
+                ViewBag.Error= "Group Contacts Column does not match.";
+
+                return View();
+            }
             return RedirectToAction("ViewContactsStatus","Dashboard");
         }
         public IActionResult ClearExcelFile(FileUploadModel fileUploadModel)
@@ -152,15 +156,24 @@ namespace DataImporter.Web.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public string ViewContactsForExcelSend(int GroupId)
+       [HttpPost]
+        public JsonResult ViewContactsForExcelSend(int id)
         {
-            
             var model = new ExcelFromDatabase();
-            var jsondata=model.GetExcelDatabaseToJson(GroupId);
-
-            return jsondata;
+            var jsondata=model.GetExcelDatabaseToJson(id);
+            return Json(jsondata);
         }
+
+        [HttpPost]
+        public List<string> ColumnName(int id)
+        {
+            var model = new ExcelFromDatabase();
+
+            var coloumName = model.GetDataTableColumnName(id);
+
+            return coloumName;
+        }
+
         [HttpPost]
         public IActionResult ExcelFileDownload(AllGroupForContacts allGroupForContacts)
         {
@@ -182,6 +195,11 @@ namespace DataImporter.Web.Controllers
 
         
         public IActionResult DownloadContacts()
+        {
+            return View();
+        }
+
+        public IActionResult SendMailContacts()
         {
             return View();
         }
@@ -214,13 +232,12 @@ namespace DataImporter.Web.Controllers
                 return NotFound();
             }
             
-            
             return File(fileContents, contentType, fileName);
         }
-
-        public IActionResult SendMailContacts(int id)
+        
+        public IActionResult SendMailContacts(AllGroupForContacts allGroupForContacts)
         {
-            id = 119;
+            var id = allGroupForContacts.GroupId;
             if (id == 0)
             {
                 throw new InvalidParameterException("Download cant be found");

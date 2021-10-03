@@ -1,4 +1,4 @@
-﻿@using DataImporter.Importing.BusinessObjects
+﻿
 @model AllGroupForContacts;
 
 <section class="pcoded-main-container">
@@ -30,7 +30,7 @@
                         <h5>File Upload</h5>
                     </div>
                     <div class="card-body">
-                        <form method="post"  asp-action="ExcelFileDownload" asp-antiforgery="true" enctype="multipart/form-data">
+                        <form >
                             <div class="row">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -39,9 +39,17 @@
                                     <select required asp-for="GroupId" id="Gp" asp-items="@(new SelectList(Model.Groups , "Id","Name"))"></select>
                                 </div>
                             </div>
-                            <button type='submit' class="btn btn-primary">Search Group</button>
+                            <button type='submit' class="btn btn-primary">Download Group</button>
+
+                        </form>
+                        
+                        <form asp-action="SendMailContacts" asp-controller="Dashboard" Method="post">
+
+                            <button type='submit' class="btn btn-danger">  SendEmail </button>
                         </form>
                     </div>
+                    
+                    
                 </div>
             </div>
             <div class="col-xl-12">
@@ -55,6 +63,7 @@
                         </div>
                         <div class="table-responsive">
                             <table id="ViewContactFromDatabase" class="table table-bordered table-striped mb-0">
+                                
                             </table>
                         </div>
                     </div>
@@ -67,32 +76,58 @@
 @section Scripts
 {
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#Gp').select2({
                 width: "18%", // need to override the changed default
             });
-        });
-        $(function () {
-            $("#Gp").on('click',function(){
-                var getValue=$(this).val();
+            var getValue;
+            $(function() {
+                $("#Gp").on('change',
+                    function() {
 
-                debugger;
+                        getValue = $(this).val();
 
-              
-                
-                "ajax": {
-                    type: "POST",
-                    url: "@Url.Action("ViewContactsForExcelSend")",
-                    data: { GroupId: getValue },
-                    dataType: "json",
-                    success: function(response) {
-                        console.log(response);
-                    }
-                   },
+                        if (getValue > 0) {
+
+                            var Coloums = [];
+                            if ($.fn.dataTable.isDataTable('#ViewContactFromDatabase')) {
+                                $('#ViewContactFromDatabase').DataTable().clear();
+                                $('#ViewContactFromDatabase').DataTable().destroy();
+                                $('#ViewContactFromDatabase').empty();
+                            };
+                            $.ajax({
+                                "type": 'POST',
+                                "url": "@Url.Action("ColumnName")",
+                                "data": { id: getValue },
+                                "success": function(d) {
+                                    for (i = 0; i < d.length; i++) {
+                                        Coloums[i] = { "title": d[i] };
+                                    }
+
+                                    $('#ViewContactFromDatabase').DataTable({
+                                        "columns": Coloums,
+                                        "processing": true,
+                                        "ajax": {
+                                            "type": "POST",
+                                            "url": "@Url.Action("ViewContactsForExcelSend")",
+                                            "data": { id: getValue }
+                                        }
+
+                                    }).done(function(data) {
+                                        $('#ViewContactFromDatabase').DataTable().ajax.reload();
+                                        
 
 
-                
-               
+                                    });
+
+
+                                }
+
+
+                            });
+
+                        }
+                    });
             });
         });
     </script>

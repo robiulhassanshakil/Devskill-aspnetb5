@@ -510,3 +510,68 @@ System.InvalidOperationException: StatusCode cannot be set because the response 
 2021-10-02 09:38:54.282 +06:00 [INF] User logged in.
 2021-10-02 09:42:31.657 +06:00 [INF] Application Starting up
 2021-10-02 09:42:38.634 +06:00 [INF] User logged in.
+2021-10-02 22:55:57.771 +06:00 [INF] Application Starting up
+2021-10-02 22:56:05.799 +06:00 [INF] User logged in.
+2021-10-02 23:20:50.871 +06:00 [INF] Application Starting up
+2021-10-02 23:20:57.885 +06:00 [INF] User logged in.
+2021-10-02 23:22:02.226 +06:00 [INF] Application Starting up
+2021-10-02 23:22:08.110 +06:00 [INF] User logged in.
+2021-10-02 23:25:00.319 +06:00 [INF] Application Starting up
+2021-10-02 23:30:49.475 +06:00 [INF] User logged in.
+2021-10-02 23:31:10.712 +06:00 [INF] Application Starting up
+2021-10-02 23:31:16.852 +06:00 [INF] User logged in.
+2021-10-02 23:34:35.028 +06:00 [INF] Application Starting up
+2021-10-02 23:34:41.126 +06:00 [INF] User logged in.
+2021-10-02 23:35:17.352 +06:00 [INF] Application Starting up
+2021-10-02 23:35:23.085 +06:00 [INF] User logged in.
+2021-10-02 23:35:55.799 +06:00 [INF] Application Starting up
+2021-10-02 23:36:01.707 +06:00 [INF] User logged in.
+2021-10-02 23:36:45.025 +06:00 [INF] Application Starting up
+2021-10-02 23:36:50.966 +06:00 [INF] User logged in.
+2021-10-02 23:41:03.148 +06:00 [INF] Application Starting up
+2021-10-02 23:41:11.470 +06:00 [INF] User logged in.
+2021-10-02 23:46:51.166 +06:00 [INF] Application Starting up
+2021-10-02 23:46:57.139 +06:00 [INF] User logged in.
+2021-10-02 23:49:27.266 +06:00 [INF] Application Starting up
+2021-10-02 23:49:33.004 +06:00 [INF] User logged in.
+2021-10-02 23:51:48.439 +06:00 [INF] Application Starting up
+2021-10-02 23:51:55.229 +06:00 [INF] User logged in.
+2021-10-02 23:53:25.589 +06:00 [INF] Application Starting up
+2021-10-02 23:53:31.851 +06:00 [INF] User logged in.
+2021-10-02 23:55:50.067 +06:00 [INF] Application Starting up
+2021-10-02 23:56:08.805 +06:00 [INF] User logged in.
+2021-10-02 23:57:12.479 +06:00 [INF] Application Starting up
+2021-10-02 23:57:43.107 +06:00 [INF] User logged in.
+2021-10-02 23:58:34.216 +06:00 [INF] Application Starting up
+2021-10-02 23:58:40.373 +06:00 [INF] User logged in.
+2021-10-02 23:58:46.501 +06:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Property 'JsonResult.SerializerSettings' must be an instance of type 'System.Text.Json.JsonSerializerOptions'.
+   at Microsoft.AspNetCore.Mvc.Infrastructure.SystemTextJsonResultExecutor.GetSerializerOptions(JsonResult result)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.SystemTextJsonResultExecutor.ExecuteAsync(ActionContext context, JsonResult result)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.MigrationsEndPointMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-10-02 23:58:46.904 +06:00 [ERR] An exception occurred while calculating the database error page content. Skipping display of the database error page.
+System.InvalidOperationException: StatusCode cannot be set because the response has already started.
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ThrowResponseAlreadyStartedException(String name)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Views.DatabaseErrorPage.ExecuteAsync()
+   at Microsoft.Extensions.RazorViews.BaseView.ExecuteAsync(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseDeveloperPageExceptionFilter.HandleExceptionAsync(ErrorContext errorContext, Func`2 next)
+2021-10-02 23:59:57.778 +06:00 [INF] Application Starting up

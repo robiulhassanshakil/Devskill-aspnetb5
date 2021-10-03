@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using Autofac;
 using AutoMapper;
 using DataImporter.Common.Utilities;
 using DataImporter.Importing.BusinessObjects;
 using DataImporter.Importing.Services;
+using DataImporter.Web.Models.Commons;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
@@ -42,7 +45,7 @@ namespace DataImporter.Web.Models.ExcelData
            var dataTableAndExcelData = _excelFileService.GetExcelDatabase(groupId);
 
            DataTable = dataTableAndExcelData.dataTable;
-           ExcelLastId = dataTableAndExcelData.ExceldataId;
+           ExcelLastId = dataTableAndExcelData.excelDataLastId;
 
             ExcelFileName = _excelFileService.GetExcelFileName(groupId);
            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -57,14 +60,42 @@ namespace DataImporter.Web.Models.ExcelData
             return fileContents;
         }
 
-        internal string GetExcelDatabaseToJson(int groupId)
+        internal object GetExcelDatabaseToJson(int groupId)
         {
             var dataTableAndExcelData = _excelFileService.GetExcelDatabase(groupId);
             DataTable = dataTableAndExcelData.dataTable;
-            ExcelLastId = dataTableAndExcelData.ExceldataId;
-            string jsonString = string.Empty;
-            jsonString = JsonConvert.SerializeObject(DataTable, Formatting.Indented);
-            return jsonString;
+           
+
+           var list= ConvertTable(DataTable);
+           return new
+           {
+               
+               data=list
+           };
+        }
+
+        internal List<string> GetDataTableColumnName(int groupId)
+        {
+            var dataTableAndExcelData = _excelFileService.GetExcelDatabase(groupId);
+            DataTable = dataTableAndExcelData.dataTable;
+
+            List<string> list = new List<string>();
+
+            foreach (DataColumn column  in DataTable.Columns)
+            {
+                list.Add($"{column.Caption}");
+            }
+
+            return list;
+        }
+
+        public List<string[]> ConvertTable(DataTable table)
+        {
+            return table.Rows.Cast<DataRow>()
+                .Select(row => table.Columns.Cast<DataColumn>()
+                    .Select(col => Convert.ToString(row[col]))
+                    .ToArray())
+                .ToList();
         }
 
         internal void CreateExportHistory(int groupId, int lastExcelFieldId)
