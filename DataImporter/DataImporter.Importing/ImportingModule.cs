@@ -53,6 +53,8 @@ namespace DataImporter.Importing
                 .InstancePerLifetimeScope();
             builder.RegisterType<ExportFileHistoryRepository>().As<IExportFileHistoryRepository>()
                 .InstancePerLifetimeScope();
+            builder.RegisterType<ImportingDataModelService>().As<IImportingDataModelService>()
+                .InstancePerLifetimeScope();
             base.Load(builder);
         }
     }
