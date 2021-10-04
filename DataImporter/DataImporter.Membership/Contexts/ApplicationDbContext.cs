@@ -24,7 +24,6 @@ namespace DataImporter.Membership.Contexts
             _connectionString = connectionString;
             _migrationAssemblyName = migrationAssemblyName;
         }
-
         protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
         {
             if (!dbContextOptionsBuilder.IsConfigured)
@@ -36,7 +35,6 @@ namespace DataImporter.Membership.Contexts
 
             base.OnConfiguring(dbContextOptionsBuilder);
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Role>()

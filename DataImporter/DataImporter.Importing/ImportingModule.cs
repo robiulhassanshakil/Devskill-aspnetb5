@@ -15,13 +15,11 @@ namespace DataImporter.Importing
     {
         private readonly string _connectionString;
         private readonly string _migrationAssemblyName;
-
         public ImportingModule(string connectionString, string migrationAssemblyName)
         {
             _connectionString = connectionString;
             _migrationAssemblyName = migrationAssemblyName;
         }
-
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<ImportingDbContext>().AsSelf()
@@ -46,7 +44,6 @@ namespace DataImporter.Importing
                 .InstancePerLifetimeScope();
             builder.RegisterType<ExcelFieldDataRepository>().As<IExcelFieldDataRepository>()
                 .InstancePerLifetimeScope();
-
             builder.RegisterType<ExcelFileService>().As<IExcelFileService>()
                 .InstancePerLifetimeScope();
             builder.RegisterType<ContactService>().As<IContactService>()

@@ -13,8 +13,6 @@ namespace DataImporter.Common.Utilities
     public class EmailService : IEmailService
     {
         private readonly EmailConfiguration _emailConfiguration;
-
-
         public EmailService(EmailConfiguration emailConfiguration)
         {
             _emailConfiguration = emailConfiguration;
@@ -37,13 +35,10 @@ namespace DataImporter.Common.Utilities
             {
                 HtmlBody = message.Content
             };
-            if (message.FileContent!=null)
+            if (message.FileContent != null)
             {
-                
-
-                    bodyBuilder.Attachments.Add(message.FileName, message.FileContent,
+                bodyBuilder.Attachments.Add(message.FileName, message.FileContent,
                         ContentType.Parse(message.ContentType));
-                
             }
 
             emailMessage.Body = bodyBuilder.ToMessageBody();
@@ -53,7 +48,7 @@ namespace DataImporter.Common.Utilities
 
         private void Send(MimeMessage mailMessage)
         {
-            using (var client=new SmtpClient())
+            using (var client = new SmtpClient())
             {
                 try
                 {

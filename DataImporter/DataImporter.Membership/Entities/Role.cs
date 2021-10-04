@@ -9,7 +9,6 @@ namespace DataImporter.Membership.Entities
             : base()
         {
         }
-
         public Role(string roleName)
             : base(roleName)
         {

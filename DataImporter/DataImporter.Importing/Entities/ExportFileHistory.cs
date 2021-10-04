@@ -14,7 +14,7 @@ namespace DataImporter.Importing.Entities
         public int GroupId { get; set; }
         public Group Group { get; set; }
         public string Email { get; set; }
-        public DateTime ExportDate {get; set;}
-        public int ExportLastExcelFieldId {get; set;}
+        public DateTime ExportDate { get; set; }
+        public int ExportLastExcelFieldId { get; set; }
     }
 }

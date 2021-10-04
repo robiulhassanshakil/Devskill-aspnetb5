@@ -29,7 +29,6 @@ namespace DataImporter.Web.Models
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
         }
-
         internal void loadData(Guid applicationUserId)
         {
             GroupNumber = _groupService.GetAllGroup(applicationUserId).Count;

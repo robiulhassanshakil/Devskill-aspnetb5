@@ -11,5 +11,5 @@ namespace DataImporter.Importing.Exceptions
         public InvalidParameterException(string message)
             : base(message) { }
     }
-    
+
 }

@@ -8,6 +8,6 @@ namespace DataImporter.Membership.Entities
     public class UserRole
         : IdentityUserRole<Guid>
     {
-       
+
     }
 }

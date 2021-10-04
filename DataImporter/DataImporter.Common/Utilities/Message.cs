@@ -14,9 +14,8 @@ namespace DataImporter.Common.Utilities
         public List<MailboxAddress> To { get; set; }
         public string Subject { get; set; }
         public string Content { get; set; }
-        public byte[]  FileContent { get; set; }
+        public byte[] FileContent { get; set; }
         public string FileName { get; set; }
-
         public string ContentType { get; set; }
 
         public Message(IEnumerable<string> to, string subject, string content)
@@ -26,11 +25,10 @@ namespace DataImporter.Common.Utilities
             Subject = subject;
             Content = content;
         }
-
-        public Message(IEnumerable<string> to,string subject,string content, byte[] fileContent,string fileName,string contentType)
+        public Message(IEnumerable<string> to, string subject, string content, byte[] fileContent, string fileName, string contentType)
         {
             To = new List<MailboxAddress>();
-            To.AddRange(to.Select(x=>new MailboxAddress(x)));
+            To.AddRange(to.Select(x => new MailboxAddress(x)));
             Subject = subject;
             Content = content;
             FileContent = fileContent;

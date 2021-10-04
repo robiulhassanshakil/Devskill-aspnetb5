@@ -16,8 +16,6 @@ namespace DataImporter.Web.Models.Contact
         private readonly IContactService _contactService;
         private readonly IMapper _mapper;
         private readonly IDateTimeUtility _dateTime;
-
-
         public ContactListModel()
         {
             _contactService = Startup.AutofacContainer.Resolve<IContactService>();
@@ -27,20 +25,17 @@ namespace DataImporter.Web.Models.Contact
         }
         public ContactListModel(IContactService contactService, IMapper mapper, IDateTimeUtility dateTime)
         {
-            
             _contactService = contactService;
             _mapper = mapper;
             _dateTime = dateTime;
         }
-        internal object LoadData(DataTablesAjaxRequestModel dataTableModel,Guid applicationUserId)
+        internal object LoadData(DataTablesAjaxRequestModel dataTableModel, Guid applicationUserId)
         {
-            
             var data = _contactService.GetExcelfile(
                 dataTableModel.PageIndex,
                 dataTableModel.PageSize,
                 dataTableModel.SearchText,
-                dataTableModel.GetSortText(new string[] {"Name","ExcelFileName","DateTime","Status"}), applicationUserId);
-
+                dataTableModel.GetSortText(new string[] { "Name", "ExcelFileName", "DateTime", "Status" }), applicationUserId);
             return new
             {
                 recordsTotal = data.total,

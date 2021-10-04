@@ -19,7 +19,7 @@ namespace DataImporter.Importing.Services
         private readonly IMapper _mapper;
 
 
-        public GroupService(IImportingUnitOfWork importingUnitOfWork, IDateTimeUtility dateTimeUtility, IMapper mapper )
+        public GroupService(IImportingUnitOfWork importingUnitOfWork, IDateTimeUtility dateTimeUtility, IMapper mapper)
         {
             _importingUnitOfWork = importingUnitOfWork;
             _dateTimeUtility = dateTimeUtility;
@@ -30,7 +30,7 @@ namespace DataImporter.Importing.Services
             if (group == null)
                 throw new InvalidParameterException("Group was not provided");
 
-            if (IsNameAlreadyUsed(group.Name,group.ApplicationUserId))
+            if (IsNameAlreadyUsed(group.Name, group.ApplicationUserId))
                 throw new DuplicateTitleException("Group title already exists");
 
 
@@ -49,7 +49,7 @@ namespace DataImporter.Importing.Services
 
         public IList<Group> GetAllGroup(Guid applicationuser)
         {
-            var groupEntities=_importingUnitOfWork.Groups.Get(x=>x.ApplicationUserId== applicationuser,"");
+            var groupEntities = _importingUnitOfWork.Groups.Get(x => x.ApplicationUserId == applicationuser, "");
             var groups = new List<Group>();
 
             foreach (var gp in groupEntities)
@@ -66,8 +66,8 @@ namespace DataImporter.Importing.Services
                 _importingUnitOfWork.Groups.Get(x => x.ApplicationUserId == applicationUserId, "ExcelFile");
 
             var allImportData = (from gp in allGroupData
-                where gp.ExcelFile.Count > 0
-                select gp.ExcelFile).Count();
+                                 where gp.ExcelFile.Count > 0
+                                 select gp.ExcelFile).Count();
 
             return allImportData;
 
@@ -77,19 +77,19 @@ namespace DataImporter.Importing.Services
         {
             var group = _importingUnitOfWork.Groups.GetById(id);
             if (group == null) return null;
-            
+
             return _mapper.Map<Group>(group);
 
 
         }
 
-        public (IList<Group> records, int total, int totalDisplay) GetGroups(int pageIndex, int pageSize, string searchText, string sortText,Guid applicationUser)
+        public (IList<Group> records, int total, int totalDisplay) GetGroups(int pageIndex, int pageSize, string searchText, string sortText, Guid applicationUser)
         {
             var groupData = _importingUnitOfWork.Groups.GetDynamic(
-                string.IsNullOrWhiteSpace(searchText) ? x=>x.ApplicationUserId == applicationUser : x => x.Name.Contains(searchText)&& x.ApplicationUserId==applicationUser,
+                string.IsNullOrWhiteSpace(searchText) ? x => x.ApplicationUserId == applicationUser : x => x.Name.Contains(searchText) && x.ApplicationUserId == applicationUser,
                 sortText, string.Empty, pageIndex, pageSize);
             var resultData = (from gp in groupData.data
-                select (_mapper.Map<Group>(gp))).ToList();
+                              select (_mapper.Map<Group>(gp))).ToList();
 
             return (resultData, groupData.total, groupData.totalDisplay);
         }
@@ -114,7 +114,7 @@ namespace DataImporter.Importing.Services
             }
         }
 
-        private bool IsNameAlreadyUsed(string name,Guid userId) =>
-            _importingUnitOfWork.Groups.GetCount(x => x.Name == name && x.ApplicationUserId==userId) > 0;
+        private bool IsNameAlreadyUsed(string name, Guid userId) =>
+            _importingUnitOfWork.Groups.GetCount(x => x.Name == name && x.ApplicationUserId == userId) > 0;
     }
 }

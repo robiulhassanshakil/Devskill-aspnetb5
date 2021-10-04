@@ -21,42 +21,40 @@ namespace DataImporter.Web.Models.ExcelData
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IDateTimeUtility _dateTimeUtility;
-
-        public DataTable DataTable {get; set;}
-        public  string ExcelFileName {get; set;}
+        public DataTable DataTable { get; set; }
+        public string ExcelFileName { get; set; }
         public int ExcelLastId { get; set; }
         public ExcelFromDatabase()
         {
-            _excelFileService = Startup.AutofacContainer.Resolve<IExcelFileService>(); 
+            _excelFileService = Startup.AutofacContainer.Resolve<IExcelFileService>();
             _mapper = Startup.AutofacContainer.Resolve<IMapper>();
             _httpContextAccessor = Startup.AutofacContainer.Resolve<IHttpContextAccessor>();
             _dateTimeUtility = Startup.AutofacContainer.Resolve<IDateTimeUtility>();
         }
-        public ExcelFromDatabase(IExcelFileService excelFileService, IMapper mapper, IHttpContextAccessor httpContextAccessor,IDateTimeUtility dateTimeUtility)
+        public ExcelFromDatabase(IExcelFileService excelFileService, IMapper mapper, IHttpContextAccessor httpContextAccessor, IDateTimeUtility dateTimeUtility)
         {
             _excelFileService = excelFileService;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
             _dateTimeUtility = dateTimeUtility;
         }
-
         internal byte[] GetExcelDatabase(int groupId)
         {
-           var dataTableAndExcelData = _excelFileService.GetExcelDatabase(groupId);
+            var dataTableAndExcelData = _excelFileService.GetExcelDatabase(groupId);
 
-           DataTable = dataTableAndExcelData.dataTable;
-           ExcelLastId = dataTableAndExcelData.excelDataLastId;
+            DataTable = dataTableAndExcelData.dataTable;
+            ExcelLastId = dataTableAndExcelData.excelDataLastId;
 
             ExcelFileName = _excelFileService.GetExcelFileName(groupId);
-           ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
-           byte[] fileContents;
-           using (var package = new ExcelPackage())
-           {
-               var workSheet = package.Workbook.Worksheets.Add(ExcelFileName);
-               workSheet.Cells["A1"].LoadFromDataTable(DataTable, true);
-               fileContents = package.GetAsByteArray();
-           }
+            byte[] fileContents;
+            using (var package = new ExcelPackage())
+            {
+                var workSheet = package.Workbook.Worksheets.Add(ExcelFileName);
+                workSheet.Cells["A1"].LoadFromDataTable(DataTable, true);
+                fileContents = package.GetAsByteArray();
+            }
             return fileContents;
         }
 
@@ -64,28 +62,23 @@ namespace DataImporter.Web.Models.ExcelData
         {
             var dataTableAndExcelData = _excelFileService.GetExcelDatabase(groupId);
             DataTable = dataTableAndExcelData.dataTable;
-           
 
-           var list= ConvertTable(DataTable);
-           return new
-           {
-               
-               data=list
-           };
+            var list = ConvertTable(DataTable);
+            return new
+            {
+                data = list
+            };
         }
 
         internal List<string> GetDataTableColumnName(int groupId)
         {
             var dataTableAndExcelData = _excelFileService.GetExcelDatabase(groupId);
             DataTable = dataTableAndExcelData.dataTable;
-
             List<string> list = new List<string>();
-
-            foreach (DataColumn column  in DataTable.Columns)
+            foreach (DataColumn column in DataTable.Columns)
             {
                 list.Add($"{column.Caption}");
             }
-
             return list;
         }
 
@@ -98,7 +91,7 @@ namespace DataImporter.Web.Models.ExcelData
                 .ToList();
         }
 
-        internal void CreateExportHistory(int groupId, int lastExcelFieldId,string email)
+        internal void CreateExportHistory(int groupId, int lastExcelFieldId, string email)
         {
             var exportFileHistory = new ExportFileHistory()
             {
@@ -112,9 +105,9 @@ namespace DataImporter.Web.Models.ExcelData
 
         public int GetGroupId(int excelLastId)
         {
-           var groupid= _excelFileService.GetGroupId(excelLastId);
+            var groupid = _excelFileService.GetGroupId(excelLastId);
 
-           return groupid;
+            return groupid;
         }
 
         internal byte[] GetExcelDatabaseForHistory(int groupId, int excelLastDataId)

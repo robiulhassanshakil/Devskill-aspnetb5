@@ -9,6 +9,5 @@ namespace DataImporter.Common.Utilities
     public interface IEmailService
     {
         void SendEmail(Message message);
-
     }
 }

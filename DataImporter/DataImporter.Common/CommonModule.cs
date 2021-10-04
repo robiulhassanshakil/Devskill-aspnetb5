@@ -8,12 +8,11 @@ namespace DataImporter.Common
 
         protected override void Load(ContainerBuilder builder)
         {
-            
             builder.RegisterType<DateTimeUtility>().As<IDateTimeUtility>()
                 .InstancePerLifetimeScope();
             builder.RegisterType<EmailService>().As<IEmailService>()
                 .InstancePerLifetimeScope();
-                
+
             base.Load(builder);
         }
     }

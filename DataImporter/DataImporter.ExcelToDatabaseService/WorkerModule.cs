@@ -10,22 +10,21 @@ namespace DataImporter.ExcelToDatabaseService
 {
     public class WorkerModule : Module
     {
-        
-            private readonly string _connectionString;
-            private readonly string _migrationAssemblyName;
 
-            public WorkerModule(string connectionStringName, string migrationAssemblyName)
-            {
-                _connectionString = connectionStringName;
-                _migrationAssemblyName = migrationAssemblyName;
+        private readonly string _connectionString;
+        private readonly string _migrationAssemblyName;
 
-            }
+        public WorkerModule(string connectionStringName, string migrationAssemblyName)
+        {
+            _connectionString = connectionStringName;
+            _migrationAssemblyName = migrationAssemblyName;
 
-            protected override void Load(ContainerBuilder builder)
-            {
-                builder.RegisterType<ImportingDataModel>().As<IImportingDataModel>()
-                    .InstancePerLifetimeScope();
-                base.Load(builder);
-            }
         }
+        protected override void Load(ContainerBuilder builder)
+        {
+            builder.RegisterType<ImportingDataModel>().As<IImportingDataModel>()
+                .InstancePerLifetimeScope();
+            base.Load(builder);
+        }
+    }
 }

@@ -51,7 +51,6 @@ namespace DataImporter.Web
         public void ConfigureContainer(ContainerBuilder builder)
         {
             var connectionInfo = GetConnectionStringAndMigrationAssemblyName();
-
             builder.RegisterModule(new ImportingModule(connectionInfo.connectionString,
                 connectionInfo.migrationAssemblyName));
             builder.RegisterModule(new CommonModule());
@@ -66,12 +65,8 @@ namespace DataImporter.Web
         {
             var connectionInfo = GetConnectionStringAndMigrationAssemblyName();
 
-            
-
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionInfo.connectionString, m => m.MigrationsAssembly(connectionInfo.migrationAssemblyName)));
-
-            
 
             services.AddDbContext<ImportingDbContext>(options =>
                 options.UseSqlServer(connectionInfo.connectionString, b =>
@@ -84,7 +79,6 @@ namespace DataImporter.Web
                 .AddRoleManager<RoleManager>()
                 .AddSignInManager<SignInManager>()
                 .AddDefaultTokenProviders();
-                
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -111,7 +105,7 @@ namespace DataImporter.Web
             services.AddAuthentication()
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
                 {
-                    
+
                     options.LoginPath = new PathString("/Account/Login");
                     options.AccessDeniedPath = new PathString("/Account/Login");
                     options.LogoutPath = new PathString("/Account/Logout");
@@ -140,22 +134,17 @@ namespace DataImporter.Web
                 });
             });
 
-
             var emailConfig = Configuration.GetSection("EmailConfiguration")
                 .Get<EmailConfiguration>();
 
             services.AddSingleton(emailConfig);
-            
-
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
 
         }
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -192,7 +181,6 @@ namespace DataImporter.Web
                 endpoints.MapRazorPages();
             });
         }
-
         private (string connectionString, string migrationAssemblyName) GetConnectionStringAndMigrationAssemblyName()
         {
             var connectionStringName = "DefaultConnection";

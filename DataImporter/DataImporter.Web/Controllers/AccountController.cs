@@ -24,8 +24,6 @@ namespace DataImporter.Web.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<AccountController> _logger;
         private readonly IEmailService _emailService;
-       
-
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -39,7 +37,6 @@ namespace DataImporter.Web.Controllers
             _roleManager = roleManager;
             _logger = logger;
             _emailService = emailService;
-            
         }
 
         public async Task<IActionResult> Register(string returnUrl = null)
@@ -47,10 +44,8 @@ namespace DataImporter.Web.Controllers
             var model = new RegisterModel();
             model.ReturnUrl = returnUrl;
             model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
             return View(model);
         }
-
         [HttpPost]
         public async Task<IActionResult> Register(RegisterModel model)
         {
@@ -58,10 +53,10 @@ namespace DataImporter.Web.Controllers
             model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { FirstName = model.FirstName, LastName = model.LastName,UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { FirstName = model.FirstName, LastName = model.LastName, UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 await _userManager.AddToRoleAsync(user, "Importer");
-                await _userManager.AddClaimAsync(user,new Claim("view_permission", "true"));
+                await _userManager.AddClaimAsync(user, new Claim("view_permission", "true"));
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
@@ -102,7 +97,7 @@ namespace DataImporter.Web.Controllers
 
             registerConfirmation.Email = email;
             // Once you add a real email sender, you should remove this code that lets you confirm the account
-            
+
             if (!registerConfirmation.DisplayConfirmAccountLink)
             {
                 var userId = await _userManager.GetUserIdAsync(user);
@@ -110,12 +105,9 @@ namespace DataImporter.Web.Controllers
                 token = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
 
                 registerConfirmation.EmailConfirmationUrl = Url.ActionLink(
-                    "ConfirmEmail","Account", new { userId = userId,token = token},Request.Scheme);
-                var message = new Message(new string[] {$"{registerConfirmation.Email}"},"Confirm Account", $"Please confirm your account by {HtmlEncoder.Default.Encode(registerConfirmation.EmailConfirmationUrl)}.");
-                
+                    "ConfirmEmail", "Account", new { userId = userId, token = token }, Request.Scheme);
+                var message = new Message(new string[] { $"{registerConfirmation.Email}" }, "Confirm Account", $"Please confirm your account by {HtmlEncoder.Default.Encode(registerConfirmation.EmailConfirmationUrl)}.");
                 _emailService.SendEmail(message);
-
-
             }
 
             return View();
@@ -134,11 +126,10 @@ namespace DataImporter.Web.Controllers
             {
                 return NotFound($"Unable to load user with ID '{userId}'.");
             }
-
             token = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token));
             var result = await _userManager.ConfirmEmailAsync(user, token);
             confirmEmailModel.StatusMessage = result.Succeeded ? "Thank you for confirming your email." : "Error confirming your email.";
-            return RedirectToAction("Login","Account");
+            return RedirectToAction("Login", "Account");
         }
 
         public async Task<IActionResult> Login(string returnUrl = null)
@@ -165,13 +156,11 @@ namespace DataImporter.Web.Controllers
         {
             model.ReturnUrl ??= Url.Content("~/dashboard/index");
 
-            
-           
             model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             if (ModelState.IsValid)
             {
-                
+
                 if (!model.ReCaptchaPassed(Request.Form["foo"]))
                 {
                     ModelState.AddModelError(string.Empty, "You failed the ReCAPTCHA v3.");
@@ -196,12 +185,10 @@ namespace DataImporter.Web.Controllers
                 }
                 else
                 {
-
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return View();
                 }
             }
-
             // If we got this far, something failed, redisplay form
             return View(model);
         }
@@ -219,10 +206,6 @@ namespace DataImporter.Web.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
-
-       
-
     }
-
 }
 

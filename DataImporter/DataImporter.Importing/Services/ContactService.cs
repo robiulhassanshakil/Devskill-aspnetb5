@@ -28,7 +28,7 @@ namespace DataImporter.Importing.Services
         {
             var groupData = _importingUnitOfWork.Groups.GetDynamic(
                 string.IsNullOrWhiteSpace(searchText) ? x => x.ApplicationUserId == applicationUser : x => x.Name.Contains(searchText) && x.ApplicationUserId == applicationUser,
-                null, "ExcelFile", pageIndex, pageSize,true);
+                null, "ExcelFile", pageIndex, pageSize, true);
 
             var excelfiles = new List<ExcelFile>();
 
@@ -53,11 +53,11 @@ namespace DataImporter.Importing.Services
 
         public void LoadAllData(Guid applicationUserId)
         {
-            var groupWithExcelfiles = _importingUnitOfWork.Groups.Get(x => x.ApplicationUserId == applicationUserId,null, "ExcelFile",true);
+            var groupWithExcelfiles = _importingUnitOfWork.Groups.Get(x => x.ApplicationUserId == applicationUserId, null, "ExcelFile", true);
 
             var excelfile = (from g in groupWithExcelfiles
-                                    where g.ExcelFile.Count != 0
-                                     select g.ExcelFile).ToList();
+                             where g.ExcelFile.Count != 0
+                             select g.ExcelFile).ToList();
 
         }
     }

@@ -15,7 +15,5 @@ namespace DataImporter.Importing.Entities
         public List<ExcelFieldData> ExcelFieldData { get; set; }
         public int GroupId { get; set; }
         public Group Group { get; set; }
-        
-
     }
 }

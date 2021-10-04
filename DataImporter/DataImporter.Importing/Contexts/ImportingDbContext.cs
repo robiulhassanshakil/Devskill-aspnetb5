@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataImporter.Importing.Contexts
 {
-    public class ImportingDbContext : DbContext, IImportingDbContext 
+    public class ImportingDbContext : DbContext, IImportingDbContext
     {
         private readonly string _connectionString;
         private readonly string _migrationAssemblyName;
@@ -40,8 +40,6 @@ namespace DataImporter.Importing.Contexts
                 .ToTable("AspNetUsers", T => T.ExcludeFromMigrations())
                 .HasMany<Group>()
                 .WithOne(x => x.ApplicationUser);
-                
-
 
             modelBuilder.Entity<Group>()
                 .HasMany(g => g.ExcelFile)
@@ -66,7 +64,6 @@ namespace DataImporter.Importing.Contexts
         public DbSet<ExcelFieldData> ExcelFieldData { get; set; }
         public DbSet<ExcelData> ExcelData { get; set; }
         public DbSet<ExcelFile> ExcelFile { get; set; }
-
         public DbSet<ExportFileHistory> ExportFileHistory { get; set; }
     }
 }

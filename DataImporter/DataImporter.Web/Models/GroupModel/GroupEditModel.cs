@@ -18,10 +18,10 @@ namespace DataImporter.Web.Models.GroupModel
 
         public GroupEditModel()
         {
-            _groupService= Startup.AutofacContainer.Resolve<IGroupService>();
-            _mapper= Startup.AutofacContainer.Resolve<IMapper>();
+            _groupService = Startup.AutofacContainer.Resolve<IGroupService>();
+            _mapper = Startup.AutofacContainer.Resolve<IMapper>();
         }
-        public GroupEditModel(IGroupService groupService,IMapper mapper)
+        public GroupEditModel(IGroupService groupService, IMapper mapper)
         {
             _groupService = groupService;
             _mapper = mapper;
@@ -30,11 +30,9 @@ namespace DataImporter.Web.Models.GroupModel
         internal void LoadModelData(int id)
         {
             var group = _groupService.GetGroup(id);
-
             _mapper.Map(group, this);
 
         }
-
         internal void Update()
         {
             var group = _mapper.Map<Group>(this);

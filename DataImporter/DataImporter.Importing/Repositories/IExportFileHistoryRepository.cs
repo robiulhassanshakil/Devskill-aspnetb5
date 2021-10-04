@@ -8,7 +8,7 @@ using DataImporter.Importing.Entities;
 
 namespace DataImporter.Importing.Repositories
 {
-    public interface IExportFileHistoryRepository :IRepository<ExportFileHistory, int>
-    {   
+    public interface IExportFileHistoryRepository : IRepository<ExportFileHistory, int>
+    {
     }
 }

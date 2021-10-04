@@ -14,7 +14,6 @@ namespace DataImporter.Importing.Profiles
         public ImportingProfile()
         {
             CreateMap<EO.ExcelFile, BO.ExcelFile>().ReverseMap();
-            
             CreateMap<EO.Group, BO.Group>().ReverseMap();
         }
     }

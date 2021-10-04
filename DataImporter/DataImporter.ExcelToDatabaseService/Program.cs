@@ -19,7 +19,6 @@ namespace DataImporter.ExcelToDatabaseService
 {
     public class Program
     {
-        
         public static IConfiguration _configuration { get; set; }
         public static ILifetimeScope AutofacContainer { get; set; }
 
@@ -29,7 +28,6 @@ namespace DataImporter.ExcelToDatabaseService
                 .AddJsonFile("appsettings.json", true)
                 .AddEnvironmentVariables()
                 .Build();
-            
 
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
@@ -71,14 +69,14 @@ namespace DataImporter.ExcelToDatabaseService
                 .ConfigureServices((hostContext, services) =>
                 {
                     var connectionInfo = GetConnectionStringAndMigrationAssemblyName();
-                      
+
                     services.AddAutoMapper(connectionInfo.migrationAssembly);
                     services.AddDbContext<ImportingDbContext>(option =>
                         option.UseSqlServer(connectionInfo.connectionString, m => m.MigrationsAssembly(connectionInfo.migrationAssemblyName)));
                     services.AddHostedService<Worker>();
                 });
 
-        public static (string connectionString, string migrationAssemblyName,Assembly migrationAssembly) GetConnectionStringAndMigrationAssemblyName()
+        public static (string connectionString, string migrationAssemblyName, Assembly migrationAssembly) GetConnectionStringAndMigrationAssemblyName()
         {
             var connectionStringName = "DefaultConnection";
             var connectionString = _configuration.GetConnectionString(connectionStringName);

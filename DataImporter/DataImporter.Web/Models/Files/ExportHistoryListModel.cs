@@ -15,18 +15,14 @@ namespace DataImporter.Web.Models.Files
         private readonly IExcelFileService _excelFileService;
         private readonly IMapper _mapper;
         private readonly IDateTimeUtility _dateTime;
-
-
         public ExportHistoryListModel()
         {
             _excelFileService = Startup.AutofacContainer.Resolve<IExcelFileService>();
             _mapper = Startup.AutofacContainer.Resolve<IMapper>();
             _dateTime = Startup.AutofacContainer.Resolve<IDateTimeUtility>();
-
         }
         public ExportHistoryListModel(IExcelFileService excelFileService, IMapper mapper, IDateTimeUtility dateTime)
         {
-
             _excelFileService = excelFileService;
             _mapper = mapper;
             _dateTime = dateTime;
@@ -38,7 +34,7 @@ namespace DataImporter.Web.Models.Files
                 dataTableModel.PageIndex,
                 dataTableModel.PageSize,
                 dataTableModel.SearchText,
-                dataTableModel.GetSortText(new string[] { "GroupName", "Email", "ExportDate",  }), applicationuserId);
+                dataTableModel.GetSortText(new string[] { "GroupName", "Email", "ExportDate", }), applicationuserId);
 
             return new
             {

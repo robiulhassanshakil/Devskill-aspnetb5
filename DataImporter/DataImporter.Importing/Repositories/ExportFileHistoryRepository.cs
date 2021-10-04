@@ -10,11 +10,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataImporter.Importing.Repositories
 {
-    public class ExportFileHistoryRepository :Repository<ExportFileHistory, int>, IExportFileHistoryRepository
+    public class ExportFileHistoryRepository : Repository<ExportFileHistory, int>, IExportFileHistoryRepository
     {
-    public ExportFileHistoryRepository(IImportingDbContext context)
-        : base((DbContext)context)
-    {
-    }
+        public ExportFileHistoryRepository(IImportingDbContext context)
+            : base((DbContext)context)
+        {
+        }
     }
 }

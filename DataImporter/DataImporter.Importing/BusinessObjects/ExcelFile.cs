@@ -10,7 +10,7 @@ namespace DataImporter.Importing.BusinessObjects
     {
         public DateTime ImportDate { get; set; }
         public string ExcelFileName { get; set; }
-        public string ExcelFilePath { get; set;}
+        public string ExcelFilePath { get; set; }
         public string Status { get; set; }
         public int GroupId { get; set; }
         public string GroupName { get; set; }

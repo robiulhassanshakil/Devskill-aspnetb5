@@ -17,10 +17,10 @@ namespace DataImporter.Web.Models.GroupModel
         private readonly IMapper _mapper;
         public CreateGroupModel()
         {
-            _groupService= Startup.AutofacContainer.Resolve<IGroupService>();
-            _mapper= Startup.AutofacContainer.Resolve<IMapper>();
+            _groupService = Startup.AutofacContainer.Resolve<IGroupService>();
+            _mapper = Startup.AutofacContainer.Resolve<IMapper>();
         }
-        public CreateGroupModel(IGroupService groupService,IMapper mapper)
+        public CreateGroupModel(IGroupService groupService, IMapper mapper)
         {
             _groupService = groupService;
             _mapper = mapper;
@@ -33,7 +33,6 @@ namespace DataImporter.Web.Models.GroupModel
                 Name = Name,
                 ApplicationUserId = applicationuser
             };
-
             _groupService.CreateGroup(group);
         }
     }

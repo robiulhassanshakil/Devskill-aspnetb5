@@ -24,7 +24,7 @@ namespace DataImporter.Importing.Services
             _mapper = mapper;
         }
 
-        public  void FileUploadToDb(ExcelFile file)
+        public void FileUploadToDb(ExcelFile file)
         {
             if (file == null)
                 throw new InvalidParameterException("File was not provided");
@@ -44,7 +44,7 @@ namespace DataImporter.Importing.Services
             var allDatas = _importingUnitOfWork.ExcelDatas.Get(x => x.GroupId == groupId, null, "ExcelFieldData", true);
 
             int LastExcelDataId = allDatas.LastOrDefault().Id;
-                
+
 
             var allExcelFieldData = new List<ExcelFieldData>();
             var coloumCounter = 0;
@@ -63,12 +63,12 @@ namespace DataImporter.Importing.Services
                     allExcelFieldData.Add(oneExcelFielData);
                 }
             }
-            
-            var dataTable=ConvertExcelDataFieldToDataTable(allExcelFieldData, coloumCounter);
+
+            var dataTable = ConvertExcelDataFieldToDataTable(allExcelFieldData, coloumCounter);
 
             return (dataTable, LastExcelDataId);
         }
-        public DataTable ConvertExcelDataFieldToDataTable(List<ExcelFieldData> allExcelFieldData,int coloumCounter)
+        public DataTable ConvertExcelDataFieldToDataTable(List<ExcelFieldData> allExcelFieldData, int coloumCounter)
         {
             var rows = allExcelFieldData.Count / coloumCounter;
             DataTable dataTable = new DataTable();
@@ -80,7 +80,7 @@ namespace DataImporter.Importing.Services
                 DataColumn dataColumn = new DataColumn();
                 dataColumn.ColumnName = excelFieldData.Name;
                 dataTable.Columns.Add(dataColumn);
-                if (coloum==coloumCounter)
+                if (coloum == coloumCounter)
                 {
                     break;
                 }
@@ -138,10 +138,10 @@ namespace DataImporter.Importing.Services
                 {
                     var exportHistory = new ExportFileHistory()
                     {
-                         GroupName = gp.Name,
-                         Email= exportFileHistory.Email,
-                         ExportDate = exportFileHistory.ExportDate,
-                         ExportLastExcelFieldId = exportFileHistory.ExportLastExcelFieldId
+                        GroupName = gp.Name,
+                        Email = exportFileHistory.Email,
+                        ExportDate = exportFileHistory.ExportDate,
+                        ExportLastExcelFieldId = exportFileHistory.ExportLastExcelFieldId
                     };
                     exportFilesHistory.Add(exportHistory);
                 }
@@ -158,11 +158,11 @@ namespace DataImporter.Importing.Services
 
         public DataTable GetExcelDataForHistoryDownload(int groupId, int excelLastDataId)
         {
-            var allDatas = _importingUnitOfWork.ExcelDatas.Get(x => x.GroupId == groupId  , null, "ExcelFieldData", true);
+            var allDatas = _importingUnitOfWork.ExcelDatas.Get(x => x.GroupId == groupId, null, "ExcelFieldData", true);
 
             var datafilter = (from excelData in allDatas
-                where excelData.Id <= excelLastDataId
-                select excelData).ToList();
+                              where excelData.Id <= excelLastDataId
+                              select excelData).ToList();
 
 
             var allExcelFieldData = new List<ExcelFieldData>();
@@ -189,14 +189,14 @@ namespace DataImporter.Importing.Services
 
         public (DataTable dataTable, int ExceldataId, int total, int totalDisplay) GetExcelDatabase(int pageIndex, int pageSize, string searchText, string sortText, int groupId)
         {
-            var alldata= _importingUnitOfWork.ExcelDatas.GetDynamic(
-                 x => x.GroupId == groupId ,
+            var alldata = _importingUnitOfWork.ExcelDatas.GetDynamic(
+                 x => x.GroupId == groupId,
                 null, "ExcelFieldData", pageIndex, pageSize, true);
 
-            
+
             int LastExcelDataId = alldata.data.LastOrDefault().Id;
-           
-            
+
+
 
             var allExcelFieldData = new List<ExcelFieldData>();
             var coloumCounter = 0;
@@ -226,9 +226,9 @@ namespace DataImporter.Importing.Services
 
         public bool CheckFirstGroup(int groupId)
         {
-            var counter=_importingUnitOfWork.ExcelDatas.Get(x=>x.GroupId==groupId,"").Count;
+            var counter = _importingUnitOfWork.ExcelDatas.Get(x => x.GroupId == groupId, "").Count;
 
-            if (counter>0)
+            if (counter > 0)
             {
                 return false;
             }

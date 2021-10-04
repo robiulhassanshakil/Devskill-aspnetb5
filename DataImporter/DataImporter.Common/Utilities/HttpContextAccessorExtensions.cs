@@ -10,7 +10,6 @@ namespace DataImporter.Common.Utilities
     public static class HttpContextAccessorExtensions
     {
         private static IHttpContextAccessor _httpContextAccessor;
-
         private static T GetHeaderValueAs<T>(string headerName)
         {
             StringValues values = StringValues.Empty;

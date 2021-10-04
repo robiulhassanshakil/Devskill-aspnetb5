@@ -29,7 +29,7 @@ namespace DataImporter.Web.Models.Account
 
         [TempData]
         public string ErrorMessage { get; set; }
-        public  bool ReCaptchaPassed(string gRecaptchaResponse)
+        public bool ReCaptchaPassed(string gRecaptchaResponse)
         {
             HttpClient httpClient = new HttpClient();
 
@@ -46,7 +46,6 @@ namespace DataImporter.Web.Models.Account
             {
                 return false;
             }
-
             return true;
         }
 

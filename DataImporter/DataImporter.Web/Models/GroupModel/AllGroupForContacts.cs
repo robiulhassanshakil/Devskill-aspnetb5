@@ -17,8 +17,6 @@ namespace DataImporter.Web.Models.GroupModel
         private readonly IGroupService _groupService;
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
-
-        
         public List<Group> Groups { get; set; }
         public int GroupId { get; set; }
         public string Email { get; set; }
@@ -34,21 +32,17 @@ namespace DataImporter.Web.Models.GroupModel
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
         }
-
         public List<Group> LoadAllGroup(Guid applicationuserId)
         {
             Groups = _groupService.GetAllGroup(applicationuserId).ToList();
-
-            Groups.Insert(0,new Group() { Id = 0, Name = "--Select Group Name--" });
-
+            Groups.Insert(0, new Group() { Id = 0, Name = "--Select Group Name--" });
             return Groups;
         }
-
         public string Groupname(int groupId)
         {
             var name = (from gp in Groups
-                where gp.Id == groupId
-                select gp.Name);
+                        where gp.Id == groupId
+                        select gp.Name);
 
             return name.ToString();
 

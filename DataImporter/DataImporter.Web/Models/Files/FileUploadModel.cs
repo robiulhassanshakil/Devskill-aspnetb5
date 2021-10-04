@@ -22,29 +22,29 @@ namespace DataImporter.Web.Models.Files
         private readonly IMapper _mapper;
         private readonly IDateTimeUtility _dateTime;
 
-        public DataTable DataTable{ get; set; }
+        public DataTable DataTable { get; set; }
         public string ExcelFileName { get; set; }
         public string ExcelFilePath { get; set; }
         public int GroupId { get; set; }
-        
+
         public FileUploadModel()
         {
-            _fileService= Startup.AutofacContainer.Resolve<IExcelFileService>();
+            _fileService = Startup.AutofacContainer.Resolve<IExcelFileService>();
             _mapper = Startup.AutofacContainer.Resolve<IMapper>();
-            _dateTime= Startup.AutofacContainer.Resolve<IDateTimeUtility>();
+            _dateTime = Startup.AutofacContainer.Resolve<IDateTimeUtility>();
 
         }
-        public FileUploadModel(IExcelFileService fileService,IMapper mapper,IDateTimeUtility dateTime)
+        public FileUploadModel(IExcelFileService fileService, IMapper mapper, IDateTimeUtility dateTime)
         {
             _fileService = fileService;
             _mapper = mapper;
             _dateTime = dateTime;
         }
 
-        public void PreviewExcelLoad(IFormFile file,AllGroupForContacts allGroupForContacts)
+        public void PreviewExcelLoad(IFormFile file, AllGroupForContacts allGroupForContacts)
         {
-           
-            if (allGroupForContacts.GroupId==0)
+
+            if (allGroupForContacts.GroupId == 0)
             {
                 throw new InvalidParameterException("Select Group");
             }
@@ -54,18 +54,18 @@ namespace DataImporter.Web.Models.Files
                 string fileext = Path.GetExtension(file.FileName);
                 if (fileext == ".xlsx" || fileext == ".xlsm" || fileext == ".xls" || fileext == ".xlsb")
                 {
-                     ExcelFileName = file.FileName;
+                    ExcelFileName = file.FileName;
                     var filePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "UploadFiles"));
-                     ExcelFilePath = Path.Combine(filePath, ExcelFileName);
+                    ExcelFilePath = Path.Combine(filePath, ExcelFileName);
                     using (var stream = new FileStream(ExcelFilePath, FileMode.Create))
                     {
-                       file.CopyTo(stream);
+                        file.CopyTo(stream);
                     }
                     using (var stream = new FileStream(ExcelFilePath, FileMode.Open, FileAccess.Read))
                     {
                         IExcelDataReader reader;
 
-                       reader = ExcelDataReader.ExcelReaderFactory.CreateReader(stream);
+                        reader = ExcelDataReader.ExcelReaderFactory.CreateReader(stream);
 
                         //// reader.IsFirstRowAsColumnNames
                         var conf = new ExcelDataSetConfiguration
@@ -148,11 +148,8 @@ namespace DataImporter.Web.Models.Files
                 };
                 _fileService.FileUploadToDb(excelFile);
             }
-            
-
             return true;
         }
-
         public void ExcelFileCancel()
         {
             File.Delete(ExcelFilePath);

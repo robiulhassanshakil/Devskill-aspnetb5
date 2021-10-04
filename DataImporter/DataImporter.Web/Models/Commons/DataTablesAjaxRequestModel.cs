@@ -7,10 +7,9 @@ using Microsoft.Extensions.Primitives;
 
 namespace DataImporter.Web.Models.Commons
 {
-    public class DataTablesAjaxRequestModel 
+    public class DataTablesAjaxRequestModel
     {
         private HttpRequest _request;
-
         private int Start
         {
             get
@@ -25,7 +24,6 @@ namespace DataImporter.Web.Models.Commons
                 return Convert.ToInt32(_request.Query["length"]);
             }
         }
-
         public string SearchText
         {
             get
@@ -33,14 +31,11 @@ namespace DataImporter.Web.Models.Commons
                 return _request.Query["search[value]"];
             }
         }
-
         public int SortingCols { get; set; }
-
         public DataTablesAjaxRequestModel(HttpRequest request)
         {
             _request = request;
         }
-
         public int PageIndex
         {
             get
@@ -51,7 +46,6 @@ namespace DataImporter.Web.Models.Commons
                     return 1;
             }
         }
-
         public int PageSize
         {
             get
@@ -62,7 +56,6 @@ namespace DataImporter.Web.Models.Commons
                     return Length;
             }
         }
-
         public static object EmptyResult
         {
             get
@@ -75,7 +68,6 @@ namespace DataImporter.Web.Models.Commons
                 };
             }
         }
-
         public string GetSortText(string[] columnNames)
         {
             var method = _request.Method.ToLower();
@@ -86,8 +78,7 @@ namespace DataImporter.Web.Models.Commons
             else
                 throw new InvalidOperationException("Http method not supported, use get or post");
         }
-
-        private string ReadValues(IEnumerable<KeyValuePair<string, StringValues>> 
+        private string ReadValues(IEnumerable<KeyValuePair<string, StringValues>>
             requestValues, string[] columnNames)
         {
             var sortText = new StringBuilder();

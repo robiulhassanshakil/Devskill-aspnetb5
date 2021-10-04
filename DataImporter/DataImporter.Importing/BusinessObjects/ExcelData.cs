@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace DataImporter.Importing.BusinessObjects
 {
-    public class ExcelData 
+    public class ExcelData
     {
         public int Id { get; set; }
         public DateTime CreateDate { get; set; }

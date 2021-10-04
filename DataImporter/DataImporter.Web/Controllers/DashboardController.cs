@@ -33,9 +33,7 @@ namespace DataImporter.Web.Controllers
         private readonly ILogger<DashboardController> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailService _emailService;
-
-
-        public DashboardController(ILogger<DashboardController> logger, UserManager<ApplicationUser> userManager,IEmailService emailService)
+        public DashboardController(ILogger<DashboardController> logger, UserManager<ApplicationUser> userManager, IEmailService emailService)
         {
             _logger = logger;
             _userManager = userManager;
@@ -60,22 +58,18 @@ namespace DataImporter.Web.Controllers
             var data = model.GetGroupData(DataTableModel, applicationuser);
             return Json(data);
         }
-
-
         public IActionResult CreateGroup()
         {
-           
             return View();
         }
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult CreateGroup(CreateGroupModel model)
         {
-            
             if (ModelState.IsValid)
             {
                 try
                 {
-                   var applicationuser= Guid.Parse(_userManager.GetUserId(HttpContext.User));
+                    var applicationuser = Guid.Parse(_userManager.GetUserId(HttpContext.User));
                     model.CreateGroup(applicationuser);
                 }
                 catch (Exception ex)
@@ -133,23 +127,23 @@ namespace DataImporter.Web.Controllers
         {
             var model = new FileUploadModel();
             model.PreviewExcelLoad(fileSelect, allGroupForContacts);
-             return View(model);
+            return View(model);
         }
         public IActionResult CreateExcelFileStatus(FileUploadModel fileUploadModel)
-        {    
-            var model=fileUploadModel.ExcelFileUpload();
-            if (model==false)
+        {
+            var model = fileUploadModel.ExcelFileUpload();
+            if (model == false)
             {
-                ViewBag.Error= "Group Contacts Column does not match.";
+                ViewBag.Error = "Group Contacts Column does not match.";
 
                 return View();
             }
-            return RedirectToAction("ViewContactsStatus","Dashboard");
+            return RedirectToAction("ViewContactsStatus", "Dashboard");
         }
         public IActionResult ClearExcelFile(FileUploadModel fileUploadModel)
-        {   
+        {
             fileUploadModel.ExcelFileCancel();
-            return RedirectToAction("UploadContacts","Dashboard");
+            return RedirectToAction("UploadContacts", "Dashboard");
         }
 
         public IActionResult ViewContacts()
@@ -160,11 +154,11 @@ namespace DataImporter.Web.Controllers
             return View(model);
         }
 
-       [HttpPost]
+        [HttpPost]
         public JsonResult ViewContactsForExcelSend(int id)
         {
             var model = new ExcelFromDatabase();
-            var jsondata=model.GetExcelDatabaseToJson(id);
+            var jsondata = model.GetExcelDatabaseToJson(id);
             return Json(jsondata);
         }
 
@@ -181,29 +175,23 @@ namespace DataImporter.Web.Controllers
         [HttpPost]
         public IActionResult ExcelFileDownload(AllGroupForContacts allGroupForContacts)
         {
-            
             var model = new ExcelFromDatabase();
             var groupId = allGroupForContacts.GroupId;
             var fileContents = model.GetExcelDatabase(groupId);
             var excelFileName = model.ExcelFileName;
             string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             string fileName = $"{excelFileName}.xlsx";
-            if (fileContents==null||fileContents.Length==0)
+            if (fileContents == null || fileContents.Length == 0)
             {
                 return NotFound();
             }
-           
             return File(fileContents, contentType, fileName);
         }
 
-        
         public IActionResult DownloadContacts()
         {
             return View();
         }
-
-       
-
 
         public JsonResult DownloadHistoryData()
         {
@@ -214,7 +202,7 @@ namespace DataImporter.Web.Controllers
             return Json(data);
 
         }
-        public IActionResult Download(int id)  
+        public IActionResult Download(int id)
         {
             if (id == 0)
             {
@@ -222,8 +210,7 @@ namespace DataImporter.Web.Controllers
             }
             var model = new ExcelFromDatabase();
             var groupId = model.GetGroupId(id);
-
-            var fileContents = model.GetExcelDatabaseForHistory(groupId,id);
+            var fileContents = model.GetExcelDatabaseForHistory(groupId, id);
             var excelFileName = model.ExcelFileName;
             string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             string fileName = $"{excelFileName}.xlsx";
@@ -231,7 +218,6 @@ namespace DataImporter.Web.Controllers
             {
                 return NotFound();
             }
-            
             return File(fileContents, contentType, fileName);
         }
         [HttpPost]
@@ -252,8 +238,6 @@ namespace DataImporter.Web.Controllers
                 throw new InvalidParameterException("Download cant be found");
             }
             var model = new ExcelFromDatabase();
-           
-
             var fileContents = model.GetExcelDatabase(groupId);
             var excelFileName = model.ExcelFileName;
             string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
@@ -262,13 +246,11 @@ namespace DataImporter.Web.Controllers
             {
                 return NotFound();
             }
-
-            var message = new Message(new string[] { $"{email}" }, "Attachment", $"Check the Attachments .",fileContents,fileName,contentType);
+            var message = new Message(new string[] { $"{email}" }, "Attachment", $"Check the Attachments .", fileContents, fileName, contentType);
             _emailService.SendEmail(message);
             var lastExcelFile = model.ExcelLastId;
-            model.CreateExportHistory(groupId, lastExcelFile,email);
+            model.CreateExportHistory(groupId, lastExcelFile, email);
             return RedirectToAction("DownloadContacts");
         }
-
     }
 }

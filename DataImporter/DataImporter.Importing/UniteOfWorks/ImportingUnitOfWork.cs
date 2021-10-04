@@ -13,13 +13,9 @@ namespace DataImporter.Importing.UniteOfWorks
     public class ImportingUnitOfWork : UnitOfWork, IImportingUnitOfWork
     {
         public IGroupRepository Groups { get; private set; }
-        
         public IExcelFileRepository ExcelFiles { get; private set; }
-
         public IExcelFieldDataRepository ExcelFieldDatas { get; private set; }
-
         public IExcelDataRepository ExcelDatas { get; private set; }
-
         public IExportFileHistoryRepository ExportFileHistories { get; private set; }
         public ImportingUnitOfWork(IImportingDbContext context,
            IGroupRepository groups,
