@@ -17,5 +17,6 @@ namespace DataImporter.Importing.Services
         int GetGroupId(int excelLastId);
         DataTable GetExcelDataForHistoryDownload(int groupId, int excelLastDataId);
         (DataTable dataTable,int excelDataLastId) GetExcelDatabase(int groupId);
+        bool CheckFirstGroup(int groupId);
     }
 }

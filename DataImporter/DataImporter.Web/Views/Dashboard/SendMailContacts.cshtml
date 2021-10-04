@@ -1,9 +1,7 @@
-﻿@model AllGroupForContacts;
+﻿@model DataImporter.Web.Models.ExcelData.SendMailContactsModel;
 @{
     ViewData["Title"] = "SendMailContacts";
 }
-
-
 <div class="pcoded-main-container">
     <div class="pcoded-content">
         <!-- [ breadcrumb ] start -->
@@ -30,18 +28,21 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row">
-
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label class="floating-label" for="Recipients"><small class="text-danger">* </small>Recipients</label>
-                                    <input type="text" class="form-control" id="Recipients" placeholder="">
+                        <form asp-action="SendMailContactsFinal" method="post">
+                            <div class="row">
+                                <input hidden class="form-control" asp-for="GroupId" value=@Model.GroupId />
+                                <div class="col-sm-6">
+                                    <div class="input-group input-group-lg">
+                                        <input type="text" class="form-control" asp-for="Email" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-lg has-ripple"> Send Mail</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <button class="btn btn-primary"> Send Mail </button>
-
+                        </form>
                     </div>
                 </div>
             </div>
@@ -68,7 +69,6 @@
         </div>
     </div>
 </div>
-
 @section Scripts
 {
 

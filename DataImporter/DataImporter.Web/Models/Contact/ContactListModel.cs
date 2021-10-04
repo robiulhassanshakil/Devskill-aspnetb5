@@ -50,7 +50,7 @@ namespace DataImporter.Web.Models.Contact
                         {
                             record.GroupName,
                             record.ExcelFileName,
-                            record.ImportDate.ToShortTimeString(),
+                            record.ImportDate.ToString(),
                             record.Status
                         }
                     ).ToArray()

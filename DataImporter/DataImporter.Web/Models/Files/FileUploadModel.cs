@@ -85,51 +85,70 @@ namespace DataImporter.Web.Models.Files
 
         public bool ExcelFileUpload()
         {
-            var ImportColumnCheck = _fileService.GetExcelDatabase(GroupId);
+            var isAFirstGroup = _fileService.CheckFirstGroup(GroupId);
 
-            DataTable = ImportColumnCheck.dataTable;
-            DataTable dataTable = new DataTable();
-            using (var stream = new FileStream(ExcelFilePath, FileMode.Open, FileAccess.Read))
+
+            if (isAFirstGroup)
             {
-                IExcelDataReader reader;
-
-                reader = ExcelDataReader.ExcelReaderFactory.CreateReader(stream);
-
-                //// reader.IsFirstRowAsColumnNames
-                var conf = new ExcelDataSetConfiguration
+                var excelFile1 = new ExcelFile()
                 {
-                    ConfigureDataTable = _ => new ExcelDataTableConfiguration
-                    {
-                        UseHeaderRow = true
-                    }
+                    ExcelFileName = ExcelFileName,
+                    ExcelFilePath = ExcelFilePath,
+                    Status = "Incomplete",
+                    ImportDate = _dateTime.Now,
+                    GroupId = GroupId
                 };
-                var dataset = reader.AsDataSet(conf);
-
-                dataTable = dataset.Tables[0];
+                _fileService.FileUploadToDb(excelFile1);
             }
-
-            if (dataTable.Columns.Count != DataTable.Columns.Count)
+            else
             {
-                return false;
-            }
+                var ImportColumnCheck = _fileService.GetExcelDatabase(GroupId);
 
-            for (int j = 0; j < DataTable.Columns.Count; j++)
-            {
-                if (!dataTable.Columns.Contains(DataTable.Columns[j].ColumnName))
+                DataTable = ImportColumnCheck.dataTable;
+                DataTable dataTable = new DataTable();
+                using (var stream = new FileStream(ExcelFilePath, FileMode.Open, FileAccess.Read))
+                {
+                    IExcelDataReader reader;
+
+                    reader = ExcelDataReader.ExcelReaderFactory.CreateReader(stream);
+
+                    //// reader.IsFirstRowAsColumnNames
+                    var conf = new ExcelDataSetConfiguration
+                    {
+                        ConfigureDataTable = _ => new ExcelDataTableConfiguration
+                        {
+                            UseHeaderRow = true
+                        }
+                    };
+                    var dataset = reader.AsDataSet(conf);
+
+                    dataTable = dataset.Tables[0];
+                }
+
+                if (dataTable.Columns.Count != DataTable.Columns.Count)
                 {
                     return false;
                 }
+
+                for (int j = 0; j < DataTable.Columns.Count; j++)
+                {
+                    if (!dataTable.Columns.Contains(DataTable.Columns[j].ColumnName))
+                    {
+                        return false;
+                    }
+                }
+
+                var excelFile = new ExcelFile()
+                {
+                    ExcelFileName = ExcelFileName,
+                    ExcelFilePath = ExcelFilePath,
+                    Status = "Incomplete",
+                    ImportDate = _dateTime.Now,
+                    GroupId = GroupId
+                };
+                _fileService.FileUploadToDb(excelFile);
             }
             
-            var excelFile = new ExcelFile()
-            {
-                ExcelFileName = ExcelFileName,
-                ExcelFilePath = ExcelFilePath,
-                Status = "Incomplete",
-                ImportDate = _dateTime.Now,
-                GroupId = GroupId
-            };
-            _fileService.FileUploadToDb(excelFile);
 
             return true;
         }

@@ -40,6 +40,7 @@ namespace DataImporter.Importing.Services
                     {
                         GroupName = gp.Name,
                         Status = excelFile.Status,
+                        ImportDate = excelFile.ImportDate,
                         ExcelFileName = excelFile.ExcelFileName,
 
                     };

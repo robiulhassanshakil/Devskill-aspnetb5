@@ -10,6 +10,7 @@ using DataImporter.Common.Utilities;
 using DataImporter.Importing.BusinessObjects;
 using DataImporter.Importing.Exceptions;
 using DataImporter.Membership.Entities;
+using DataImporter.Web.Models;
 using DataImporter.Web.Models.Commons;
 using DataImporter.Web.Models.Contact;
 using DataImporter.Web.Models.ExcelData;
@@ -42,7 +43,10 @@ namespace DataImporter.Web.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var model = new DashBoardModel();
+            var applicationuser = Guid.Parse(_userManager.GetUserId(HttpContext.User));
+            model.loadData(applicationuser);
+            return View(model);
         }
         public IActionResult ManageGroup()
         {
@@ -188,8 +192,7 @@ namespace DataImporter.Web.Controllers
             {
                 return NotFound();
             }
-            var lastExcelFile = model.ExcelLastId;
-            model.CreateExportHistory(groupId, lastExcelFile);
+           
             return File(fileContents, contentType, fileName);
         }
 
@@ -199,10 +202,7 @@ namespace DataImporter.Web.Controllers
             return View();
         }
 
-        public IActionResult SendMailContacts()
-        {
-            return View();
-        }
+       
 
 
         public JsonResult DownloadHistoryData()
@@ -234,18 +234,27 @@ namespace DataImporter.Web.Controllers
             
             return File(fileContents, contentType, fileName);
         }
-        
+        [HttpPost]
         public IActionResult SendMailContacts(AllGroupForContacts allGroupForContacts)
         {
-            var id = allGroupForContacts.GroupId;
-            if (id == 0)
+            var model = new SendMailContactsModel();
+            model.GroupId = allGroupForContacts.GroupId;
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult SendMailContactsFinal(SendMailContactsModel sendMailContactsModel)
+        {
+            var groupId = sendMailContactsModel.GroupId;
+            var email = sendMailContactsModel.Email;
+            if (groupId == 0)
             {
                 throw new InvalidParameterException("Download cant be found");
             }
             var model = new ExcelFromDatabase();
-            var groupId = model.GetGroupId(id);
+           
 
-            var fileContents = model.GetExcelDatabaseForHistory(groupId, id);
+            var fileContents = model.GetExcelDatabase(groupId);
             var excelFileName = model.ExcelFileName;
             string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             string fileName = $"{excelFileName}.xlsx";
@@ -254,15 +263,11 @@ namespace DataImporter.Web.Controllers
                 return NotFound();
             }
 
-
-
-            
-
-            var message = new Message(new string[] { "kratosrobin467@gmail.com" }, "Attachment", $"Check the Attachments .",fileContents,fileName,contentType);
+            var message = new Message(new string[] { $"{email}" }, "Attachment", $"Check the Attachments .",fileContents,fileName,contentType);
             _emailService.SendEmail(message);
-            
-
-            return File(fileContents, contentType, fileName);
+            var lastExcelFile = model.ExcelLastId;
+            model.CreateExportHistory(groupId, lastExcelFile,email);
+            return RedirectToAction("DownloadContacts");
         }
 
     }

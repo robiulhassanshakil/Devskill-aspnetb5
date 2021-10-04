@@ -60,6 +60,19 @@ namespace DataImporter.Importing.Services
             return groups;
         }
 
+        public int GetAllImportData(Guid applicationUserId)
+        {
+            var allGroupData =
+                _importingUnitOfWork.Groups.Get(x => x.ApplicationUserId == applicationUserId, "ExcelFile");
+
+            var allImportData = (from gp in allGroupData
+                where gp.ExcelFile.Count > 0
+                select gp.ExcelFile).Count();
+
+            return allImportData;
+
+        }
+
         public Group GetGroup(int id)
         {
             var group = _importingUnitOfWork.Groups.GetById(id);

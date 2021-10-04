@@ -223,5 +223,17 @@ namespace DataImporter.Importing.Services
 
 
         }
+
+        public bool CheckFirstGroup(int groupId)
+        {
+            var counter=_importingUnitOfWork.ExcelDatas.Get(x=>x.GroupId==groupId,"").Count;
+
+            if (counter>0)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

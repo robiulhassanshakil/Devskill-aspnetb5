@@ -18,9 +18,10 @@ namespace DataImporter.Web.Models.GroupModel
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
+        
         public List<Group> Groups { get; set; }
         public int GroupId { get; set; }
-        
+        public string Email { get; set; }
         public AllGroupForContacts()
         {
             _groupService = Startup.AutofacContainer.Resolve<IGroupService>();

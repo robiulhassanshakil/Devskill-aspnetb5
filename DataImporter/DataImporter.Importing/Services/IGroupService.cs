@@ -15,5 +15,6 @@ namespace DataImporter.Importing.Services
         Group GetGroup(int id);
         void UpdateGroup(Group group);
         IList<Group> GetAllGroup(Guid applicationuser);
+        int GetAllImportData(Guid applicationUserId);
     }
 }

@@ -49,7 +49,7 @@ namespace DataImporter.Web.Models.Files
                         {
                             record.GroupName,
                             record.Email,
-                            record.ExportDate.ToShortTimeString(),
+                            record.ExportDate.ToString(),
                             record.ExportLastExcelFieldId.ToString()
                         }
                     ).ToArray()

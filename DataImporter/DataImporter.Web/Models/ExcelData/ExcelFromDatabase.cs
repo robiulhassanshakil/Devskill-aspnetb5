@@ -98,13 +98,13 @@ namespace DataImporter.Web.Models.ExcelData
                 .ToList();
         }
 
-        internal void CreateExportHistory(int groupId, int lastExcelFieldId)
+        internal void CreateExportHistory(int groupId, int lastExcelFieldId,string email)
         {
             var exportFileHistory = new ExportFileHistory()
             {
                 GroupId = groupId,
                 ExportDate = _dateTimeUtility.Now,
-                Email = "NoT Send",
+                Email = email,
                 ExportLastExcelFieldId = lastExcelFieldId
             };
             _excelFileService.ExportFileHistoryCreate(exportFileHistory);
