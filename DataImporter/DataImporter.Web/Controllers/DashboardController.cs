@@ -89,7 +89,6 @@ namespace DataImporter.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult GroupEdit(GroupEditModel model)
         {
-
             if (ModelState.IsValid)
             {
                 model.Update();
@@ -150,7 +149,7 @@ namespace DataImporter.Web.Controllers
         {
             var model = new AllGroupForContacts();
             var applicationuserId = Guid.Parse(_userManager.GetUserId(HttpContext.User));
-            model.LoadAllGroup(applicationuserId);
+            model.LoadAllGroupForViewData(applicationuserId);
             return View(model);
         }
 
@@ -166,9 +165,14 @@ namespace DataImporter.Web.Controllers
         public List<string> ColumnName(int id)
         {
             var model = new ExcelFromDatabase();
-
+          /*  var IsitFirstData = model.GroupCheek(id);
+          
+                if (IsitFirstData)
+                {
+                    
+                }*/
+            
             var coloumName = model.GetDataTableColumnName(id);
-
             return coloumName;
         }
 
@@ -227,7 +231,6 @@ namespace DataImporter.Web.Controllers
             model.GroupId = allGroupForContacts.GroupId;
             return View(model);
         }
-
         [HttpPost]
         public IActionResult SendMailContactsFinal(SendMailContactsModel sendMailContactsModel)
         {

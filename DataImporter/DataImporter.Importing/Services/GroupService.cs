@@ -47,6 +47,14 @@ namespace DataImporter.Importing.Services
             _importingUnitOfWork.Save();
         }
 
+        public int GetAllExportData(Guid applicationUserId)
+        {
+            var AllExportData = _importingUnitOfWork.ExportFileHistories.Get(x=>x.Group.ApplicationUserId==applicationUserId, "").Count;
+
+
+            return AllExportData;
+        }
+
         public IList<Group> GetAllGroup(Guid applicationuser)
         {
             var groupEntities = _importingUnitOfWork.Groups.Get(x => x.ApplicationUserId == applicationuser, "");
@@ -62,14 +70,9 @@ namespace DataImporter.Importing.Services
 
         public int GetAllImportData(Guid applicationUserId)
         {
-            var allGroupData =
-                _importingUnitOfWork.Groups.Get(x => x.ApplicationUserId == applicationUserId, "ExcelFile");
+            var allGroupData = _importingUnitOfWork.ExcelFiles.Get(x => x.Group.ApplicationUserId == applicationUserId, "").Count;
 
-            var allImportData = (from gp in allGroupData
-                                 where gp.ExcelFile.Count > 0
-                                 select gp.ExcelFile).Count();
-
-            return allImportData;
+            return allGroupData;
 
         }
 
@@ -79,7 +82,6 @@ namespace DataImporter.Importing.Services
             if (group == null) return null;
 
             return _mapper.Map<Group>(group);
-
 
         }
 
@@ -92,6 +94,20 @@ namespace DataImporter.Importing.Services
                               select (_mapper.Map<Group>(gp))).ToList();
 
             return (resultData, groupData.total, groupData.totalDisplay);
+        }
+
+        public List<Group> LoadAllGroupFroViewData(Guid applicationuserId)
+        {
+            var groupListForViewData =_importingUnitOfWork.Groups.Get(x => x.ApplicationUserId == applicationuserId && x.ExcelData.Count>0, "");
+
+            var groups = new List<Group>();
+
+            foreach (var gp in groupListForViewData)
+            {
+                groups.Add(_mapper.Map<Group>(gp));
+            }
+
+            return groups;
         }
 
         public void UpdateGroup(Group group)

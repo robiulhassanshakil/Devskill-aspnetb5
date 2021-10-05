@@ -16,7 +16,7 @@ namespace DataImporter.Web.Models
         private readonly IHttpContextAccessor _httpContextAccessor;
         public int GroupNumber { get; set; }
         public int ImportNumber { get; set; }
-        public int ContactsNumber { get; set; }
+        public int ExportNumber { get; set; }
         public DashBoardModel()
         {
             _groupService = Startup.AutofacContainer.Resolve<IGroupService>();
@@ -33,6 +33,7 @@ namespace DataImporter.Web.Models
         {
             GroupNumber = _groupService.GetAllGroup(applicationUserId).Count;
             ImportNumber = _groupService.GetAllImportData(applicationUserId);
+            ExportNumber = _groupService.GetAllExportData(applicationUserId);
         }
     }
 }

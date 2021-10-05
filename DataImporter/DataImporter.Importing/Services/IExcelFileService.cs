@@ -9,7 +9,6 @@ namespace DataImporter.Importing.Services
     public interface IExcelFileService
     {
         void FileUploadToDb(ExcelFile file);
-        (DataTable dataTable, int ExceldataId, int total, int totalDisplay) GetExcelDatabase(int pageIndex, int pageSize, string searchText, string sortText, int groupId);
         string GetExcelFileName(int groupId);
         void ExportFileHistoryCreate(ExportFileHistory exportFileHistory);
         (IList<ExportFileHistory> records, int total, int totalDisplay) GetExcelFileHistory(int pageIndex, int pageSize, string searchText, string sortText, Guid applicationUser);

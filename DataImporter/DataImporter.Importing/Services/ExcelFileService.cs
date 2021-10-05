@@ -187,42 +187,7 @@ namespace DataImporter.Importing.Services
             return dataTable;
         }
 
-        public (DataTable dataTable, int ExceldataId, int total, int totalDisplay) GetExcelDatabase(int pageIndex, int pageSize, string searchText, string sortText, int groupId)
-        {
-            var alldata = _importingUnitOfWork.ExcelDatas.GetDynamic(
-                 x => x.GroupId == groupId,
-                null, "ExcelFieldData", pageIndex, pageSize, true);
-
-
-            int LastExcelDataId = alldata.data.LastOrDefault().Id;
-
-
-
-            var allExcelFieldData = new List<ExcelFieldData>();
-            var coloumCounter = 0;
-            foreach (var allData in alldata.data)
-            {
-                coloumCounter = 0;
-                foreach (var excelFieldData in allData.ExcelFieldData)
-                {
-                    coloumCounter++;
-                    var oneExcelFielData = new ExcelFieldData()
-                    {
-                        ExcelDataId = excelFieldData.ExcelDataId,
-                        Name = excelFieldData.Name,
-                        Value = excelFieldData.Value
-                    };
-                    allExcelFieldData.Add(oneExcelFielData);
-                }
-            }
-
-            var dataTable = ConvertExcelDataFieldToDataTable(allExcelFieldData, coloumCounter);
-
-
-            return (dataTable, LastExcelDataId, alldata.total, alldata.totalDisplay);
-
-
-        }
+       
 
         public bool CheckFirstGroup(int groupId)
         {

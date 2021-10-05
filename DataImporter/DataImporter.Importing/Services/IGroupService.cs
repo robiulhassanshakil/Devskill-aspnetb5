@@ -16,5 +16,7 @@ namespace DataImporter.Importing.Services
         void UpdateGroup(Group group);
         IList<Group> GetAllGroup(Guid applicationuser);
         int GetAllImportData(Guid applicationUserId);
+        int GetAllExportData(Guid applicationUserId);
+        List<Group> LoadAllGroupFroViewData(Guid applicationuserId);
     }
 }

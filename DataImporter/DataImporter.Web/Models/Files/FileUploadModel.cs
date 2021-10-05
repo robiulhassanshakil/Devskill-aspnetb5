@@ -13,6 +13,8 @@ using DataImporter.Importing.Services;
 using DataImporter.Web.Models.GroupModel;
 using ExcelDataReader;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using ILogger = Serilog.ILogger;
 
 namespace DataImporter.Web.Models.Files
 {
@@ -21,6 +23,8 @@ namespace DataImporter.Web.Models.Files
         private readonly IExcelFileService _fileService;
         private readonly IMapper _mapper;
         private readonly IDateTimeUtility _dateTime;
+        private readonly ILogger<FileUploadModel> _logger;
+
 
         public DataTable DataTable { get; set; }
         public string ExcelFileName { get; set; }
@@ -34,11 +38,12 @@ namespace DataImporter.Web.Models.Files
             _dateTime = Startup.AutofacContainer.Resolve<IDateTimeUtility>();
 
         }
-        public FileUploadModel(IExcelFileService fileService, IMapper mapper, IDateTimeUtility dateTime)
+        public FileUploadModel(IExcelFileService fileService, IMapper mapper, IDateTimeUtility dateTime, ILogger<FileUploadModel> logger)
         {
             _fileService = fileService;
             _mapper = mapper;
             _dateTime = dateTime;
+            _logger = logger;
         }
 
         public void PreviewExcelLoad(IFormFile file, AllGroupForContacts allGroupForContacts)
@@ -86,8 +91,6 @@ namespace DataImporter.Web.Models.Files
         public bool ExcelFileUpload()
         {
             var isAFirstGroup = _fileService.CheckFirstGroup(GroupId);
-
-
             if (isAFirstGroup)
             {
                 var excelFile1 = new ExcelFile()
@@ -103,13 +106,11 @@ namespace DataImporter.Web.Models.Files
             else
             {
                 var ImportColumnCheck = _fileService.GetExcelDatabase(GroupId);
-
                 DataTable = ImportColumnCheck.dataTable;
                 DataTable dataTable = new DataTable();
                 using (var stream = new FileStream(ExcelFilePath, FileMode.Open, FileAccess.Read))
                 {
                     IExcelDataReader reader;
-
                     reader = ExcelDataReader.ExcelReaderFactory.CreateReader(stream);
 
                     //// reader.IsFirstRowAsColumnNames
@@ -134,6 +135,14 @@ namespace DataImporter.Web.Models.Files
                 {
                     if (!dataTable.Columns.Contains(DataTable.Columns[j].ColumnName))
                     {
+                        try
+                        {
+                            File.Delete(ExcelFilePath);
+                        }
+                        catch (Exception e)
+                        {
+                            _logger.LogInformation($"{e.Message}");
+                        }
                         return false;
                     }
                 }

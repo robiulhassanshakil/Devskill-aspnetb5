@@ -45,7 +45,11 @@ namespace DataImporter.Web.Models.GroupModel
                         select gp.Name);
 
             return name.ToString();
-
+        }
+        internal void LoadAllGroupForViewData(Guid applicationuserId)
+        {
+           Groups= _groupService.LoadAllGroupFroViewData(applicationuserId);
+           Groups.Insert(0, new Group() { Id = 0, Name = "--Select Group Name--" });
         }
     }
 }

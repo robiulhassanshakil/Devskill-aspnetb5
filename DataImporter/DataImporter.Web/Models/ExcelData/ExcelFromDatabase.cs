@@ -125,5 +125,12 @@ namespace DataImporter.Web.Models.ExcelData
             }
             return fileContents;
         }
+
+        internal bool GroupCheek(int id)
+        {
+            var isItFirst = _excelFileService.CheckFirstGroup(id);
+
+            return isItFirst;
+        }
     }
 }

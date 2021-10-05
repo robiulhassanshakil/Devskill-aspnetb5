@@ -1,4 +1,4 @@
-﻿
+﻿@model DashBoardModel;
 @{
     ViewData["Title"] = "Index";
 }
@@ -33,7 +33,7 @@
                             </div>
                             <div class="col-auto">
                                 <h6 class="text-muted m-b-10">Groups</h6>
-                                <h2 class="m-b-0">10</h2>
+                                <h2 class="m-b-0" >@Model.GroupNumber </h2>
                             </div>
                         </div>
                     </div>
@@ -47,8 +47,8 @@
                                 <i class="icon feather icon-navigation-2 f-30 text-c-green"></i>
                             </div>
                             <div class="col-auto">
-                                <h6 class="text-muted m-b-10">Import/Export</h6>
-                                <h2 class="m-b-0">20</h2>
+                                <h6 class="text-muted m-b-10">Imports</h6>
+                                <h2 class="m-b-0">@Model.ImportNumber</h2>
                             </div>
                         </div>
                     </div>
@@ -62,8 +62,8 @@
                                 <i class="icon feather icon-users f-30 text-c-red"></i>
                             </div>
                             <div class="col-auto">
-                                <h6 class="text-muted m-b-10">Contracts</h6>
-                                <h2 class="m-b-0">205</h2>
+                                <h6 class="text-muted m-b-10">Exports</h6>
+                                <h2 class="m-b-0">@Model.ExportNumber</h2>
                             </div>
                         </div>
                     </div>
