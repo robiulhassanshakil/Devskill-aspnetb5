@@ -7,6 +7,12 @@ namespace DataImporter.Web.Models.Account
 {
     public class ConfirmEmailModel
     {
+        
         public string StatusMessage { get; set; }
+
+        public ConfirmEmailModel()
+        {
+            
+        }
     }
 }

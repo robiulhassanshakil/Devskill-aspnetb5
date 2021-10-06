@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using Autofac;
 using DataImporter.Common.Utilities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -24,24 +25,26 @@ namespace DataImporter.Web.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<AccountController> _logger;
         private readonly IEmailService _emailService;
+        private readonly ILifetimeScope _scope;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             RoleManager<Role> roleManager,
             ILogger<AccountController> logger,
-            IEmailService emailService)
+            IEmailService emailService,ILifetimeScope scope)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _logger = logger;
             _emailService = emailService;
+            _scope = scope;
         }
 
         public async Task<IActionResult> Register(string returnUrl = null)
         {
-            var model = new RegisterModel();
+            var model = _scope.Resolve<RegisterModel>();
             model.ReturnUrl = returnUrl;
             model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             return View(model);
@@ -53,6 +56,7 @@ namespace DataImporter.Web.Controllers
             model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                
                 var user = new ApplicationUser { FirstName = model.FirstName, LastName = model.LastName, UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 await _userManager.AddToRoleAsync(user, "Importer");
@@ -83,7 +87,7 @@ namespace DataImporter.Web.Controllers
         }
         public async Task<IActionResult> RegisterConfirmation(string email, string returnUrl = null)
         {
-            var registerConfirmation = new RegisterConfirmationModel();
+            var registerConfirmation = _scope.Resolve<RegisterConfirmationModel>();
             if (email == null)
             {
                 return RedirectToAction("Index", "Dashboard");
@@ -115,7 +119,7 @@ namespace DataImporter.Web.Controllers
 
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
-            var confirmEmailModel = new ConfirmEmailModel();
+            var confirmEmailModel = _scope.Resolve<ConfirmEmailModel>();
             if (userId == null || token == null)
             {
                 return RedirectToAction("Register", "Account");
@@ -134,7 +138,7 @@ namespace DataImporter.Web.Controllers
 
         public async Task<IActionResult> Login(string returnUrl = null)
         {
-            var model = new LoginModel();
+            var model = _scope.Resolve<LoginModel>();
             if (!string.IsNullOrEmpty(model.ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, model.ErrorMessage);
@@ -154,6 +158,7 @@ namespace DataImporter.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel model)
         {
+
             model.ReturnUrl ??= Url.Content("~/dashboard/index");
 
             model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();

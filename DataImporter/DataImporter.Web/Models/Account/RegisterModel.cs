@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Autofac;
 using Microsoft.AspNetCore.Authentication;
 
 namespace DataImporter.Web.Models.Account
 {
     public class RegisterModel
     {
+        private ILifetimeScope _scope;
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
         [Display(Name = "FirstName")]
@@ -34,5 +36,15 @@ namespace DataImporter.Web.Models.Account
         public string ConfirmPassword { get; set; }
         public string ReturnUrl { get; set; }
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
+
+        public RegisterModel()
+        {
+            
+        }
+        public void Resolve(ILifetimeScope scope)
+        {
+            _scope = scope;
+
+        }
     }
 }

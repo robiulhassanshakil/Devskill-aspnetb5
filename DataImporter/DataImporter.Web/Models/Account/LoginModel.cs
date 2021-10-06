@@ -29,6 +29,11 @@ namespace DataImporter.Web.Models.Account
 
         [TempData]
         public string ErrorMessage { get; set; }
+
+        public LoginModel()
+        {
+            
+        }
         public bool ReCaptchaPassed(string gRecaptchaResponse)
         {
             HttpClient httpClient = new HttpClient();

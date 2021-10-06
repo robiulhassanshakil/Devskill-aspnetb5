@@ -47,7 +47,7 @@ namespace DataImporter.Web
         }
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment WebHostEnvironment { get; set; }
-        public static ILifetimeScope AutofacContainer { get; set; }
+        public ILifetimeScope AutofacContainer { get; set; }
         public void ConfigureContainer(ContainerBuilder builder)
         {
             var connectionInfo = GetConnectionStringAndMigrationAssemblyName();

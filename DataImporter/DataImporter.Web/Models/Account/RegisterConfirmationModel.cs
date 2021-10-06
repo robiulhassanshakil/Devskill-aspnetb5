@@ -12,5 +12,9 @@ namespace DataImporter.Web.Models.Account
         public string EmailConfirmationUrl { get; set; }
         public string ReturnUrl { get; set; }
 
+        public RegisterConfirmationModel()
+        {
+            
+        }
     }
 }

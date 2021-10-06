@@ -16,6 +16,8 @@ namespace DataImporter.Web.Models.Contact
         private readonly IContactService _contactService;
         private readonly IMapper _mapper;
         private readonly IDateTimeUtility _dateTime;
+        private readonly ILifetimeScope _scope;
+
         public ContactListModel()
         {
             _contactService = Startup.AutofacContainer.Resolve<IContactService>();
@@ -23,11 +25,12 @@ namespace DataImporter.Web.Models.Contact
             _dateTime = Startup.AutofacContainer.Resolve<IDateTimeUtility>();
 
         }
-        public ContactListModel(IContactService contactService, IMapper mapper, IDateTimeUtility dateTime)
+        public ContactListModel(IContactService contactService, IMapper mapper, IDateTimeUtility dateTime, ILifetimeScope scope)
         {
             _contactService = contactService;
             _mapper = mapper;
             _dateTime = dateTime;
+            _scope = scope;
         }
         internal object LoadData(DataTablesAjaxRequestModel dataTableModel, Guid applicationUserId)
         {
