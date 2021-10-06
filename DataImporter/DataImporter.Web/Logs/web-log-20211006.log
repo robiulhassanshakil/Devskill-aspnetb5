@@ -15,3 +15,81 @@
 2021-10-06 06:02:31.981 +06:00 [INF] User logged in.
 2021-10-06 06:02:34.546 +06:00 [INF] User logged out.
 2021-10-06 06:02:37.761 +06:00 [INF] User logged in.
+2021-10-06 06:10:43.043 +06:00 [INF] Application Starting up
+2021-10-06 06:10:48.794 +06:00 [INF] User logged in.
+2021-10-06 08:32:08.672 +06:00 [INF] Application Starting up
+2021-10-06 08:32:17.771 +06:00 [INF] User logged in.
+2021-10-06 08:32:47.692 +06:00 [ERR] Create Group Failed
+DataImporter.Importing.Exceptions.DuplicateTitleException: Group title already exists
+   at DataImporter.Importing.Services.GroupService.CreateGroup(Group group) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Importing\Services\GroupService.cs:line 34
+   at DataImporter.Web.Models.GroupModel.CreateGroupModel.CreateGroup(Guid applicationuser) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Models\GroupModel\CreateGroupModel.cs:line 36
+   at DataImporter.Web.Controllers.DashboardController.CreateGroup(CreateGroupModel model) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Controllers\DashboardController.cs:line 73
+2021-10-06 08:32:51.317 +06:00 [ERR] Create Group Failed
+DataImporter.Importing.Exceptions.DuplicateTitleException: Group title already exists
+   at DataImporter.Importing.Services.GroupService.CreateGroup(Group group) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Importing\Services\GroupService.cs:line 34
+   at DataImporter.Web.Models.GroupModel.CreateGroupModel.CreateGroup(Guid applicationuser) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Models\GroupModel\CreateGroupModel.cs:line 36
+   at DataImporter.Web.Controllers.DashboardController.CreateGroup(CreateGroupModel model) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Controllers\DashboardController.cs:line 73
+2021-10-06 08:33:27.463 +06:00 [ERR] Create Group Failed
+DataImporter.Importing.Exceptions.DuplicateTitleException: Group title already exists
+   at DataImporter.Importing.Services.GroupService.CreateGroup(Group group) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Importing\Services\GroupService.cs:line 34
+   at DataImporter.Web.Models.GroupModel.CreateGroupModel.CreateGroup(Guid applicationuser) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Models\GroupModel\CreateGroupModel.cs:line 36
+   at DataImporter.Web.Controllers.DashboardController.CreateGroup(CreateGroupModel model) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Controllers\DashboardController.cs:line 73
+2021-10-06 08:35:29.607 +06:00 [INF] Application Starting up
+2021-10-06 08:35:36.273 +06:00 [INF] User logged in.
+2021-10-06 08:37:07.828 +06:00 [INF] Application Starting up
+2021-10-06 08:37:13.266 +06:00 [INF] User logged in.
+2021-10-06 08:39:13.490 +06:00 [INF] Application Starting up
+2021-10-06 08:39:25.951 +06:00 [INF] User logged in.
+2021-10-06 08:46:58.769 +06:00 [INF] Application Starting up
+2021-10-06 08:47:10.919 +06:00 [INF] User logged in.
+2021-10-06 08:47:24.952 +06:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at DataImporter.Web.Models.GroupModel.AllGroupForContacts.LoadAllGroupForViewData(Guid applicationuserId) in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Models\GroupModel\AllGroupForContacts.cs:line 51
+   at DataImporter.Web.Controllers.DashboardController.ViewContacts() in F:\code\aspnetmvcEXAMAssignment\Devskill-aspnetb5\DataImporter\DataImporter.Web\Controllers\DashboardController.cs:line 162
+   at lambda_method902(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.MigrationsEndPointMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-10-06 08:47:25.319 +06:00 [ERR] An exception occurred while calculating the database error page content. Skipping display of the database error page.
+System.InvalidOperationException: StatusCode cannot be set because the response has already started.
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ThrowResponseAlreadyStartedException(String name)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_StatusCode(Int32 value)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Views.DatabaseErrorPage.ExecuteAsync()
+   at Microsoft.Extensions.RazorViews.BaseView.ExecuteAsync(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseDeveloperPageExceptionFilter.HandleExceptionAsync(ErrorContext errorContext, Func`2 next)
+2021-10-06 09:34:56.379 +06:00 [INF] Application Starting up
+2021-10-06 16:40:46.151 +06:00 [INF] Application Starting up
+2021-10-06 16:42:05.832 +06:00 [INF] User created a new account with password.
+2021-10-06 16:43:28.713 +06:00 [INF] User logged in.
+2021-10-06 16:43:38.826 +06:00 [INF] User logged in.
+2021-10-06 17:41:42.035 +06:00 [INF] Application Starting up
+2021-10-06 17:42:30.926 +06:00 [INF] Application Starting up
+2021-10-06 17:42:38.143 +06:00 [INF] User logged in.
+2021-10-06 18:01:49.926 +06:00 [INF] Application Starting up
+2021-10-06 18:01:57.319 +06:00 [INF] User logged in.
+2021-10-06 18:07:34.191 +06:00 [INF] Application Starting up
+2021-10-06 18:07:55.621 +06:00 [INF] User logged in.
+2021-10-06 18:08:38.561 +06:00 [INF] Application Starting up
+2021-10-06 18:08:49.796 +06:00 [INF] User logged in.

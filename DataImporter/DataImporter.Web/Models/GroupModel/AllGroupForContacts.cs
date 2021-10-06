@@ -14,17 +14,16 @@ namespace DataImporter.Web.Models.GroupModel
 {
     public class AllGroupForContacts
     {
-        private readonly IGroupService _groupService;
-        private readonly IMapper _mapper;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private  IGroupService _groupService;
+        private  IMapper _mapper;
+        private  IHttpContextAccessor _httpContextAccessor;
+        private ILifetimeScope _scope;
         public List<Group> Groups { get; set; }
         public int GroupId { get; set; }
         public string Email { get; set; }
         public AllGroupForContacts()
         {
-            _groupService = Startup.AutofacContainer.Resolve<IGroupService>();
-            _mapper = Startup.AutofacContainer.Resolve<IMapper>();
-            _httpContextAccessor = Startup.AutofacContainer.Resolve<IHttpContextAccessor>();
+            
         }
         public AllGroupForContacts(IGroupService groupService, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
@@ -50,6 +49,14 @@ namespace DataImporter.Web.Models.GroupModel
         {
            Groups= _groupService.LoadAllGroupFroViewData(applicationuserId);
            Groups.Insert(0, new Group() { Id = 0, Name = "--Select Group Name--" });
+        }
+
+        public void Resolve(ILifetimeScope scope)
+        {
+            _scope = scope;
+            _groupService=_scope.Resolve<IGroupService>();
+            _mapper = _scope.Resolve<IMapper>();
+            _httpContextAccessor = _scope.Resolve<IHttpContextAccessor>();
         }
     }
 }

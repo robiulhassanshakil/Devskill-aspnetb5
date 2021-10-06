@@ -20,9 +20,9 @@ namespace DataImporter.Web.Models.Contact
 
         public ContactListModel()
         {
-            _contactService = Startup.AutofacContainer.Resolve<IContactService>();
+            /*_contactService = Startup.AutofacContainer.Resolve<IContactService>();
             _mapper = Startup.AutofacContainer.Resolve<IMapper>();
-            _dateTime = Startup.AutofacContainer.Resolve<IDateTimeUtility>();
+            _dateTime = Startup.AutofacContainer.Resolve<IDateTimeUtility>();*/
 
         }
         public ContactListModel(IContactService contactService, IMapper mapper, IDateTimeUtility dateTime, ILifetimeScope scope)
@@ -54,5 +54,6 @@ namespace DataImporter.Web.Models.Contact
                     ).ToArray()
             };
         }
+
     }
 }

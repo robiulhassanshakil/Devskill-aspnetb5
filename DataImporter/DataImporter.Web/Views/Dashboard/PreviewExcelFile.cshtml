@@ -38,7 +38,7 @@
                                     <tr>
                                         @foreach (DataColumn coloum in Model.DataTable.Columns)
                                         {
-                                            <th>@coloum.Caption.ToString()</th>
+                                            <th>@coloum.ColumnName.ToString()</th>
                                         }
                                     </tr>
 
@@ -46,15 +46,15 @@
 
                                 <tbody>
                                     @{
-                                        var p = 0;
+                                        var x = 0;
                                         foreach (DataRow row in Model.DataTable.Rows)
                                         {
-                                            p++;
+                                            x++;
                                             {
                                                 <tr>
                                                     @foreach (DataColumn dataColumn in Model.DataTable.Columns)
                                                     {
-
+                                                        
                                                         <td>
                                                             @row[dataColumn]
                                                         </td>
@@ -62,7 +62,7 @@
                                                     }
                                                 </tr>
                                             }
-                                            if (p >= 10)
+                                            if (x > 10)
                                                 break;
                                         }
                                     }

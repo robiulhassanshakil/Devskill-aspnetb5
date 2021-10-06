@@ -12,13 +12,13 @@ namespace DataImporter.Web.Models.GroupModel
         [Required, MaxLength(200, ErrorMessage = "Name should be less than 200 Characters")]
         public string Name { get; set; }
 
+        private ILifetimeScope _scope;
 
-        private readonly IGroupService _groupService;
-        private readonly IMapper _mapper;
+        private  IGroupService _groupService;
+        private  IMapper _mapper;
         public CreateGroupModel()
         {
-            _groupService = Startup.AutofacContainer.Resolve<IGroupService>();
-            _mapper = Startup.AutofacContainer.Resolve<IMapper>();
+
         }
         public CreateGroupModel(IGroupService groupService, IMapper mapper)
         {
@@ -34,6 +34,14 @@ namespace DataImporter.Web.Models.GroupModel
                 ApplicationUserId = applicationuser
             };
             _groupService.CreateGroup(group);
+        }
+
+
+        public void Resolve(ILifetimeScope scope)
+        {
+            _scope = scope;
+            _groupService = _scope.Resolve<IGroupService>();
+            _mapper = _scope.Resolve<IMapper>();
         }
     }
 }

@@ -12,14 +12,13 @@ namespace DataImporter.Web.Models.Files
 {
     public class ExportHistoryListModel
     {
-        private readonly IExcelFileService _excelFileService;
-        private readonly IMapper _mapper;
-        private readonly IDateTimeUtility _dateTime;
+        private ILifetimeScope _scope;
+        private  IExcelFileService _excelFileService;
+        private  IMapper _mapper;
+        private  IDateTimeUtility _dateTime;
         public ExportHistoryListModel()
         {
-            _excelFileService = Startup.AutofacContainer.Resolve<IExcelFileService>();
-            _mapper = Startup.AutofacContainer.Resolve<IMapper>();
-            _dateTime = Startup.AutofacContainer.Resolve<IDateTimeUtility>();
+          
         }
         public ExportHistoryListModel(IExcelFileService excelFileService, IMapper mapper, IDateTimeUtility dateTime)
         {
@@ -50,6 +49,14 @@ namespace DataImporter.Web.Models.Files
                         }
                     ).ToArray()
             };
+        }
+
+        public void Resolve(ILifetimeScope scope)
+        {
+            _scope = scope;
+            _mapper = _scope.Resolve<IMapper>();
+            _dateTime = _scope.Resolve<IDateTimeUtility>();
+            _excelFileService = _scope.Resolve<IExcelFileService>();
         }
     }
 }

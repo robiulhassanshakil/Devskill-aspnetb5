@@ -20,12 +20,11 @@ namespace DataImporter.Web.Models.Files
 {
     public class FileUploadModel
     {
-        private readonly IExcelFileService _fileService;
-        private readonly IMapper _mapper;
-        private readonly IDateTimeUtility _dateTime;
-        private readonly ILogger<FileUploadModel> _logger;
-
-
+        private  IExcelFileService _fileService;
+        private  IMapper _mapper;
+        private  IDateTimeUtility _dateTime;
+        private  ILogger<FileUploadModel> _logger;
+        private ILifetimeScope _scope;
         public DataTable DataTable { get; set; }
         public string ExcelFileName { get; set; }
         public string ExcelFilePath { get; set; }
@@ -33,9 +32,6 @@ namespace DataImporter.Web.Models.Files
 
         public FileUploadModel()
         {
-            _fileService = Startup.AutofacContainer.Resolve<IExcelFileService>();
-            _mapper = Startup.AutofacContainer.Resolve<IMapper>();
-            _dateTime = Startup.AutofacContainer.Resolve<IDateTimeUtility>();
 
         }
         public FileUploadModel(IExcelFileService fileService, IMapper mapper, IDateTimeUtility dateTime, ILogger<FileUploadModel> logger)
@@ -162,6 +158,15 @@ namespace DataImporter.Web.Models.Files
         public void ExcelFileCancel()
         {
             File.Delete(ExcelFilePath);
+        }
+
+        public void Resolve(ILifetimeScope scope)
+        {
+            _scope = scope;
+            _fileService = _scope.Resolve<IExcelFileService>();
+            _mapper = _scope.Resolve<IMapper>();
+            _dateTime = _scope.Resolve<IDateTimeUtility>();
+            _logger = _scope.Resolve<ILogger<FileUploadModel>>();
         }
     }
 }

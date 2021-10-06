@@ -10,12 +10,13 @@ namespace DataImporter.Web.Models.GroupModel
 {
     public class GroupListModel
     {
-        private readonly IGroupService _groupService;
-        private readonly IMapper _mapper;
+        private  IGroupService _groupService;
+        private  IMapper _mapper;
+        private ILifetimeScope _scope;
+
         public GroupListModel()
         {
-            _groupService = Startup.AutofacContainer.Resolve<IGroupService>();
-            _mapper = Startup.AutofacContainer.Resolve<IMapper>();
+           
         }
         public GroupListModel(IGroupService groupService, IMapper mapper)
         {
@@ -46,6 +47,13 @@ namespace DataImporter.Web.Models.GroupModel
         internal void Delete(int id)
         {
             _groupService.DeleteGroup(id);
+        }
+
+        public void Resolve(ILifetimeScope scope)
+        {
+            _scope = scope;
+            _groupService=_scope.Resolve<IGroupService>();
+            _mapper=_scope.Resolve<IMapper>();
         }
     }
 }

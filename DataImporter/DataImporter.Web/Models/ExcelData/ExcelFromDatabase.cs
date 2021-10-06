@@ -17,19 +17,17 @@ namespace DataImporter.Web.Models.ExcelData
 {
     public class ExcelFromDatabase
     {
-        private readonly IExcelFileService _excelFileService;
-        private readonly IMapper _mapper;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IDateTimeUtility _dateTimeUtility;
+        private ILifetimeScope _scope;
+        private  IExcelFileService _excelFileService;
+        private  IMapper _mapper;
+        private  IHttpContextAccessor _httpContextAccessor;
+        private  IDateTimeUtility _dateTimeUtility;
         public DataTable DataTable { get; set; }
         public string ExcelFileName { get; set; }
         public int ExcelLastId { get; set; }
         public ExcelFromDatabase()
         {
-            _excelFileService = Startup.AutofacContainer.Resolve<IExcelFileService>();
-            _mapper = Startup.AutofacContainer.Resolve<IMapper>();
-            _httpContextAccessor = Startup.AutofacContainer.Resolve<IHttpContextAccessor>();
-            _dateTimeUtility = Startup.AutofacContainer.Resolve<IDateTimeUtility>();
+           
         }
         public ExcelFromDatabase(IExcelFileService excelFileService, IMapper mapper, IHttpContextAccessor httpContextAccessor, IDateTimeUtility dateTimeUtility)
         {
@@ -131,6 +129,15 @@ namespace DataImporter.Web.Models.ExcelData
             var isItFirst = _excelFileService.CheckFirstGroup(id);
 
             return isItFirst;
+        }
+
+        public void Resolve(ILifetimeScope scope)
+        {
+            _scope = scope;
+            _excelFileService = _scope.Resolve<IExcelFileService>();
+            _dateTimeUtility = _scope.Resolve<IDateTimeUtility>();
+            _mapper = _scope.Resolve<IMapper>();
+            _httpContextAccessor = _scope.Resolve<IHttpContextAccessor>();
         }
     }
 }

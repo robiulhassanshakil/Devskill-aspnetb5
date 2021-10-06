@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Autofac;
 using DataImporter.Common.Utilities;
 using DataImporter.Importing.BusinessObjects;
 using DataImporter.Importing.Exceptions;
@@ -33,15 +34,20 @@ namespace DataImporter.Web.Controllers
         private readonly ILogger<DashboardController> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailService _emailService;
-        public DashboardController(ILogger<DashboardController> logger, UserManager<ApplicationUser> userManager, IEmailService emailService)
+        private readonly ILifetimeScope _scope;
+
+        public DashboardController(ILogger<DashboardController> logger, UserManager<ApplicationUser> userManager, IEmailService emailService,ILifetimeScope scope)
         {
             _logger = logger;
             _userManager = userManager;
             _emailService = emailService;
+            _scope = scope;
         }
         public IActionResult Index()
         {
-            var model = new DashBoardModel();
+            var model = _scope.Resolve<DashBoardModel>();
+
+            
             var applicationuser = Guid.Parse(_userManager.GetUserId(HttpContext.User));
             model.loadData(applicationuser);
             return View(model);
@@ -53,7 +59,8 @@ namespace DataImporter.Web.Controllers
         public JsonResult GetGroupData()
         {
             var DataTableModel = new DataTablesAjaxRequestModel(Request);
-            var model = new GroupListModel();
+            var model = _scope.Resolve<GroupListModel>();
+           
             var applicationuser = Guid.Parse(_userManager.GetUserId(HttpContext.User));
             var data = model.GetGroupData(DataTableModel, applicationuser);
             return Json(data);
@@ -70,6 +77,7 @@ namespace DataImporter.Web.Controllers
                 try
                 {
                     var applicationuser = Guid.Parse(_userManager.GetUserId(HttpContext.User));
+                    model.Resolve(_scope);
                     model.CreateGroup(applicationuser);
                 }
                 catch (Exception ex)
@@ -82,7 +90,8 @@ namespace DataImporter.Web.Controllers
         }
         public IActionResult GroupEdit(int id)
         {
-            var model = new GroupEditModel();
+            var model = _scope.Resolve<GroupEditModel>();
+            
             model.LoadModelData(id);
             return View(model);
         }
@@ -91,13 +100,15 @@ namespace DataImporter.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.Resolve(_scope);
                 model.Update();
             }
             return RedirectToAction("ManageGroup");
         }
         public IActionResult GroupDelete(int id)
         {
-            var model = new GroupListModel();
+            var model = _scope.Resolve<GroupListModel>();
+            
             model.Delete(id);
             return RedirectToAction("ManageGroup");
         }
@@ -108,14 +119,14 @@ namespace DataImporter.Web.Controllers
         public JsonResult ViewContactsGetData()
         {
             var dataTableModel = new DataTablesAjaxRequestModel(Request);
-            var model = new ContactListModel();
+            var model = _scope.Resolve<ContactListModel>();
             var applicationuserId = Guid.Parse(_userManager.GetUserId(HttpContext.User));
             var data = model.LoadData(dataTableModel, applicationuserId);
             return Json(data);
         }
         public IActionResult UploadContacts()
         {
-            var model = new AllGroupForContacts();
+            var model = _scope.Resolve<AllGroupForContacts>();
             var applicationuserId = Guid.Parse(_userManager.GetUserId(HttpContext.User));
             model.LoadAllGroup(applicationuserId);
             return View(model);
@@ -124,15 +135,17 @@ namespace DataImporter.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult PreviewExcelFile(IFormFile fileSelect, AllGroupForContacts allGroupForContacts)
         {
-            var model = new FileUploadModel();
+            allGroupForContacts.Resolve(_scope);
+            var model = _scope.Resolve<FileUploadModel>();
             model.PreviewExcelLoad(fileSelect, allGroupForContacts);
             return View(model);
         }
         public IActionResult CreateExcelFileStatus(FileUploadModel fileUploadModel)
         {
+            fileUploadModel.Resolve(_scope);
             var model = fileUploadModel.ExcelFileUpload();
             if (model == false)
-            {
+            { 
                 ViewBag.Error = "Group Contacts Column does not match.";
 
                 return View();
@@ -141,13 +154,14 @@ namespace DataImporter.Web.Controllers
         }
         public IActionResult ClearExcelFile(FileUploadModel fileUploadModel)
         {
+            fileUploadModel.Resolve(_scope);
             fileUploadModel.ExcelFileCancel();
             return RedirectToAction("UploadContacts", "Dashboard");
         }
 
         public IActionResult ViewContacts()
         {
-            var model = new AllGroupForContacts();
+            var model = _scope.Resolve<AllGroupForContacts>();
             var applicationuserId = Guid.Parse(_userManager.GetUserId(HttpContext.User));
             model.LoadAllGroupForViewData(applicationuserId);
             return View(model);
@@ -156,7 +170,7 @@ namespace DataImporter.Web.Controllers
         [HttpPost]
         public JsonResult ViewContactsForExcelSend(int id)
         {
-            var model = new ExcelFromDatabase();
+            var model = _scope.Resolve<ExcelFromDatabase>();
             var jsondata = model.GetExcelDatabaseToJson(id);
             return Json(jsondata);
         }
@@ -164,14 +178,7 @@ namespace DataImporter.Web.Controllers
         [HttpPost]
         public List<string> ColumnName(int id)
         {
-            var model = new ExcelFromDatabase();
-          /*  var IsitFirstData = model.GroupCheek(id);
-          
-                if (IsitFirstData)
-                {
-                    
-                }*/
-            
+            var model = _scope.Resolve<ExcelFromDatabase>();
             var coloumName = model.GetDataTableColumnName(id);
             return coloumName;
         }
@@ -179,7 +186,8 @@ namespace DataImporter.Web.Controllers
         [HttpPost]
         public IActionResult ExcelFileDownload(AllGroupForContacts allGroupForContacts)
         {
-            var model = new ExcelFromDatabase();
+            allGroupForContacts.Resolve(_scope);
+            var model = _scope.Resolve<ExcelFromDatabase>();
             var groupId = allGroupForContacts.GroupId;
             var fileContents = model.GetExcelDatabase(groupId);
             var excelFileName = model.ExcelFileName;
@@ -200,7 +208,7 @@ namespace DataImporter.Web.Controllers
         public JsonResult DownloadHistoryData()
         {
             var dataTableModel = new DataTablesAjaxRequestModel(Request);
-            var model = new ExportHistoryListModel();
+            var model = _scope.Resolve<ExportHistoryListModel>();
             var applicationuserId = Guid.Parse(_userManager.GetUserId(HttpContext.User));
             var data = model.LoadDataExcelHistory(dataTableModel, applicationuserId);
             return Json(data);
@@ -212,7 +220,7 @@ namespace DataImporter.Web.Controllers
             {
                 throw new InvalidParameterException("Download cant be found");
             }
-            var model = new ExcelFromDatabase();
+            var model = _scope.Resolve<ExcelFromDatabase>();
             var groupId = model.GetGroupId(id);
             var fileContents = model.GetExcelDatabaseForHistory(groupId, id);
             var excelFileName = model.ExcelFileName;
@@ -227,20 +235,22 @@ namespace DataImporter.Web.Controllers
         [HttpPost]
         public IActionResult SendMailContacts(AllGroupForContacts allGroupForContacts)
         {
-            var model = new SendMailContactsModel();
+            allGroupForContacts.Resolve(_scope);
+            var model = _scope.Resolve<SendMailContactsModel>();
             model.GroupId = allGroupForContacts.GroupId;
             return View(model);
         }
         [HttpPost]
         public IActionResult SendMailContactsFinal(SendMailContactsModel sendMailContactsModel)
-        {
+        { 
+            
             var groupId = sendMailContactsModel.GroupId;
             var email = sendMailContactsModel.Email;
             if (groupId == 0)
             {
                 throw new InvalidParameterException("Download cant be found");
             }
-            var model = new ExcelFromDatabase();
+            var model = _scope.Resolve<ExcelFromDatabase>();
             var fileContents = model.GetExcelDatabase(groupId);
             var excelFileName = model.ExcelFileName;
             string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";

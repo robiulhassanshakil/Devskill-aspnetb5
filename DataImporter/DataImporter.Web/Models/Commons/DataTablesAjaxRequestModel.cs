@@ -10,6 +10,11 @@ namespace DataImporter.Web.Models.Commons
     public class DataTablesAjaxRequestModel
     {
         private HttpRequest _request;
+
+        public DataTablesAjaxRequestModel()
+        {
+            
+        }
         private int Start
         {
             get
