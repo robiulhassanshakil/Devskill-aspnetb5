@@ -63,23 +63,6 @@ namespace DataImporter.Importing.Tests
             );
         }
 
-        /* public void CreateGroup_GroupNameExist_ThrowException()
-         {
-             //Arrange
-             var  group = new Group()
-             {
-                 Name = "DevSkill"
-             };
-
-
-             //Act
-
-
-             //Assert
-             Should.Throw<InvalidOperationException>(
-                 () => _groupService.CreateGroup(group)
-             );
-         }*/
         [Test]
         public void CreateGroup_GroupExist_CreateGroup()
         {
@@ -190,8 +173,5 @@ namespace DataImporter.Importing.Tests
             Should.Throw<InvalidParameterException>(
                 () => _groupService.UpdateGroup(group)); 
         }
-
-
-
     }
 }
