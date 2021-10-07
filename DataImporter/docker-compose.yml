@@ -33,4 +33,3 @@ services:
             - "1400:1433"
 volumes:
      app-volume:
-       drive:local
