@@ -43,6 +43,11 @@ namespace DataImporter.Importing.Services
 
         public void DeleteGroup(int id)
         {
+            if (id == 0)
+            {
+                throw new InvalidParameterException("Group Id  is not provided");
+            }
+
             _importingUnitOfWork.Groups.Remove(id);
             _importingUnitOfWork.Save();
         }
@@ -114,19 +119,18 @@ namespace DataImporter.Importing.Services
         {
             if (group == null)
             {
-                throw new InvalidOperationException("Group is messing");
+                throw new InvalidParameterException("Group is messing");
             }
 
             var groupEntity = _importingUnitOfWork.Groups.GetById(group.Id);
             if (groupEntity != null)
             {
                 groupEntity.Name = group.Name;
-                groupEntity.Id = group.Id;
                 _importingUnitOfWork.Save();
             }
             else
             {
-                throw new InvalidOperationException("Couldn't find Group");
+                throw new InvalidParameterException("Couldn't find Group");
             }
         }
 
