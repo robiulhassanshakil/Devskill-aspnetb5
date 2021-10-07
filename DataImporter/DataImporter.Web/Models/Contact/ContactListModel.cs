@@ -13,16 +13,13 @@ namespace DataImporter.Web.Models.Contact
 {
     public class ContactListModel
     {
-        private readonly IContactService _contactService;
-        private readonly IMapper _mapper;
-        private readonly IDateTimeUtility _dateTime;
-        private readonly ILifetimeScope _scope;
+        private  IContactService _contactService;
+        private  IMapper _mapper;
+        private  IDateTimeUtility _dateTime;
+        private  ILifetimeScope _scope;
 
         public ContactListModel()
         {
-            /*_contactService = Startup.AutofacContainer.Resolve<IContactService>();
-            _mapper = Startup.AutofacContainer.Resolve<IMapper>();
-            _dateTime = Startup.AutofacContainer.Resolve<IDateTimeUtility>();*/
 
         }
         public ContactListModel(IContactService contactService, IMapper mapper, IDateTimeUtility dateTime, ILifetimeScope scope)
@@ -53,6 +50,14 @@ namespace DataImporter.Web.Models.Contact
                         }
                     ).ToArray()
             };
+        }
+
+        public void Resolve(ILifetimeScope scope)
+        {
+            _scope = scope;
+            _contactService = _scope.Resolve<IContactService>();
+            _mapper = _scope.Resolve<IMapper>();
+            _dateTime = _scope.Resolve<IDateTimeUtility>();
         }
 
     }

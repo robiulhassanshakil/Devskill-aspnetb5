@@ -4,16 +4,14 @@ using DataImporter.Importing.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DataImporter.Web.Data.Migrations
+namespace DataImporter.Web.Migrations
 {
     [DbContext(typeof(ImportingDbContext))]
-    [Migration("20210927095300_AddImportDateTime")]
-    partial class AddImportDateTime
+    partial class ImportingDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,10 +41,9 @@ namespace DataImporter.Web.Data.Migrations
 
             modelBuilder.Entity("DataImporter.Importing.Entities.ExcelFieldData", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("ExcelDataId")
                         .HasColumnType("int");
@@ -91,6 +88,32 @@ namespace DataImporter.Web.Data.Migrations
                     b.HasIndex("GroupId");
 
                     b.ToTable("ExcelFile");
+                });
+
+            modelBuilder.Entity("DataImporter.Importing.Entities.ExportFileHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ExportDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ExportLastExcelFieldId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
+                    b.ToTable("ExportFileHistory");
                 });
 
             modelBuilder.Entity("DataImporter.Importing.Entities.Group", b =>
@@ -205,6 +228,17 @@ namespace DataImporter.Web.Data.Migrations
                     b.Navigation("Group");
                 });
 
+            modelBuilder.Entity("DataImporter.Importing.Entities.ExportFileHistory", b =>
+                {
+                    b.HasOne("DataImporter.Importing.Entities.Group", "Group")
+                        .WithMany("ExportFileHistory")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Group");
+                });
+
             modelBuilder.Entity("DataImporter.Importing.Entities.Group", b =>
                 {
                     b.HasOne("DataImporter.Membership.Entities.ApplicationUser", "ApplicationUser")
@@ -226,6 +260,8 @@ namespace DataImporter.Web.Data.Migrations
                     b.Navigation("ExcelData");
 
                     b.Navigation("ExcelFile");
+
+                    b.Navigation("ExportFileHistory");
                 });
 #pragma warning restore 612, 618
         }

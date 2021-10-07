@@ -197,7 +197,6 @@ namespace DataImporter.Importing.Services
             {
                 return false;
             }
-
             return true;
         }
     }

@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DataImporter.Web.Data.Migrations
+namespace DataImporter.Web.Migrations
 {
-    public partial class AddImportDateTime : Migration
+    public partial class AddGuidId : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -71,11 +71,32 @@ namespace DataImporter.Web.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ExcelFieldData",
+                name: "ExportFileHistory",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    GroupId = table.Column<int>(type: "int", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ExportDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ExportLastExcelFieldId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExportFileHistory", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ExportFileHistory_Group_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "Group",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ExcelFieldData",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ExcelDataId = table.Column<int>(type: "int", nullable: false)
@@ -107,6 +128,11 @@ namespace DataImporter.Web.Data.Migrations
                 column: "GroupId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ExportFileHistory_GroupId",
+                table: "ExportFileHistory",
+                column: "GroupId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Group_ApplicationUserId",
                 table: "Group",
                 column: "ApplicationUserId");
@@ -119,6 +145,9 @@ namespace DataImporter.Web.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "ExcelFile");
+
+            migrationBuilder.DropTable(
+                name: "ExportFileHistory");
 
             migrationBuilder.DropTable(
                 name: "ExcelData");

@@ -8,7 +8,7 @@ using DataImporter.Importing.Entities;
 
 namespace DataImporter.Importing.Repositories
 {
-    public interface IExcelFieldDataRepository : IRepository<ExcelFieldData, int>
+    public interface IExcelFieldDataRepository : IRepository<ExcelFieldData, Guid>
     {
     }
 }

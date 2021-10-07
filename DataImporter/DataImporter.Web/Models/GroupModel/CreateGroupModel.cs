@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Autofac;
 using AutoMapper;
 using DataImporter.Importing.BusinessObjects;
+using DataImporter.Importing.Exceptions;
 using DataImporter.Importing.Services;
 
 namespace DataImporter.Web.Models.GroupModel
@@ -26,12 +27,13 @@ namespace DataImporter.Web.Models.GroupModel
             _mapper = mapper;
         }
 
-        internal void CreateGroup(Guid applicationuser)
+        public void CreateGroup(Guid applicationUserId)
         {
+           
             var group = new Group()
             {
                 Name = Name,
-                ApplicationUserId = applicationuser
+                ApplicationUserId = applicationUserId
             };
             _groupService.CreateGroup(group);
         }

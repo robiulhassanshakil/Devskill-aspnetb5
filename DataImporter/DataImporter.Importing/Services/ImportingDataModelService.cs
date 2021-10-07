@@ -57,28 +57,31 @@ namespace DataImporter.Importing.Services
 
                         for (int i = 0; i < row.Count; i++)
                         {
-                            _importingUnitOfWork.ExcelDatas.Add(new ExcelData()
-                            {
-                                GroupId = file.GroupId,
-                                ImportDate = _dateTimeUtility.Now
-                            });
-                            _importingUnitOfWork.Save();
-
-                            var exceldataId = _importingUnitOfWork.ExcelDatas.GetAll().Last().Id;
-
+                            List<ExcelFieldData> excelFieldDatas = new List<ExcelFieldData>();
                             for (int j = 0; j < column.Count; j++)
                             {
                                 var excelFieldData = new ExcelFieldData()
                                 {
-                                    Name = dataTable.Columns[j].ColumnName,
-                                    Value = dataTable.Rows[i][j].ToString(),
-                                    ExcelDataId = exceldataId
+                                    Name = dataSet.Tables[0].Columns[j].ColumnName,
+                                    Value = dataSet.Tables[0].Rows[i][j].ToString(),
                                 };
-                                _importingUnitOfWork.ExcelFieldDatas.Add(excelFieldData);
-                                _importingUnitOfWork.Save();
+
+                                excelFieldDatas.Add(excelFieldData);
+
+                                //
                             }
+
+                            _importingUnitOfWork.ExcelDatas.Add(new ExcelData()
+                            {
+
+                                GroupId = file.GroupId,
+                                ExcelFieldData = excelFieldDatas
+
+
+                            });
                         }
                     }
+
                     file.Status = "Completed";
                     File.Delete(filePath);
                 }

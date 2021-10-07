@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DataImporter.Importing.Entities
 {
-    public class ExcelFieldData : IEntity<int>
+    public class ExcelFieldData : IEntity<Guid>
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Value { get; set; }
         public int ExcelDataId { get; set; }
