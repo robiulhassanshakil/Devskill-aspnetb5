@@ -56,7 +56,7 @@ namespace DataImporter.Web.Models.Files
                 if (fileext == ".xlsx" || fileext == ".xlsm" || fileext == ".xls" || fileext == ".xlsb")
                 {
                     ExcelFileName = file.FileName;
-                    var filePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "UploadFiles"));
+                    var filePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "uploadfiles"));
                     ExcelFilePath = Path.Combine(filePath, ExcelFileName);
                     using (var stream = new FileStream(ExcelFilePath, FileMode.Create))
                     {
