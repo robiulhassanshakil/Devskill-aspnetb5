@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Autofac;
+﻿using Autofac;
 using AutoMapper;
 using TicketBookingSystem.Booking.BusinessObjects;
 using TicketBookingSystem.Booking.Services;

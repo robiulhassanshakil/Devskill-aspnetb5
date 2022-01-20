@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using TicketBookingSystem.Booking.BusinessObjects;
-using TicketBookingSystem.Booking.Contexts;
 using TicketBookingSystem.Booking.UniteOfWorks;
 
 namespace TicketBookingSystem.Booking.Services

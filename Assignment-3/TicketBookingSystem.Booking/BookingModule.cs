@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Autofac;
-using Microsoft.EntityFrameworkCore;
+﻿using Autofac;
 using TicketBookingSystem.Booking.Contexts;
 using TicketBookingSystem.Booking.Repositories;
 using TicketBookingSystem.Booking.Services;

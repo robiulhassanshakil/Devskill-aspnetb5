@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TicketBookingSystem.Data
+﻿namespace TicketBookingSystem.Data
 {
     public interface IEntity<T>
     {

@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TicketBookingSystem.Booking.Entities;
 
 namespace TicketBookingSystem.Booking.Contexts
 {
     public class BookingDbContext : DbContext, IBookingDbContext
     {
-
-
         private readonly string _connectionString;
         private readonly string _migrationAssemblyName;
 
