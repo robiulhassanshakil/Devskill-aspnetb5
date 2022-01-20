@@ -48,7 +48,7 @@ namespace TicketBookingSystem.Booking.Services
         {
             var ticketData = _bookingUniteOfWork.Tickets.GetDynamic(
                 string.IsNullOrWhiteSpace(searchText) ? null : x => x.Destination.Contains(searchText),
-                sortText, string.Empty, pageIndex, pageSize);
+                sortText, null, pageIndex, pageSize);
 
             var resultData = (from ticket in ticketData.data
                               select (_mapper.Map<Ticket>(ticket))).ToList();

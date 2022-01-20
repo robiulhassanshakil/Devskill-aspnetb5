@@ -10,10 +10,10 @@ using TicketBookingSystem.Data;
 
 namespace TicketBookingSystem.Booking.Repositories
 {
-    public class TicketRepository : Repository<Ticket, int>, ITicketRepository
+    public class TicketRepository : Repository<Ticket, int, BookingDbContext>, ITicketRepository
     {
         public TicketRepository(IBookingDbContext context)
-            : base((DbContext)context)
+            : base((BookingDbContext)context)
         {
 
         }
