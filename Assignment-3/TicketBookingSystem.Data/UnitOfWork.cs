@@ -16,9 +16,7 @@ namespace TicketBookingSystem.Data
 
         public void Save() => _dbContext?.SaveChanges();
 
-        public async Task SaveAsync()
-        {
-            int num = await _dbContext.SaveChangesAsync();
-        }
+        public async Task SaveAsync() => await _dbContext.SaveChangesAsync();
+        
     }
 }
